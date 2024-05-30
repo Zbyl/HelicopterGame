@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://de2ss5g5n71k3"]
+[gd_scene load_steps=15 format=3 uid="uid://de2ss5g5n71k3"]
 
 [ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain.gd" id="1_os0q5"]
 [ext_resource type="Resource" path="res://Terrains/Terrain0/data.hterrain" id="2_fvvhu"]
@@ -9,6 +9,20 @@
 [ext_resource type="Texture2D" uid="uid://dfkuavlyi113s" path="res://Scenes/example_level_slot0_normal_roughness.png" id="7_5poxd"]
 [ext_resource type="Texture2D" uid="uid://dl7tensj84kv1" path="res://Scenes/example_level_slot1_normal_roughness.png" id="8_ra2f7"]
 [ext_resource type="Texture2D" uid="uid://cw7pgyhxj60w8" path="res://Scenes/example_level_slot2_normal_roughness.png" id="9_2y85y"]
+[ext_resource type="PackedScene" uid="uid://c4cy5cnclan71" path="res://Scenes/helicopter.tscn" id="10_eoqmd"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7a3gm"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_v6hf6"]
+sky_material = SubResource("ProceduralSkyMaterial_7a3gm")
+
+[sub_resource type="Environment" id="Environment_hpw2e"]
+background_mode = 2
+sky = SubResource("Sky_v6hf6")
+tonemap_mode = 2
+glow_enabled = true
 
 [sub_resource type="Resource" id="Resource_6ii8t"]
 script = ExtResource("3_rvsfy")
@@ -16,6 +30,13 @@ mode = 0
 textures = [[ExtResource("4_75pru"), ExtResource("5_db0x5"), ExtResource("6_rq71a")], [ExtResource("7_5poxd"), ExtResource("8_ra2f7"), ExtResource("9_2y85y")]]
 
 [node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_hpw2e")
 
 [node name="HTerrain" type="Node3D" parent="."]
 script = ExtResource("1_os0q5")
@@ -34,3 +55,6 @@ shader_params/u_ground_uv_scale = 20
 shader_params/u_depth_blending = true
 shader_params/u_triplanar = null
 shader_params/u_tile_reduction = null
+
+[node name="Helicopter" parent="." instance=ExtResource("10_eoqmd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 343.596, 7.44939, 309.427)
