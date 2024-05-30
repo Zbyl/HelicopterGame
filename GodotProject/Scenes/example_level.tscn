@@ -81,6 +81,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 340.669, 3.82464, 305.857)
 [node name="Crate4" parent="Crates" instance=ExtResource("11_1l5l2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 341.284, 2.51874, 305.857)
 
+[node name="Crate7" parent="Crates" instance=ExtResource("11_1l5l2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 355.284, 2.51874, 290.857)
+
 [node name="Cacti" type="Node3D" parent="."]
 
 [node name="cactus1" parent="Cacti" instance=ExtResource("12_xedte")]
