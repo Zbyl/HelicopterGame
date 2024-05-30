@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://by0gv5obxit0e"]
+
+[ext_resource type="PackedScene" uid="uid://u6ked61wxcw5" path="res://Models/Objects/cactus1.glb" id="1_x5x66"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_a6f3x"]
+height = 4.0
+
+[node name="cactus1" instance=ExtResource("1_x5x66")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.58363, 0)
+shape = SubResource("CylinderShape3D_a6f3x")
