@@ -86,17 +86,74 @@ grow_vertical = 2
 
 [node name="Pad" type="TextureRect" parent="Screen/ControlsHelp"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 235.0
-offset_top = -106.0
-offset_right = 2041.0
-offset_bottom = 1198.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -274.0
+offset_right = 2234.0
+offset_bottom = 1364.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_2ggaf")
+
+[node name="Move" type="Label" parent="Screen/ControlsHelp"]
+layout_mode = 0
+offset_left = 213.0
+offset_top = -43.0
+offset_right = 304.0
+offset_bottom = -1.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 20
+text = "Move"
+
+[node name="Rotate" type="Label" parent="Screen/ControlsHelp"]
+layout_mode = 0
+offset_left = 451.0
+offset_top = 78.0
+offset_right = 542.0
+offset_bottom = 120.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 20
+text = "Rotate"
+
+[node name="Rockets" type="Label" parent="Screen/ControlsHelp"]
+layout_mode = 0
+offset_left = 500.0
+offset_top = -129.0
+offset_right = 613.0
+offset_bottom = -87.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 20
+text = "Rockets"
+
+[node name="Menu" type="Label" parent="Screen/ControlsHelp"]
+layout_mode = 0
+offset_left = 434.0
+offset_top = -65.0
+offset_right = 547.0
+offset_bottom = -23.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 20
+text = "Menu"
+
+[node name="Gun" type="Label" parent="Screen/ControlsHelp"]
+layout_mode = 0
+offset_left = 288.0
+offset_top = -128.0
+offset_right = 401.0
+offset_bottom = -86.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 20
+text = "Gun"
 
 [connection signal="pressed" from="Screen/Menu/VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
 [connection signal="pressed" from="Screen/Menu/VBoxContainer/ControlsButton" to="." method="_on_controls_button_pressed"]
