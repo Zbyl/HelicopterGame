@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://3dtl0q5lvotw"]
+
+[ext_resource type="Script" path="res://Scripts/crate.gd" id="1_drhmi"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_php8r"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kxn3j"]
+albedo_color = Color(0.923178, 0.493492, 0.322328, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xxgcp"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_koo16"]
+points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
+
+[node name="Crate" type="RigidBody3D" groups=["Hittable", "Pushable"]]
+mass = 20.0
+physics_material_override = SubResource("PhysicsMaterial_php8r")
+script = ExtResource("1_drhmi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_kxn3j")
+mesh = SubResource("BoxMesh_xxgcp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_koo16")

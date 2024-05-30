@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhcyss46uiodi"]
+
+[ext_resource type="Script" path="res://Scripts/explosion.gd" id="1_s6iun"]
+[ext_resource type="AudioStream" uid="uid://dkrrhbp0q8f4d" path="res://Sounds/560578__theplax__explosion-6.wav" id="2_ypega"]
+
+[node name="Explosion" type="Node3D"]
+script = ExtResource("1_s6iun")
+
+[node name="ExplosionSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_ypega")
