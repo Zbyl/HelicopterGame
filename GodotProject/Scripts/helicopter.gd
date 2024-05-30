@@ -41,12 +41,12 @@ var active_rocket_left: bool = true # true fire left rocket next, false fire rig
 @export var PITCH_MAX = 0.2
 @export var PITCH_FADE = 0.01
 
-@export var CAMERA_MAX_LAG = 0.7
-@export var CAMERA_FADE = 0.02
+@export var AIM_MAX_UP = 0.7
+@export var AIM_MAX_DOWN = 0.3
+@export var AIM_SPEED_SLOW = 0.01
+@export var AIM_SPEED_FAST = 0.03
 
-@export var AIM_MAX_UP = 0.2
-@export var AIM_MAX_DOWN = 0.5
-@export var AIM_FADE = 0.015
+@export var MODEL_CAMERA_LAG = 10
 
 @export var ROTOR_SPEED = 0.3;
 
@@ -64,8 +64,6 @@ var roll_angle = 0
 var pitch_angle = 0
 
 var aim_angle = 0;
-
-var camera_lag = 0;
 
 func fire_rocket():
 	if not rocket_cooldown_timer.is_stopped():
@@ -118,23 +116,22 @@ func _physics_process(delta):
 
 	if input_rot != 0:
 		rot_current = move_toward(rot_current, -input_rot * ROT_SPEED, ROT_ACCELERATION)
-		camera_lag = move_toward(camera_lag, input_rot*CAMERA_MAX_LAG, CAMERA_FADE)
 	else:
 		rot_current = move_toward(rot_current, 0, ROT_FADE)
-		camera_lag = move_toward(camera_lag, 0, CAMERA_FADE)
 
 	rotate_object_local(Vector3(0, 1, 0), rot_current)
 
 	var input_aim = Input.get_axis("aim_up", "aim_down")
 
-	if input_aim < 0:
-		aim_angle = move_toward(aim_angle, AIM_MAX_UP, AIM_FADE)
+	if input_aim < -0.5:
+		aim_angle = move_toward(aim_angle, AIM_MAX_UP, AIM_SPEED_FAST)
+	elif input_aim < 0:
+		aim_angle = move_toward(aim_angle, AIM_MAX_UP, AIM_SPEED_SLOW)
+	elif input_aim > 0.5:
+		aim_angle = move_toward(aim_angle, -AIM_MAX_DOWN, AIM_SPEED_FAST)
 	elif input_aim > 0:
-		aim_angle = move_toward(aim_angle, -AIM_MAX_DOWN, AIM_FADE)
-	else:
-		aim_angle = move_toward(aim_angle, 0, AIM_FADE)
+		aim_angle = move_toward(aim_angle, -AIM_MAX_DOWN, AIM_SPEED_SLOW)
 
-	aim.rotation.x = aim_angle
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -161,10 +158,16 @@ func _physics_process(delta):
 
 	velocity = transform.basis * rel_velocity
 
+	camera_3d.transform = camera_initial_transform.rotated(Vector3(1, 0, 0), aim_angle)
+
 	model.rotation.z = roll_angle
 	model.rotation.x = pitch_angle
+	model.rotation.y = rot_current*MODEL_CAMERA_LAG
 
-	camera_3d.transform = camera_initial_transform.rotated(Vector3(0, 1, 0), camera_lag)
+
+	var visible_rect = camera_3d.get_viewport().get_visible_rect();
+	var point_of_aim = camera_3d.project_position(visible_rect.position+(visible_rect.size/2), 100);
+	aim.target_position = aim.to_local(point_of_aim)
 
 	var crosshair_3d_pos = Vector3(0, 0, 0)
 	if aim.is_colliding():
