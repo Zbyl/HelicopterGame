@@ -67,7 +67,7 @@ func fire_rocket():
 	var rocket: Rocket = ROCKET.instantiate()
 	get_tree().root.add_child(rocket)
 	rocket.global_position = rocket_left_marker.global_position if active_rocket_left else rocket_right_marker.global_position
-	rocket.global_rotation = self.global_rotation
+	rocket.look_at(aim.to_global(aim.position + aim.target_position))
 
 func fire_gun():
 	if not gun_cooldown_timer.is_stopped():
@@ -77,7 +77,7 @@ func fire_gun():
 	var bullet: Rocket = BULLET.instantiate()
 	get_tree().root.add_child(bullet)
 	bullet.global_position = gun_marker.global_position
-	bullet.global_rotation = self.global_rotation
+	bullet.look_at(aim.to_global(aim.position + aim.target_position))
 
 func _physics_process(delta):
 	if Input.is_action_pressed("fire_rocket"):
