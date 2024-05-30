@@ -33,7 +33,7 @@ func _on_body_entered(body):
 		print('Pushing', body.name)
 		var position = ray_cast.get_collision_point() if ray_cast.is_colliding() else body.global_position
 		var normal = -transform.basis.z * hit_force
-		var rigid_body: RigidBody3D = body
+		var rigid_body: PhysicsBody3D = body
 		rigid_body.apply_impulse(normal, position - rigid_body.global_position)
 
 func explode():

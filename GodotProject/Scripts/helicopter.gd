@@ -22,6 +22,8 @@ var active_rocket_left: bool = true # true fire left rocket next, false fire rig
 @onready var camera_3d:Camera3D = $Camera3D
 @onready var camera_initial_transform:Transform3D = Transform3D($Camera3D.transform)
 
+@onready var initial_altitude = global_position.y
+
 
 @export var SPEED_FORWARD = 40.0
 @export var SPEED_BACKWARD = 10.0
@@ -49,6 +51,8 @@ var active_rocket_left: bool = true # true fire left rocket next, false fire rig
 @export var MODEL_CAMERA_LAG = 10
 
 @export var ROTOR_SPEED = 0.3;
+
+@export var ALTITUDE_ADJUST = 2
 
 var rot_current = 0;
 
@@ -157,6 +161,7 @@ func _physics_process(delta):
 		pitch_angle = move_toward(pitch_angle, 0, PITCH_FADE)
 
 	velocity = transform.basis * rel_velocity
+	velocity.y = (initial_altitude-global_position.y)*ALTITUDE_ADJUST
 
 	camera_3d.transform = camera_initial_transform.rotated(Vector3(1, 0, 0), aim_angle)
 

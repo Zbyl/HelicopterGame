@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://bp11cmjwsnf1a"]
+
+[ext_resource type="Script" path="res://Scripts/Crawling_mob.gd" id="1_jyo6m"]
+[ext_resource type="Script" path="res://Scenes/mob.gd" id="2_2uowj"]
+
+[sub_resource type="Curve3D" id="Curve3D_nqa06"]
+_data = {
+"points": PackedVector3Array(0.0269523, -0.218216, 2.74498, -0.0269523, 0.218216, -2.74498, 0.0900807, 0.0227122, -0.0524979, 0.0913789, -0.0207129, 2.04647, -0.0913789, 0.0207129, -2.04647, -1.35706, 0.0854921, -5.05513, 0.0896268, -0.113281, 2.47258, -0.0896268, 0.113281, -2.47258, 1.53552, 0.119915, -11.6017, -0.433833, -0.150883, 3.74743, 0.433833, 0.150883, -3.74743, -1.26043, 0.217453, -18.8089, -1.68914, -0.022089, 1.8837, 1.68914, 0.022089, -1.8837, 1.28101, 0.271692, -27.0433, -1.89719, 0.073844, -0.101263, 1.89719, -0.073844, 0.101263, 7.65693, 0.250902, -31.471, -2.25146, 0.611858, -1.77299, 2.25146, -0.611858, 1.77299, 17.6192, 0.111692, -27.3462, -0.215593, 0.598518, -1.64786, 0.215593, -0.598518, 1.64786, 21.1013, -0.0266132, -16.6284, 0.316019, 0.312291, -1.29408, -0.316019, -0.312291, 1.29408, 17.228, -0.0980244, -5.24257, 0.770445, 0.814689, -3.32194, -0.770445, -0.814689, 3.32194, 17.3869, -0.226387, 7.87533, 0.85224, 0.799046, -3.35608, -0.85224, -0.799046, 3.35608, 13.4992, -0.323788, 21.9648, 1.18081, 0.752676, -3.54418, -1.18081, -0.752676, 3.54418, 18.427, -0.548977, 40.1808, 3.77009, -0.770915, -0.56308, -3.77009, 0.770915, 0.56308, -2.62793, -0.539219, 60.8961, 1.46398, -1.65534, 3.90675, -1.46398, 1.65534, -3.90675, -21.0438, -0.28149, 53.2308, -2.98786, -0.103931, 7.23441, 2.98786, 0.103931, -7.23441, -23.6518, -0.0569496, 32.6887, -3.174, 0.162912, 4.18031, 3.174, -0.162912, -4.18031, -10.1972, -0.0257072, 15.5731, 0.0542791, -0.288953, 3.59798, -0.0542791, 0.288953, -3.59798, 0.0900807, 0.0227122, -0.0524979),
+"tilts": PackedFloat32Array(0, 0.944798, -0.483972, 0, 0, 0.718951, 0, 0.43458, 0.345988, -0.309873, 0, -0.867577, 0, 0, 0.0677948, 0, 0)
+}
+point_count = 17
+
+[sub_resource type="SphereMesh" id="SphereMesh_65pb4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h4kkg"]
+size = Vector3(1, 1, 3)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ldfhj"]
+top_radius = 0.4
+height = 3.0
+
+[node name="CrawlingMob" type="Node3D"]
+script = ExtResource("1_jyo6m")
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_nqa06")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(0.99995, 0.000778021, 0.00978738, -5.82076e-11, 0.996855, -0.0792423, -0.00981824, 0.0792385, 0.996807, 0.0900807, 0.0227122, -0.0524979)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Path3D/PathFollow3D"]
+mesh = SubResource("SphereMesh_65pb4")
+
+[node name="mob" type="CharacterBody3D" parent="." groups=["Hittable"]]
+transform = Transform3D(0.999951, 0.000778021, 0.00978738, -5.82076e-11, 0.996855, -0.0792423, -0.00981825, 0.0792385, 0.996807, 0.0900807, 0.0227122, -0.0524979)
+script = ExtResource("2_2uowj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="mob"]
+shape = SubResource("BoxShape3D_h4kkg")
+
+[node name="Node3D" type="Node3D" parent="mob"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="mob/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 0.0682765, 0.997666, 0, -0.997666, 0.0682765, 0, 0, 0)
+mesh = SubResource("CylinderMesh_ldfhj")

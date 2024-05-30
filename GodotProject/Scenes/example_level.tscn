@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://de2ss5g5n71k3"]
+[gd_scene load_steps=18 format=3 uid="uid://de2ss5g5n71k3"]
 
 [ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain.gd" id="1_os0q5"]
 [ext_resource type="Resource" path="res://Terrains/Terrain0/data.hterrain" id="2_fvvhu"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cw7pgyhxj60w8" path="res://Scenes/example_level_slot2_normal_roughness.png" id="9_2y85y"]
 [ext_resource type="PackedScene" uid="uid://5qy16o5wggi" path="res://Scenes/helicopter.tscn" id="10_eoqmd"]
 [ext_resource type="PackedScene" uid="uid://3dtl0q5lvotw" path="res://Scenes/crate.tscn" id="11_1l5l2"]
+[ext_resource type="PackedScene" uid="uid://bp11cmjwsnf1a" path="res://Scenes/Crawling_mob.tscn" id="11_xrqy2"]
 [ext_resource type="PackedScene" uid="uid://by0gv5obxit0e" path="res://Models/Objects/cactus1.tscn" id="12_xedte"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7a3gm"]
@@ -59,7 +60,11 @@ shader_params/u_triplanar = null
 shader_params/u_tile_reduction = null
 
 [node name="Helicopter" parent="." instance=ExtResource("10_eoqmd")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 343.596, 8.63821, 309.427)
+
+[node name="CrawlingMob" parent="." instance=ExtResource("11_xrqy2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 348.504, 1.56093, 242.892)
 
 [node name="Crates" type="Node3D" parent="."]
 
