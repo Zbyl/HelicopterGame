@@ -39,7 +39,8 @@ func _on_body_entered(body):
 func explode():
 	var explosion: Explosion = ROCKET_EXPLOSION.instantiate() if is_rocket else BULLET_EXPLOSION.instantiate()
 	get_tree().root.add_child(explosion)
-	explosion.global_position = self.global_position
+	var position = ray_cast.get_collision_point() if ray_cast.is_colliding() else self.global_position
+	explosion.global_position = position
 	explosion.global_rotation = self.global_rotation
 	queue_free()
 

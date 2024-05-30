@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://pdskgluljddh" path="res://Scenes/projectile_base.tscn" id="1_m5q6r"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xnajs"]
-albedo_color = Color(1, 1, 4, 1)
+albedo_color = Color(0.199317, 0.151253, 0.114783, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_e3se8"]
 radius = 0.1
@@ -11,10 +11,12 @@ height = 0.2
 radial_segments = 4
 rings = 3
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_qpoyh"]
-radius = 0.1
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_rrn8g"]
+height = 5.0
+radius = 0.2
 
 [node name="Bullet" instance=ExtResource("1_m5q6r")]
+speed = 2.5
 is_rocket = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." index="2"]
@@ -22,4 +24,5 @@ material_override = SubResource("StandardMaterial3D_xnajs")
 mesh = SubResource("SphereMesh_e3se8")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="3"]
-shape = SubResource("SphereShape3D_qpoyh")
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 2.38784)
+shape = SubResource("CylinderShape3D_rrn8g")

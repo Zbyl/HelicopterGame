@@ -1,38 +1,55 @@
-[gd_scene load_steps=6 format=3 uid="uid://hfkyybqpj0qn"]
+[gd_scene load_steps=8 format=3 uid="uid://hfkyybqpj0qn"]
 
 [ext_resource type="PackedScene" uid="uid://pdskgluljddh" path="res://Scenes/projectile_base.tscn" id="1_usbvj"]
+[ext_resource type="Material" uid="uid://pff4jjxy6xq1" path="res://Materials/rocket_material.tres" id="2_f3jdx"]
+[ext_resource type="PackedScene" uid="uid://ydn110havasm" path="res://Scenes/smoke_trail.tscn" id="2_v8j2d"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_eyjsi"]
-size = Vector3(0.1, 0.1, 1)
+size = Vector3(0.2, 0.2, 2)
 
 [sub_resource type="BoxMesh" id="BoxMesh_fygse"]
-size = Vector3(0.15, 0.15, 0.2)
+size = Vector3(0.5, 0.05, 0.1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_sbjp0"]
 top_radius = 0.0
 bottom_radius = 0.1
 height = 0.5
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_v53n5"]
-size = Vector3(0.2, 0.2, 1)
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_h18y2"]
+height = 5.0
+radius = 0.2
 
 [node name="Rocket" instance=ExtResource("1_usbvj")]
+speed = 1.5
 
 [node name="Model" type="Node3D" parent="." index="2"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Model" index="0"]
+material_override = ExtResource("2_f3jdx")
 mesh = SubResource("BoxMesh_eyjsi")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Model" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.49103)
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0, 0, 0.970194)
+material_override = ExtResource("2_f3jdx")
 mesh = SubResource("BoxMesh_fygse")
 skeleton = NodePath("../..")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Model" index="2"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.712822)
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Model" index="2"]
+transform = Transform3D(-0.707107, -0.707107, 0, 0.707107, -0.707107, 0, 0, 0, 1, 0, 0, 0.970194)
+material_override = ExtResource("2_f3jdx")
+mesh = SubResource("BoxMesh_fygse")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Model" index="3"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -1.23391)
+material_override = ExtResource("2_f3jdx")
 mesh = SubResource("CylinderMesh_sbjp0")
 skeleton = NodePath("../MeshInstance3D2")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="." index="3"]
-shape = SubResource("BoxShape3D_v53n5")
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 1.54363)
+shape = SubResource("CylinderShape3D_h18y2")
+
+[node name="SmokeTrail" parent="." index="4" instance=ExtResource("2_v8j2d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0775318, 0, 1.0458)

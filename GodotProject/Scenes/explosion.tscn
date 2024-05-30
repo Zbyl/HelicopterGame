@@ -66,8 +66,8 @@ curve = SubResource("Curve_ox5wv")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6lp0n"]
 gravity = Vector3(0, 0, 0)
-scale_min = 4.0
-scale_max = 4.0
+scale_min = 6.0
+scale_max = 6.0
 scale_curve = SubResource("CurveTexture_hw18m")
 color = Color(2.5, 1, 0.5, 1)
 
@@ -93,8 +93,8 @@ spread = 180.0
 initial_velocity_min = 0.5
 initial_velocity_max = 2.0
 gravity = Vector3(0, -2, 0)
-scale_min = 0.75
-scale_max = 1.5
+scale_min = 1.2
+scale_max = 2.2
 scale_curve = SubResource("CurveTexture_kutpu")
 color = Color(5, 2, 1, 1)
 color_ramp = SubResource("GradientTexture1D_vgmfi")
@@ -115,8 +115,8 @@ spread = 180.0
 initial_velocity_min = 0.5
 initial_velocity_max = 2.0
 gravity = Vector3(0, 0, 0)
-scale_min = 3.0
-scale_max = 4.0
+scale_min = 4.5
+scale_max = 6.0
 scale_curve = SubResource("CurveTexture_hv0qm")
 color = Color(0, 0, 0, 1)
 
@@ -132,7 +132,7 @@ stream = ExtResource("2_ypega")
 material_override = SubResource("StandardMaterial3D_u47bn")
 emitting = false
 amount = 20
-lifetime = 0.6
+lifetime = 0.3
 one_shot = true
 explosiveness = 1.0
 fixed_fps = 60
