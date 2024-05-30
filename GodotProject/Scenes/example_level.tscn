@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dfkuavlyi113s" path="res://Scenes/example_level_slot0_normal_roughness.png" id="7_5poxd"]
 [ext_resource type="Texture2D" uid="uid://dl7tensj84kv1" path="res://Scenes/example_level_slot1_normal_roughness.png" id="8_ra2f7"]
 [ext_resource type="Texture2D" uid="uid://cw7pgyhxj60w8" path="res://Scenes/example_level_slot2_normal_roughness.png" id="9_2y85y"]
-[ext_resource type="PackedScene" uid="uid://c4cy5cnclan71" path="res://Scenes/helicopter.tscn" id="10_eoqmd"]
+[ext_resource type="PackedScene" uid="uid://5qy16o5wggi" path="res://Scenes/helicopter.tscn" id="10_eoqmd"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7a3gm"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
