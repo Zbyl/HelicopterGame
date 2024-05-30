@@ -14,9 +14,12 @@ var active_rocket_left: bool = true # true fire left rocket next, false fire rig
 @onready var aim:RayCast3D = $Aim
 @onready var canvas_layer = $CanvasLayer
 @onready var crosshair = $Crosshair
+@onready var helicopter_main_blades = $Model/HelicopterMainBlades
+@onready var helicopter_back_blades = $Model/HelicopterBackBlades
 
 
-@onready var mesh_instance_3d:MeshInstance3D = $MeshInstance3D
+
+@onready var model = $Model
 @onready var camera_3d:Camera3D = $Camera3D
 @onready var camera_initial_transform:Transform3D = Transform3D($Camera3D.transform)
 
@@ -42,6 +45,12 @@ var active_rocket_left: bool = true # true fire left rocket next, false fire rig
 @export var CAMERA_MAX_LAG = 0.7
 @export var CAMERA_FADE = 0.02
 
+@export var AIM_MAX_UP = 0.2
+@export var AIM_MAX_DOWN = 0.5
+@export var AIM_FADE = 0.015
+
+@export var ROTOR_SPEED = 0.3;
+
 var rot_current = 0;
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -54,6 +63,8 @@ var rot_current = 0;
 var rel_velocity = Vector3(0, 0, 0);
 var roll_angle = 0
 var pitch_angle = 0
+
+var aim_angle = 0;
 
 var camera_lag = 0;
 
@@ -78,6 +89,13 @@ func fire_gun():
 	get_tree().root.add_child(bullet)
 	bullet.global_position = gun_marker.global_position
 	bullet.look_at(aim.to_global(aim.position + aim.target_position))
+
+func rotate_rotors():
+	var now = Time.get_ticks_msec()
+
+	helicopter_main_blades.rotate_y(ROTOR_SPEED)
+	helicopter_back_blades.rotate_x(-ROTOR_SPEED)
+
 
 func _physics_process(delta):
 	if Input.is_action_pressed("fire_rocket"):
@@ -107,7 +125,17 @@ func _physics_process(delta):
 		camera_lag = move_toward(camera_lag, 0, CAMERA_FADE)
 
 	rotate_object_local(Vector3(0, 1, 0), rot_current)
-	#rotate_y(rot_current)
+
+	var input_aim = Input.get_axis("aim_up", "aim_down")
+
+	if input_aim < 0:
+		aim_angle = move_toward(aim_angle, -input_aim*AIM_MAX_UP, AIM_FADE)
+	elif input_aim > 0:
+		aim_angle = move_toward(aim_angle, -input_aim*AIM_MAX_DOWN, AIM_FADE)
+	else:
+		aim_angle = move_toward(aim_angle, 0, AIM_FADE)
+
+	aim.rotation.x = aim_angle
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -134,8 +162,8 @@ func _physics_process(delta):
 
 	velocity = transform.basis * rel_velocity
 
-	mesh_instance_3d.rotation.z = roll_angle
-	mesh_instance_3d.rotation.x = pitch_angle
+	model.rotation.z = roll_angle
+	model.rotation.x = pitch_angle
 
 	camera_3d.transform = camera_initial_transform.rotated(Vector3(0, 1, 0), camera_lag)
 
@@ -143,14 +171,14 @@ func _physics_process(delta):
 	if aim.is_colliding():
 		crosshair_3d_pos = aim.get_collision_point()
 	else:
-		crosshair_3d_pos = aim.target_position
+		crosshair_3d_pos = aim.to_global(aim.position+aim.target_position)
 
 	var crosshair_2d_pos = camera_3d.unproject_position(crosshair_3d_pos)
 
 	crosshair.offset.x = crosshair_2d_pos.x / crosshair.scale.x
 	crosshair.offset.y = crosshair_2d_pos.y / crosshair.scale.y
 
-
+	rotate_rotors()
 
 	#var input_dir = Input.get_vector("strafe_left", "strafe_right", "forward", "backward")
 #

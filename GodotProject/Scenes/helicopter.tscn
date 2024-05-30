@@ -1,13 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://5qy16o5wggi"]
+[gd_scene load_steps=7 format=3 uid="uid://5qy16o5wggi"]
 
 [ext_resource type="Script" path="res://Scripts/helicopter.gd" id="1_ghlj3"]
 [ext_resource type="Texture2D" uid="uid://b0xjpjh84d2fw" path="res://Graphics/crosshair.png" id="2_aj7h3"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d5gsj"]
-albedo_color = Color(0.282389, 0.719793, 0.518388, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_qux28"]
-size = Vector3(1, 1, 2)
+[ext_resource type="PackedScene" uid="uid://rmwxa7ffk43" path="res://Models/Helicopter/HelicopterMain.glb" id="3_p8ct2"]
+[ext_resource type="PackedScene" uid="uid://c1hwmpn4cm0pd" path="res://Models/Helicopter/HelicopterMainBlades.glb" id="4_8e0nd"]
+[ext_resource type="PackedScene" uid="uid://ckq8knjfyujgd" path="res://Models/Helicopter/HelicopterBackBlades.glb" id="5_nvfav"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_y4tvk"]
 points = PackedVector3Array(0.5, 0.5, 1, 0.5, -0.5, 1, 0.5, 0.5, -1, -0.5, 0.5, 1, -0.5, -0.5, 1, 0.5, -0.5, -1, -0.5, 0.5, -1, -0.5, -0.5, -1)
@@ -18,15 +15,11 @@ collision_mask = 13
 motion_mode = 1
 script = ExtResource("1_ghlj3")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-material_override = SubResource("StandardMaterial3D_d5gsj")
-mesh = SubResource("BoxMesh_qux28")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("ConvexPolygonShape3D_y4tvk")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.838337, 0.545152, 0, -0.545152, 0.838337, 0, 6.47849, 7.57152)
+transform = Transform3D(1, 0, 0, 0, 0.838337, 0.545152, 0, -0.545152, 0.838337, 0, 18.8311, 22.8601)
 
 [node name="AudioListener3D" type="AudioListener3D" parent="Camera3D"]
 
@@ -48,7 +41,7 @@ wait_time = 0.1
 one_shot = true
 
 [node name="Aim" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.99816, 0.0606304, 0, -0.0606304, 0.99816, 0.0116706, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.979466, 0.201608, 0, -0.201608, 0.979466, 0.0116706, 0, 0)
 target_position = Vector3(0, 0, -100)
 collision_mask = 5
 
@@ -56,3 +49,13 @@ collision_mask = 5
 position = Vector2(-7.62939e-06, -7.62939e-06)
 scale = Vector2(0.0921569, 0.0921569)
 texture = ExtResource("2_aj7h3")
+
+[node name="Model" type="Node3D" parent="."]
+
+[node name="HelicopterMain" parent="Model" instance=ExtResource("3_p8ct2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0356127, 0, 0.00756264)
+
+[node name="HelicopterMainBlades" parent="Model" instance=ExtResource("4_8e0nd")]
+
+[node name="HelicopterBackBlades" parent="Model" instance=ExtResource("5_nvfav")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -1.30854, 0.627666, 8.46264)
