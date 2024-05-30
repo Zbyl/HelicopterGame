@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
 @onready var marker = $Marker
+@onready var mesh_instance_3d:MeshInstance3D = $MeshInstance3D
 
 @export var SPEED_FORWARD = 40.0
 @export var SPEED_BACKWARD = 10.0
@@ -14,6 +15,12 @@ extends CharacterBody3D
 @export var ROT_ACCELERATION = 0.1
 @export var ROT_FADE = 0.3
 
+@export var ROLL_MAX = 0.1
+@export var ROLL_FADE = 0.01
+
+@export var PITCH_MAX = 0.2
+@export var PITCH_FADE = 0.01
+
 var rot_current = 0;
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -24,6 +31,8 @@ var rot_current = 0;
 #	marker = $Marker
 
 var rel_velocity = Vector3(0, 0, 0);
+var roll_angle = 0
+var pitch_angle = 0
 
 
 func _physics_process(delta):
@@ -54,19 +63,27 @@ func _physics_process(delta):
 
 	if input_strafe != 0:
 		rel_velocity.x = move_toward(rel_velocity.x, input_strafe * STRAFE_SPEED, STRAFE_ACCELERATION)
+		roll_angle = move_toward(roll_angle, -input_strafe * ROLL_MAX, ROLL_FADE)
 	else:
 		rel_velocity.x = move_toward(rel_velocity.x, 0, STRAFE_FADE)
+		roll_angle = move_toward(roll_angle, 0, ROLL_FADE)
 
 	var input_accelerate = Input.get_axis("forward", "backward")
 
 	if input_accelerate < 0:
 		rel_velocity.z = move_toward(rel_velocity.z, input_accelerate * SPEED_FORWARD, SPEED_ACCELERATION)
+		pitch_angle = move_toward(pitch_angle, input_accelerate * PITCH_MAX, PITCH_FADE)
 	elif input_accelerate > 0:
 		rel_velocity.z = move_toward(rel_velocity.z, input_accelerate * SPEED_BACKWARD, SPEED_ACCELERATION)
+		pitch_angle = move_toward(pitch_angle, input_accelerate * PITCH_MAX, PITCH_FADE)
 	else:
 		rel_velocity.z = move_toward(rel_velocity.z, 0, SPEED_FADE)
+		pitch_angle = move_toward(pitch_angle, 0, PITCH_FADE)
 
 	velocity = transform.basis * rel_velocity
+
+	mesh_instance_3d.rotation.z = roll_angle
+	mesh_instance_3d.rotation.x = pitch_angle
 
 
 	#var input_dir = Input.get_vector("strafe_left", "strafe_right", "forward", "backward")
