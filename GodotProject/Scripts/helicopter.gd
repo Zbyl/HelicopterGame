@@ -129,9 +129,9 @@ func _physics_process(delta):
 	var input_aim = Input.get_axis("aim_up", "aim_down")
 
 	if input_aim < 0:
-		aim_angle = move_toward(aim_angle, -input_aim*AIM_MAX_UP, AIM_FADE)
+		aim_angle = move_toward(aim_angle, AIM_MAX_UP, AIM_FADE)
 	elif input_aim > 0:
-		aim_angle = move_toward(aim_angle, -input_aim*AIM_MAX_DOWN, AIM_FADE)
+		aim_angle = move_toward(aim_angle, -AIM_MAX_DOWN, AIM_FADE)
 	else:
 		aim_angle = move_toward(aim_angle, 0, AIM_FADE)
 
