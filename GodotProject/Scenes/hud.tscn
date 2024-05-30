@@ -1,0 +1,161 @@
+[gd_scene load_steps=4 format=3 uid="uid://coir15qm3jlrt"]
+
+[ext_resource type="Script" path="res://Scripts/hud.gd" id="1_iyo5i"]
+[ext_resource type="Texture2D" uid="uid://b7us0q86x3d55" path="res://Graphics/Hud/pad.png" id="2_2ggaf"]
+[ext_resource type="Texture2D" uid="uid://do663e4dpqisj" path="res://Graphics/Screens/SplashScreen.png" id="3_l1l2y"]
+
+[node name="Hud" type="CanvasLayer"]
+script = ExtResource("1_iyo5i")
+
+[node name="Screen" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="Screen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_l1l2y")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Menu" type="Control" parent="Screen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Screen/Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -408.0
+offset_top = -237.0
+offset_right = -122.0
+offset_bottom = 41.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 9
+
+[node name="NewGameButton" type="Button" parent="Screen/Menu/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "New Game"
+
+[node name="ControlsButton" type="Button" parent="Screen/Menu/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Controls
+"
+
+[node name="FullScreenButton" type="Button" parent="Screen/Menu/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Full Screen"
+
+[node name="ExitGameButton" type="Button" parent="Screen/Menu/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Exit Game"
+
+[node name="ControlsHelp" type="Control" parent="Screen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -229.0
+offset_top = -167.0
+offset_right = 229.0
+offset_bottom = 167.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Pad" type="TextureRect" parent="Screen/ControlsHelp"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -274.0
+offset_right = 2234.0
+offset_bottom = 1364.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_2ggaf")
+
+[node name="Move" type="Label" parent="Screen/ControlsHelp"]
+layout_mode = 0
+offset_left = 213.0
+offset_top = -43.0
+offset_right = 304.0
+offset_bottom = -1.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 20
+text = "Move"
+
+[node name="Rotate" type="Label" parent="Screen/ControlsHelp"]
+layout_mode = 0
+offset_left = 451.0
+offset_top = 78.0
+offset_right = 542.0
+offset_bottom = 120.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 20
+text = "Rotate"
+
+[node name="Rockets" type="Label" parent="Screen/ControlsHelp"]
+layout_mode = 0
+offset_left = 500.0
+offset_top = -129.0
+offset_right = 613.0
+offset_bottom = -87.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 20
+text = "Rockets"
+
+[node name="Menu" type="Label" parent="Screen/ControlsHelp"]
+layout_mode = 0
+offset_left = 434.0
+offset_top = -65.0
+offset_right = 547.0
+offset_bottom = -23.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 20
+text = "Menu"
+
+[node name="Gun" type="Label" parent="Screen/ControlsHelp"]
+layout_mode = 0
+offset_left = 288.0
+offset_top = -128.0
+offset_right = 401.0
+offset_bottom = -86.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 20
+text = "Gun"
+
+[connection signal="pressed" from="Screen/Menu/VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="Screen/Menu/VBoxContainer/ControlsButton" to="." method="_on_controls_button_pressed"]
+[connection signal="pressed" from="Screen/Menu/VBoxContainer/FullScreenButton" to="." method="_on_full_screen_button_pressed"]
+[connection signal="pressed" from="Screen/Menu/VBoxContainer/ExitGameButton" to="." method="_on_exit_game_button_pressed"]
