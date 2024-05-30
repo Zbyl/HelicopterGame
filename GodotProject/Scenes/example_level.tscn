@@ -59,7 +59,7 @@ shader_params/u_triplanar = null
 shader_params/u_tile_reduction = null
 
 [node name="Helicopter" parent="." instance=ExtResource("10_eoqmd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 343.596, 15.7508, 309.427)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 343.596, 8.63821, 309.427)
 
 [node name="Crates" type="Node3D" parent="."]
 
