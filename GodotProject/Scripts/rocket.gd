@@ -10,7 +10,7 @@ class_name Rocket
 @onready var ray_cast: RayCast3D = $RayCast
 
 const ROCKET_EXPLOSION = preload("res://Scenes/explosion.tscn")
-const BULLET_EXPLOSION = preload("res://Scenes/explosion.tscn")
+const BULLET_EXPLOSION = preload("res://Scenes/bullet_hit.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

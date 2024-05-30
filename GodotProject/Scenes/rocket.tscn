@@ -1,56 +1,38 @@
-[gd_scene load_steps=6 format=3 uid="uid://pdskgluljddh"]
+[gd_scene load_steps=6 format=3 uid="uid://hfkyybqpj0qn"]
 
-[ext_resource type="Script" path="res://Scripts/rocket.gd" id="1_74hie"]
+[ext_resource type="PackedScene" uid="uid://pdskgluljddh" path="res://Scenes/projectile_base.tscn" id="1_usbvj"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_d3pph"]
+[sub_resource type="BoxMesh" id="BoxMesh_eyjsi"]
 size = Vector3(0.1, 0.1, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_ga3g1"]
+[sub_resource type="BoxMesh" id="BoxMesh_fygse"]
 size = Vector3(0.15, 0.15, 0.2)
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_ftedq"]
+[sub_resource type="CylinderMesh" id="CylinderMesh_sbjp0"]
 top_radius = 0.0
 bottom_radius = 0.1
 height = 0.5
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_gvibs"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_v53n5"]
 size = Vector3(0.2, 0.2, 1)
 
-[node name="Rocket" type="Area3D"]
-collision_layer = 8
-collision_mask = 7
-script = ExtResource("1_74hie")
-speed = 0.5
+[node name="Rocket" instance=ExtResource("1_usbvj")]
 
-[node name="Model" type="Node3D" parent="."]
+[node name="Model" type="Node3D" parent="." index="2"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
-mesh = SubResource("BoxMesh_d3pph")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model" index="0"]
+mesh = SubResource("BoxMesh_eyjsi")
 skeleton = NodePath("../..")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.49103)
-mesh = SubResource("BoxMesh_ga3g1")
+mesh = SubResource("BoxMesh_fygse")
 skeleton = NodePath("../..")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Model"]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Model" index="2"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.712822)
-mesh = SubResource("CylinderMesh_ftedq")
+mesh = SubResource("CylinderMesh_sbjp0")
 skeleton = NodePath("../MeshInstance3D2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_gvibs")
-
-[node name="LifeTimer" type="Timer" parent="."]
-wait_time = 5.0
-one_shot = true
-autostart = true
-
-[node name="RayCast" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.00313649, 0.453367)
-target_position = Vector3(0, -2, 0)
-collision_mask = 7
-hit_from_inside = true
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="timeout" from="LifeTimer" to="." method="_on_life_timer_timeout"]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." index="3"]
+shape = SubResource("BoxShape3D_v53n5")
