@@ -152,6 +152,7 @@ process_material = SubResource("ParticleProcessMaterial_sxixd")
 draw_pass_1 = SubResource("QuadMesh_yhdu2")
 
 [node name="Smoke" type="GPUParticles3D" parent="."]
+visible = false
 material_override = ExtResource("4_pwvvb")
 emitting = false
 amount = 10
