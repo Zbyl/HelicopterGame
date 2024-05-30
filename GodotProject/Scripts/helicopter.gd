@@ -12,7 +12,6 @@ var active_rocket_left: bool = true # true fire left rocket next, false fire rig
 @onready var rocket_left_marker: Marker3D = $RocketLeftMarker
 @onready var rocket_right_marker: Marker3D = $RocketRightMarker
 @onready var aim:RayCast3D = $Aim
-@onready var canvas_layer = $CanvasLayer
 @onready var crosshair = $Crosshair
 @onready var helicopter_main_blades = $Model/HelicopterMainBlades
 @onready var helicopter_back_blades = $Model/HelicopterBackBlades

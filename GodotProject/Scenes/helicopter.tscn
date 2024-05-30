@@ -27,10 +27,10 @@ transform = Transform3D(1, 0, 0, 0, 0.83143, 0.555629, 0, -0.555629, 0.83143, 0,
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0108917, -0.0209594, -1.90442)
 
 [node name="RocketLeftMarker" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.68388, -0.0132573, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.683293, -0.0132573, 0)
 
 [node name="RocketRightMarker" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.63778, -0.0575461, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.745833, -0.0575461, 0)
 
 [node name="RocketCooldownTimer" type="Timer" parent="."]
 wait_time = 0.5
