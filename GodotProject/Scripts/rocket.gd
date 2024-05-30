@@ -24,7 +24,7 @@ func _process(delta):
 
 func _on_body_entered(body):
 	explode()
-	
+
 	if body.is_in_group('Hittable'):
 		print('Hitting', body.name)
 		body.hit(hit_damage)

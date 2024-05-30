@@ -11,9 +11,15 @@ var active_rocket_left: bool = true # true fire left rocket next, false fire rig
 @onready var gun_marker: Marker3D = $GunMarker
 @onready var rocket_left_marker: Marker3D = $RocketLeftMarker
 @onready var rocket_right_marker: Marker3D = $RocketRightMarker
+@onready var aim:RayCast3D = $Aim
+@onready var canvas_layer = $CanvasLayer
+@onready var crosshair = $Crosshair
 
 
 @onready var mesh_instance_3d:MeshInstance3D = $MeshInstance3D
+@onready var camera_3d:Camera3D = $Camera3D
+@onready var camera_initial_transform:Transform3D = Transform3D($Camera3D.transform)
+
 
 @export var SPEED_FORWARD = 40.0
 @export var SPEED_BACKWARD = 10.0
@@ -23,7 +29,7 @@ var active_rocket_left: bool = true # true fire left rocket next, false fire rig
 @export var STRAFE_ACCELERATION = 0.4
 @export var STRAFE_FADE = 0.2
 
-@export var ROT_SPEED = 0.1
+@export var ROT_SPEED = 0.03
 @export var ROT_ACCELERATION = 0.1
 @export var ROT_FADE = 0.3
 
@@ -32,6 +38,9 @@ var active_rocket_left: bool = true # true fire left rocket next, false fire rig
 
 @export var PITCH_MAX = 0.2
 @export var PITCH_FADE = 0.01
+
+@export var CAMERA_MAX_LAG = 0.7
+@export var CAMERA_FADE = 0.02
 
 var rot_current = 0;
 
@@ -45,6 +54,8 @@ var rot_current = 0;
 var rel_velocity = Vector3(0, 0, 0);
 var roll_angle = 0
 var pitch_angle = 0
+
+var camera_lag = 0;
 
 func fire_rocket():
 	if not rocket_cooldown_timer.is_stopped():
@@ -71,10 +82,10 @@ func fire_gun():
 func _physics_process(delta):
 	if Input.is_action_pressed("fire_rocket"):
 		fire_rocket()
-		
+
 	if Input.is_action_pressed("fire_gun"):
 		fire_gun()
-		
+
 
 	# Add the gravity.
 	if is_on_floor() && rel_velocity.y<0:
@@ -90,8 +101,10 @@ func _physics_process(delta):
 
 	if input_rot != 0:
 		rot_current = move_toward(rot_current, -input_rot * ROT_SPEED, ROT_ACCELERATION)
+		camera_lag = move_toward(camera_lag, input_rot*CAMERA_MAX_LAG, CAMERA_FADE)
 	else:
 		rot_current = move_toward(rot_current, 0, ROT_FADE)
+		camera_lag = move_toward(camera_lag, 0, CAMERA_FADE)
 
 	rotate_object_local(Vector3(0, 1, 0), rot_current)
 	#rotate_y(rot_current)
@@ -123,6 +136,20 @@ func _physics_process(delta):
 
 	mesh_instance_3d.rotation.z = roll_angle
 	mesh_instance_3d.rotation.x = pitch_angle
+
+	camera_3d.transform = camera_initial_transform.rotated(Vector3(0, 1, 0), camera_lag)
+
+	var crosshair_3d_pos = Vector3(0, 0, 0)
+	if aim.is_colliding():
+		crosshair_3d_pos = aim.get_collision_point()
+	else:
+		crosshair_3d_pos = aim.target_position
+
+	var crosshair_2d_pos = camera_3d.unproject_position(crosshair_3d_pos)
+
+	crosshair.offset.x = crosshair_2d_pos.x / crosshair.scale.x
+	crosshair.offset.y = crosshair_2d_pos.y / crosshair.scale.y
+
 
 
 	#var input_dir = Input.get_vector("strafe_left", "strafe_right", "forward", "backward")

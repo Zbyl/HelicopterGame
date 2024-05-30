@@ -17,6 +17,8 @@ height = 0.5
 size = Vector3(0.2, 0.2, 1)
 
 [node name="Rocket" type="Area3D"]
+collision_layer = 8
+collision_mask = 7
 script = ExtResource("1_74hie")
 speed = 0.5
 
@@ -47,6 +49,7 @@ autostart = true
 [node name="RayCast" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.00313649, 0.453367)
 target_position = Vector3(0, -2, 0)
+collision_mask = 7
 hit_from_inside = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
