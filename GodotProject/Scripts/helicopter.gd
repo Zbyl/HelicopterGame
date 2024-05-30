@@ -4,7 +4,7 @@ class_name Helicopter
 
 const ROCKET = preload("res://Scenes/rocket.tscn")
 @onready var rocket_cooldown_timer: Timer = $RocketCooldownTimer
-const BULLET = preload("res://Scenes/rocket.tscn")
+const BULLET = preload("res://Scenes/bullet.tscn")
 @onready var gun_cooldown_timer: Timer = $GunCooldownTimer
 var active_rocket_left: bool = true # true fire left rocket next, false fire right rocket next.
 
