@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://de2ss5g5n71k3"]
+[gd_scene load_steps=16 format=3 uid="uid://de2ss5g5n71k3"]
 
 [ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain.gd" id="1_os0q5"]
 [ext_resource type="Resource" path="res://Terrains/Terrain0/data.hterrain" id="2_fvvhu"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dl7tensj84kv1" path="res://Scenes/example_level_slot1_normal_roughness.png" id="8_ra2f7"]
 [ext_resource type="Texture2D" uid="uid://cw7pgyhxj60w8" path="res://Scenes/example_level_slot2_normal_roughness.png" id="9_2y85y"]
 [ext_resource type="PackedScene" uid="uid://5qy16o5wggi" path="res://Scenes/helicopter.tscn" id="10_eoqmd"]
+[ext_resource type="PackedScene" uid="uid://3dtl0q5lvotw" path="res://Scenes/crate.tscn" id="11_1l5l2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7a3gm"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -57,4 +58,22 @@ shader_params/u_triplanar = null
 shader_params/u_tile_reduction = null
 
 [node name="Helicopter" parent="." instance=ExtResource("10_eoqmd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 343.596, 7.44939, 309.427)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 343.596, 1.96671, 309.427)
+
+[node name="Crate" parent="." instance=ExtResource("11_1l5l2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 340.716, 1.2849, 305.857)
+
+[node name="Crate5" parent="." instance=ExtResource("11_1l5l2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 342.078, 1.2849, 305.857)
+
+[node name="Crate2" parent="." instance=ExtResource("11_1l5l2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 339.325, 1.2849, 305.857)
+
+[node name="Crate3" parent="." instance=ExtResource("11_1l5l2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 340.02, 2.51874, 305.857)
+
+[node name="Crate6" parent="." instance=ExtResource("11_1l5l2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 340.669, 3.82464, 305.857)
+
+[node name="Crate4" parent="." instance=ExtResource("11_1l5l2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 341.284, 2.51874, 305.857)

@@ -1,6 +1,18 @@
 extends CharacterBody3D
 
-@onready var marker = $Marker
+class_name Helicopter
+
+const ROCKET = preload("res://Scenes/rocket.tscn")
+@onready var rocket_cooldown_timer: Timer = $RocketCooldownTimer
+const BULLET = preload("res://Scenes/rocket.tscn")
+@onready var gun_cooldown_timer: Timer = $GunCooldownTimer
+var active_rocket_left: bool = true # true fire left rocket next, false fire right rocket next.
+
+@onready var gun_marker: Marker3D = $GunMarker
+@onready var rocket_left_marker: Marker3D = $RocketLeftMarker
+@onready var rocket_right_marker: Marker3D = $RocketRightMarker
+
+
 @onready var mesh_instance_3d:MeshInstance3D = $MeshInstance3D
 
 @export var SPEED_FORWARD = 40.0
@@ -34,8 +46,35 @@ var rel_velocity = Vector3(0, 0, 0);
 var roll_angle = 0
 var pitch_angle = 0
 
+func fire_rocket():
+	if not rocket_cooldown_timer.is_stopped():
+		return
+	rocket_cooldown_timer.start()
+
+	active_rocket_left = !active_rocket_left
+
+	var rocket: Rocket = ROCKET.instantiate()
+	get_tree().root.add_child(rocket)
+	rocket.global_position = rocket_left_marker.global_position if active_rocket_left else rocket_right_marker.global_position
+	rocket.global_rotation = self.global_rotation
+
+func fire_gun():
+	if not gun_cooldown_timer.is_stopped():
+		return
+	gun_cooldown_timer.start()
+
+	var bullet: Rocket = BULLET.instantiate()
+	get_tree().root.add_child(bullet)
+	bullet.global_position = gun_marker.global_position
+	bullet.global_rotation = self.global_rotation
 
 func _physics_process(delta):
+	if Input.is_action_pressed("fire_rocket"):
+		fire_rocket()
+		
+	if Input.is_action_pressed("fire_gun"):
+		fire_gun()
+		
 
 	# Add the gravity.
 	if is_on_floor() && rel_velocity.y<0:
