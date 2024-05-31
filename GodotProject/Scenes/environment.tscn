@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://glltdrtbk7mk"]
+[gd_scene load_steps=5 format=3 uid="uid://c07x8xsfl05lp"]
 
 [ext_resource type="Texture2D" uid="uid://dnc2t3sjrkon" path="res://Graphics/AllSkyFree_Sky_EpicBlueSunset_Equirect.png" id="1_j1l4t"]
 
@@ -12,7 +12,8 @@ sky_material = SubResource("PanoramaSkyMaterial_3wnch")
 background_mode = 2
 sky = SubResource("Sky_v6hf6")
 ambient_light_color = Color(1, 0, 1, 1)
-ambient_light_sky_contribution = 0.71
+ambient_light_sky_contribution = 0.8
+ambient_light_energy = 0.0
 tonemap_mode = 2
 glow_enabled = true
 fog_enabled = true
