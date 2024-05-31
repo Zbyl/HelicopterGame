@@ -92,7 +92,8 @@ script = SubResource("GDScript_86j6i")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0511475, 0.0833435, 0.613786)
 shape = SubResource("BoxShape3D_8uhra")
 
-[node name="RayCast3D" type="RayCast3D" parent="."]
+[node name="GroundRayCast" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26547, 0)
+target_position = Vector3(0, -1000, 0)
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_body_entered"]
