@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dlg28wvr55o38"
+path="res://.godot/imported/Tribal Ritual.wav-0216667676d45da5d675b5e6db7f0c54.sample"
+
+[deps]
+
+source_file="res://Music/Tribal Ritual.wav"
+dest_files=["res://.godot/imported/Tribal Ritual.wav-0216667676d45da5d675b5e6db7f0c54.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
