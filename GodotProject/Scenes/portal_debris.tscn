@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://chsn40rdfkr6"]
+
+[ext_resource type="Script" path="res://Scripts/portal_debris.gd" id="1_ruhve"]
+[ext_resource type="PackedScene" uid="uid://415g26kcfy75" path="res://Scenes/portal_trail.tscn" id="2_5x58v"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_pd1gk"]
+friction = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xw47c"]
+transparency = 1
+albedo_color = Color(0.65834, 0.65834, 0.65834, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_mouni"]
+size = Vector3(1, 1, 0.5)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_chn4f"]
+points = PackedVector3Array(-0.492544, -0.492544, -0.25, 0.0146517, 0.470697, 0.246671, 0.0146517, 0.470697, -0.238735, 0.492544, -0.492544, -0.25, 0.477152, -0.477152, 0.25, -0.477152, -0.477152, 0.25, -0.0146517, 0.470697, 0.246671, -0.0146517, 0.470697, -0.238735, 0.470523, -0.441046, 0.246582, -0.470523, -0.441046, 0.246582, -0.470523, -0.441046, -0.238645, 0.470523, -0.441046, -0.238645)
+
+[node name="PortalDebris" type="Node3D"]
+script = ExtResource("1_ruhve")
+
+[node name="Debris" type="RigidBody3D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_pd1gk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Debris"]
+material_override = SubResource("StandardMaterial3D_xw47c")
+mesh = SubResource("PrismMesh_mouni")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Debris"]
+shape = SubResource("ConvexPolygonShape3D_chn4f")
+
+[node name="PortalTrail" parent="Debris" instance=ExtResource("2_5x58v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0759109, 0, 0)
