@@ -31,9 +31,11 @@ var landing_helipad: Node3D
 @onready var camera_3d:Camera3D = %Camera
 @onready var camera_initial_transform:Transform3D = Transform3D(%Camera.transform)
 
-@onready var initial_altitude = global_position.y
+#@onready var initial_altitude = global_position.y
 
-
+@export var UP_ACCELERATION = 1.0
+@export var UP_SPEED = 20.0
+@export var UP_FADE = 0.25
 @export var SPEED_FORWARD = 40.0
 @export var SPEED_BACKWARD = 25.0
 @export var SPEED_ACCELERATION = 0.4
@@ -169,8 +171,17 @@ func handle_input_and_movement():
 		rel_velocity.z = move_toward(rel_velocity.z, 0, SPEED_FADE)
 		pitch_angle = move_toward(pitch_angle, 0, PITCH_FADE)
 
+	var input_fly_up = Input.get_axis("fly_down", "fly_up")
+	velocity.y += input_fly_up * UP_ACCELERATION
+	rel_velocity.y = velocity.y
+	if rel_velocity.y > UP_SPEED:
+		rel_velocity.y = UP_SPEED
+	if rel_velocity.y < -UP_SPEED:
+		rel_velocity.y = -UP_SPEED
+	rel_velocity.y = move_toward(rel_velocity.y, 0, UP_FADE)
+	
 	velocity = transform.basis * rel_velocity
-	velocity.y = (initial_altitude-global_position.y)*ALTITUDE_ADJUST
+	#velocity.y = (initial_altitude-global_position.y)*ALTITUDE_ADJUST
 	velocity += hit_thrust
 
 	camera_3d.transform = camera_initial_transform.rotated(Vector3(1, 0, 0), aim_angle)
