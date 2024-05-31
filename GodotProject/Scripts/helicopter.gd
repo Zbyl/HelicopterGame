@@ -16,6 +16,7 @@ var active_rocket_left: bool = true # true fire left rocket next, false fire rig
 const BIG_EXPLOSION = preload("res://Scenes/big_explosion.tscn")
 const DEBRIS = preload("res://Scenes/helicopter_debris.tscn")
 const HELICOPTER_HIT = preload("res://Scenes/helicopter_hit.tscn")
+const GAME_OVER_EXPLOSION = preload("res://Scenes/Game_over_sound.tscn")
 @export var num_debris: int = 10
 
 @export var health: float = 100
@@ -325,6 +326,9 @@ func hit(force: float) -> bool: # Returns true if object is dead.
 
 func die():
 	GameData.game._on_player_died()
+
+	var game_over_sound = GAME_OVER_EXPLOSION.instantiate()
+	get_tree().root.add_child(game_over_sound)
 
 	for i in range(num_debris):
 		var debris = DEBRIS.instantiate()
