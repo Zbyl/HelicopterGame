@@ -127,6 +127,7 @@ script = ExtResource("1_8uprc")
 
 [node name="ExplosionSound" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_by4ml")
+volume_db = 3.048
 
 [node name="Flash" type="GPUParticles3D" parent="."]
 visible = false

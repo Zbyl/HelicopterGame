@@ -9,6 +9,7 @@ class_name Rocket
 @export var hit_force: float = 50.0
 
 @onready var ray_cast: RayCast3D = $RayCast
+@onready var audio_stream_player_3d = $AudioStreamPlayer3D
 
 const ROCKET_EXPLOSION = preload("res://Scenes/explosion.tscn")
 const BULLET_EXPLOSION = preload("res://Scenes/bullet_hit.tscn")
@@ -17,6 +18,7 @@ var owner_body
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	audio_stream_player_3d.play()
 	pass # Replace with function body.
 
 func set_owner_body(body):
