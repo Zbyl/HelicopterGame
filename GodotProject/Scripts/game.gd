@@ -124,11 +124,12 @@ func _on_player_died(): # Called by Helicopter when its health drops to zero, be
 	hud.show_menu(true)
 	
 func _on_game_success(): # Called by Helicopter when its health drops to zero, before queue_free()!
+	print('_on_game_success()')
 	GameData.game.pause_player_and_enemies(true)
 	
 	play_music(MusicKind.SUCCESS)
 
-	#await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(1).timeout
 	await _switch_level(SUCCESS_SCREEN, true)
 	
 func _on_portal_died(): # Called by portal when its health drops to zero, before queue_free()!
@@ -138,6 +139,15 @@ func _on_portal_died(): # Called by portal when its health drops to zero, before
 func _on_egg_died(): # Called by egg when its health drops to zero, before queue_free()!
 	#update_counters()
 	pass
+
+func _is_landing_allowed() -> bool:
+	if (alive_portals > 0) or (alive_eggs > 0):
+		hud.show_mission_not_complete()
+		return false
+	return true
+
+func _on_landing_finished():
+	_on_game_success()
 
 func update_counters():
 	alive_portals = get_tree().get_nodes_in_group('Portals').size()

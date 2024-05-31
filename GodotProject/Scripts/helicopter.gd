@@ -196,10 +196,10 @@ func handle_input_and_movement():
 	crosshair.offset.y = crosshair_2d_pos.y / crosshair.scale.y
 
 func landing_sequence_ended():
-	pass
+	GameData.game._on_landing_finished()
 
 func handle_landing_sequence():
-	if model.global_position==landing_helipad.landing_marker.global_position:
+	if (model.global_position - landing_helipad.landing_marker.global_position).length() < 0.2:
 		landing_sequence_ended()
 
 	velocity.x = move_toward(velocity.x, 0, SPEED_FADE)

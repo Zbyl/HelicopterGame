@@ -13,11 +13,14 @@ signal pause_game(do_pause: bool)
 @onready var health_label: Label = $Screen/Gauges/HealthLabel
 @onready var portals_label: Label = $Screen/Gauges/PortalsLabel
 @onready var eggs_label: Label = $Screen/Gauges/EggsLabel
+@onready var mission_not_complete: Control = $Screen/MissionNotComplete
+@onready var mission_not_complete_timer: Timer = $Screen/MissionNotComplete/MissionNotCompleteHideTimer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	controls_help.visible = false
 	gauges.visible = false
+	mission_not_complete.visible = false
 	new_game_button.grab_focus.call_deferred()
 
 
@@ -65,3 +68,13 @@ func _on_full_screen_button_pressed():
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
+
+func show_mission_not_complete():
+	if mission_not_complete.visible:
+		return
+	mission_not_complete.visible = true
+	mission_not_complete_timer.start()
+
+
+func _on_mission_not_complete_hide_timer_timeout():
+	mission_not_complete.visible = false
