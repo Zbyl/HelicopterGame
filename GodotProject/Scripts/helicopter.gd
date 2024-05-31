@@ -8,6 +8,10 @@ const BULLET = preload("res://Scenes/bullet.tscn")
 @onready var gun_cooldown_timer: Timer = $GunCooldownTimer
 var active_rocket_left: bool = true # true fire left rocket next, false fire right rocket next.
 
+const BIG_EXPLOSION = preload("res://Scenes/big_explosion.tscn")
+const DEBRIS = preload("res://Scenes/crate_debris.tscn")
+@export var health: float = 100
+
 @onready var gun_marker: Marker3D = $GunMarker
 @onready var rocket_left_marker: Marker3D = $RocketLeftMarker
 @onready var rocket_right_marker: Marker3D = $RocketRightMarker
@@ -80,6 +84,8 @@ func fire_rocket():
 	get_tree().root.add_child(rocket)
 	rocket.global_position = rocket_left_marker.global_position if active_rocket_left else rocket_right_marker.global_position
 	rocket.look_at(aim.to_global(aim.position + aim.target_position))
+	
+	hit(40)
 
 func fire_gun():
 	if not gun_cooldown_timer.is_stopped():
@@ -200,3 +206,30 @@ func _physics_process(delta):
 		#velocity.z = move_toward(velocity.z, 0, SPEED_FADE)
 
 	move_and_slide()
+
+
+func hit(force: float):
+	health -= force
+	GameData.hud.update_health_label(health)
+	if health < 0:
+		die()
+
+func die():
+	var pos = camera_3d.global_position
+	var rot = camera_3d.global_rotation
+	#self.remove_child(camera_3d)
+	camera_3d.reparent(get_tree().root)
+	#get_tree().root.add_child(camera_3d)
+	camera_3d.global_position = pos
+	camera_3d.global_rotation = rot
+	
+	var debris = DEBRIS.instantiate()
+	get_tree().root.add_child(debris)
+	debris.global_position = global_position
+
+	var explosion = BIG_EXPLOSION.instantiate()
+	get_tree().root.add_child(explosion)
+	explosion.global_position = self.global_position
+	explosion.global_rotation = self.global_rotation
+	queue_free()
+
