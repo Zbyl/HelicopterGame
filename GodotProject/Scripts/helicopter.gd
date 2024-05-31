@@ -13,6 +13,8 @@ const DEBRIS = preload("res://Scenes/crate_debris.tscn")
 const HELICOPTER_HIT = preload("res://Scenes/helicopter_hit.tscn")
 @export var health: float = 100
 var paused: bool = false
+var landing: bool = false
+var landing_helipad: Node3D
 
 @onready var gun_marker: Marker3D = $GunMarker
 @onready var rocket_left_marker: Marker3D = $RocketLeftMarker
@@ -52,12 +54,14 @@ var paused: bool = false
 
 @export var AIM_MAX_UP = 0.7
 @export var AIM_MAX_DOWN = 0.3
+@export var AIM_AT_LANDING = -0.6
 @export var AIM_SPEED_SLOW = 0.01
 @export var AIM_SPEED_FAST = 0.03
 
 @export var MODEL_CAMERA_LAG = 10
 
 @export var ROTOR_SPEED = 0.3;
+@export var ROTOR_SPEED_LANDED = 0.1
 
 @export var ALTITUDE_ADJUST = 2
 
@@ -75,6 +79,7 @@ var roll_angle = 0
 var pitch_angle = 0
 
 var aim_angle = 0;
+var rotor_speed = ROTOR_SPEED
 
 @export var HIT_MAX_AGE = 2000
 @export var HIT_FADE = 0.1
@@ -116,35 +121,10 @@ func fire_gun():
 func rotate_rotors():
 	var now = Time.get_ticks_msec()
 
-	helicopter_main_blades.rotate_y(ROTOR_SPEED)
-	helicopter_back_blades.rotate_x(-ROTOR_SPEED)
+	helicopter_main_blades.rotate_y(rotor_speed)
+	helicopter_back_blades.rotate_x(-rotor_speed)
 
-
-func _physics_process(delta):
-	if paused:
-		return
-
-	if Input.is_action_just_pressed("debug_button"):
-		if hit(40):
-			return
-
-	if Input.is_action_pressed("fire_rocket"):
-		fire_rocket()
-
-	if Input.is_action_pressed("fire_gun"):
-		fire_gun()
-
-
-	# Add the gravity.
-	if is_on_floor() && rel_velocity.y<0:
-		rel_velocity.y = 0
-
-	#marker.global_position
-
-	# Handle jump.
-	#if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		#velocity.y = JUMP_VELOCITY
-
+func handle_input_and_movement():
 	var input_rot = Input.get_axis("turn_left", "turn_right")
 
 	if input_rot != 0:
@@ -214,6 +194,47 @@ func _physics_process(delta):
 
 	crosshair.offset.x = crosshair_2d_pos.x / crosshair.scale.x
 	crosshair.offset.y = crosshair_2d_pos.y / crosshair.scale.y
+
+func landing_sequence_ended():
+	pass
+
+func handle_landing_sequence():
+	if model.global_position==landing_helipad.landing_marker.global_position:
+		landing_sequence_ended()
+
+	velocity.x = move_toward(velocity.x, 0, SPEED_FADE)
+	velocity.y = move_toward(velocity.y, 0, SPEED_FADE)
+	velocity.z = move_toward(velocity.z, 0, SPEED_FADE)
+	model.rotation.z = move_toward(model.rotation.z, 0, ROLL_FADE)
+	model.rotation.x = move_toward(model.rotation.x, 0, PITCH_FADE)
+	model.rotation.y = move_toward(model.rotation.y, PI/4, 0.01)
+	model.global_position.x = move_toward(model.global_position.x, landing_helipad.landing_marker.global_position.x, 0.05)
+	model.global_position.y = move_toward(model.global_position.y, landing_helipad.landing_marker.global_position.y, 0.05)
+	model.global_position.z = move_toward(model.global_position.z, landing_helipad.landing_marker.global_position.z, 0.05)
+	aim_angle = move_toward(aim_angle, AIM_AT_LANDING, AIM_SPEED_SLOW)
+	camera_3d.transform = camera_initial_transform.rotated(Vector3(1, 0, 0), aim_angle)
+	rotor_speed = move_toward(rotor_speed, ROTOR_SPEED_LANDED, 0.01)
+
+
+func _physics_process(delta):
+	if paused:
+		return
+
+	if Input.is_action_just_pressed("debug_button"):
+		if hit(40):
+			return
+
+	if Input.is_action_pressed("fire_rocket"):
+		fire_rocket()
+
+	if Input.is_action_pressed("fire_gun"):
+		fire_gun()
+
+
+	if !landing:
+		handle_input_and_movement()
+	else:
+		handle_landing_sequence()
 
 	rotate_rotors()
 	fade_hit()
@@ -289,4 +310,10 @@ func die():
 	explosion.global_position = self.global_position
 	explosion.global_rotation = self.global_rotation
 	queue_free()
+
+func land(helipad):
+	print("Helicopter landing")
+	landing = true
+	landing_helipad = helipad
+	landing_helipad.start_blinking()
 

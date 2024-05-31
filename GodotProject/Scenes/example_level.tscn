@@ -1,12 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://de2ss5g5n71k3"]
+[gd_scene load_steps=14 format=3 uid="uid://de2ss5g5n71k3"]
 
+[ext_resource type="PackedScene" uid="uid://5fgwf4wqjj43" path="res://Scenes/BazookaBeaver.tscn" id="3_r1q1s"]
 [ext_resource type="PackedScene" uid="uid://cwnf2ddcjvs8e" path="res://Models/StaticObjects/MainPlane.tscn" id="4_iy4ns"]
+[ext_resource type="PackedScene" uid="uid://b0n0fx6wosttu" path="res://Scenes/Helipad.tscn" id="4_nflhc"]
 [ext_resource type="PackedScene" uid="uid://mbsnudy0ijcu" path="res://Models/StaticObjects/rock3.tscn" id="5_0o5oj"]
 [ext_resource type="PackedScene" uid="uid://cu3gi8x4p7o2" path="res://Models/StaticObjects/rock.tscn" id="5_pvois"]
 [ext_resource type="PackedScene" uid="uid://dmucieunpid58" path="res://Models/StaticObjects/Rock4.tscn" id="7_6fbpj"]
 [ext_resource type="PackedScene" uid="uid://5qy16o5wggi" path="res://Scenes/helicopter.tscn" id="10_eoqmd"]
 [ext_resource type="PackedScene" uid="uid://3dtl0q5lvotw" path="res://Scenes/crate.tscn" id="11_1l5l2"]
-[ext_resource type="PackedScene" path="res://Scenes/Crawling_mob.tscn" id="11_xrqy2"]
+[ext_resource type="PackedScene" uid="uid://bp11cmjwsnf1a" path="res://Scenes/Crawling_mob.tscn" id="11_xrqy2"]
 [ext_resource type="PackedScene" uid="uid://by0gv5obxit0e" path="res://Models/Objects/cactus1.tscn" id="12_xedte"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7a3gm"]
@@ -36,7 +38,16 @@ environment = SubResource("Environment_hpw2e")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.638, 0)
 
 [node name="CrawlingMob" parent="." instance=ExtResource("11_xrqy2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 348.504, 1.56093, 242.892)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.70641, 2.62279, -59.9835)
+
+[node name="CrawlingMob2" parent="." instance=ExtResource("11_xrqy2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -74.5833, 0, 0)
+
+[node name="BazookaBeaver" parent="." instance=ExtResource("3_r1q1s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 58.8084, 5.46733, -11.8587)
+
+[node name="Helipad" parent="." instance=ExtResource("4_nflhc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 81.4439, 0.0344379, 110.482)
 
 [node name="Crates" type="Node3D" parent="."]
 

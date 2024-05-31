@@ -1,5 +1,52 @@
-[gd_scene load_steps=2 format=3 uid="uid://cwnf2ddcjvs8e"]
+[gd_scene load_steps=5 format=3 uid="uid://cwnf2ddcjvs8e"]
 
-[ext_resource type="PackedScene" uid="uid://b8onllm4fs7d" path="res://Models/StaticObjects/MainPlane.glb" id="1_2r52a"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2bcsk"]
+resource_name = "Material.012"
+cull_mode = 2
+albedo_color = Color(0.925631, 0.75267, 0.539691, 1)
+roughness = 0.5
 
-[node name="MainPlane2" instance=ExtResource("1_2r52a")]
+[sub_resource type="ArrayMesh" id="ArrayMesh_avumq"]
+_surfaces = [{
+"aabb": AABB(-1, 0, -1, 2, 1e-05, 2.00001),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 3, 0, 1, 0, 0, 0, 2, 0, 3, 0),
+"name": "Material.012",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 254, 255, 0, 0, 255, 255, 0, 0, 254, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_47n2f"]
+resource_name = "MainPlane_Plane"
+_surfaces = [{
+"aabb": AABB(-1, 0, -1, 2, 1e-05, 2.00001),
+"attribute_data": PackedByteArray(0, 0, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 255, 255, 0, 0),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 3, 0, 1, 0, 0, 0, 2, 0, 3, 0),
+"material": SubResource("StandardMaterial3D_2bcsk"),
+"name": "Material.012",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 254, 255, 255, 191, 255, 255, 0, 0, 254, 255, 255, 191, 0, 0, 0, 0, 0, 0, 255, 191, 255, 255, 0, 0, 0, 0, 255, 191, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_avumq")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qepm3"]
+size = Vector3(3.79156, 1, 3.82178)
+
+[node name="MainPlane2" type="StaticBody3D"]
+
+[node name="MainPlane" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_47n2f")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.604401, -0.497803, -0.925049)
+shape = SubResource("BoxShape3D_qepm3")

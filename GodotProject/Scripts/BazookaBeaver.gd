@@ -52,12 +52,12 @@ func do_fire():
 	last_fired = Time.get_ticks_msec()
 
 	var rocket: Rocket = ROCKET.instantiate()
+	rocket.speed = BEAVER_ROCKET_SPEED
+	rocket.rocket_hit_damage = BEAVER_ROCKET_HIT_DAMAGE
 	rocket.set_owner_body(mob)
 	get_tree().root.add_child(rocket)
 	rocket.global_position = firing_marker.global_position
 	rocket.look_at(helicopter.global_position)
-	rocket.speed = BEAVER_ROCKET_SPEED
-	rocket.hit_damage = BEAVER_ROCKET_HIT_DAMAGE
 
 func try_to_fire():
 	var now = Time.get_ticks_msec()
