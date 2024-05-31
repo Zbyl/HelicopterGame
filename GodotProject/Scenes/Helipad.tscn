@@ -69,6 +69,8 @@ _data = {
 script = ExtResource("1_x7fs5")
 
 [node name="Area3D" type="Area3D" parent="."]
+collision_layer = 32
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("CylinderShape3D_uswjy")
