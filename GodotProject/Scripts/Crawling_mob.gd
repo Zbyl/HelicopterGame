@@ -10,11 +10,14 @@ var helicopter
 @export var SPEED = 12
 @export var PURSUIT_SPEED = 25
 @export var SPEED_FADE = 0.7
-@export var PURSUIT_DISTANCE = 50
+@export var PURSUIT_DISTANCE = 75
 @export var ATTACK_DISTANCE = 20
 @export var ATTACK_COOLDOWN = 1000
 @export var PURSUIT_COOLDOWN = 4000
-@export var JUMP_FACTOR = 2.5
+@export var JUMP_FACTOR = 2.25
+@export var VERTICAL_LIMIT_LIMIT = 15
+@export var VERTICAL_VELOCITY_FADE = 0.5
+@export var GRAVITY_FACTOR = 2
 
 @export var health: float = 60
 var paused: bool = false
@@ -22,7 +25,7 @@ const BIG_EXPLOSION = preload("res://Scenes/blood_explosion.tscn")
 const DEBRIS = preload("res://Scenes/shark_debris.tscn")
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")*GRAVITY_FACTOR
 
 enum {CALM, IN_PURSUIT, ATTACKING}
 
@@ -108,6 +111,9 @@ func _process(delta):
 	# Add the gravity.
 	if not mob.is_on_floor():
 		mob.velocity.y -= gravity * delta
+
+	if mob.global_position.y > VERTICAL_LIMIT_LIMIT && mob.velocity.y>0:
+		mob.velocity.y = move_toward(mob.velocity.y, 0, VERTICAL_VELOCITY_FADE)
 
 	if state==ATTACKING && Time.get_ticks_msec() - state_changed > ATTACK_COOLDOWN:
 		set_state(IN_PURSUIT)

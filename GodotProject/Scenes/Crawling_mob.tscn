@@ -12,7 +12,7 @@ _data = {
 point_count = 17
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_h4kkg"]
-size = Vector3(1, 1, 3)
+size = Vector3(3, 3, 8)
 
 [node name="CrawlingMob" type="Node3D" groups=["Enemies"]]
 script = ExtResource("1_jyo6m")
@@ -30,9 +30,10 @@ collision_mask = 31
 script = ExtResource("2_2uowj")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="mob"]
+transform = Transform3D(1, 1.43773e-08, -2.8871e-08, 4.71482e-09, 1, -1.42306e-06, 0, 4.24683e-07, 1.00001, -0.00099995, 1, 0.499994)
 shape = SubResource("BoxShape3D_h4kkg")
 
 [node name="Node3D" type="Node3D" parent="mob"]
 
 [node name="Shark" parent="mob/Node3D" instance=ExtResource("3_1ayi7")]
-transform = Transform3D(-0.999942, -0.0019518, -0.0105701, -0.00146831, 0.998961, -0.0455569, 0.0106481, -0.0455388, -0.998906, 0, 0, 0)
+transform = Transform3D(-1.99988, -0.0039036, -0.0211404, -0.00293662, 1.99792, -0.0911139, 0.0212963, -0.0910775, -1.99781, 0, 0.996674, -0.0792279)
