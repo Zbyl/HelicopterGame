@@ -17,14 +17,15 @@ func rnd():
 	return rng.randf_range(-3, 3)
 
 func rVector(x, y, z):
-	return Vector3(x*rnd(), y*rnd(), z*rnd())
+	return Vector3(x*rnd(), rng.randf_range(3, 10), z*rnd())
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	debris_1.apply_impulse(rVector(1, 6, 0), rVector(0.03, 0.03, 0))
 	debris_2.apply_impulse(rVector(1, 9, 1), rVector(0, 1, 0.5))
-	debris_3.apply_impulse(rVector(-0.4, 12, -2), rVector(0.4, 0, 0.7))
-	debris_4.apply_impulse(rVector(1, 5, -1), rVector(0, 0, 0))
+	debris_3.apply_impulse(rVector(-0.4, 12, -2), rVector(0.4, 0.5, 0.7))
+	debris_4.apply_impulse(rVector(1, 5, -1), rVector(0, 0.1, 0))
+	debris_1.angular_velocity=rVector(1, 0.5, 0.1)
 
 	if alpha_tween:
 		alpha_tween.kill()

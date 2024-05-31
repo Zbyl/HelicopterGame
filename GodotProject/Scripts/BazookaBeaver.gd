@@ -39,6 +39,7 @@ func hit(force):
 		var debris = DEBRIS.instantiate()
 		get_tree().root.add_child(debris)
 		debris.global_position = global_position
+		debris.global_position.y+=1
 
 		var explosion = BIG_EXPLOSION.instantiate()
 		get_tree().root.add_child(explosion)
