@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://c6hnsv2ujv8bv"]
+
+[ext_resource type="Script" path="res://Scripts/Portal.gd" id="1_nqjut"]
+[ext_resource type="PackedScene" uid="uid://c0jm4gu4r02np" path="res://Models/Objects/Eggs-col.glb" id="2_4fs7h"]
+[ext_resource type="Script" path="res://Scripts/PortalBody.gd" id="3_i5nmc"]
+[ext_resource type="PackedScene" uid="uid://citgnso22hi0a" path="res://Models/Objects/BrokenEggs-col.glb" id="4_m51nq"]
+
+[node name="Eggs" type="Node3D"]
+script = ExtResource("1_nqjut")
+is_portal = false
+
+[node name="Model" parent="." groups=["Eggs"] instance=ExtResource("2_4fs7h")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.68092, 0, 5.9172)
+
+[node name="Eggs" parent="Model" index="0"]
+transform = Transform3D(-0.191814, 0.72931, -0.827258, -0.936424, 0.0317023, 0.228063, 0.124954, 1.35712, 0.439236, 1.85027, 0, -5.88532)
+
+[node name="StaticBody3D" parent="Model/Eggs" index="0" groups=["Hittable"]]
+script = ExtResource("3_i5nmc")
+
+[node name="BrokenModel" parent="." instance=ExtResource("4_m51nq")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.42326, 0, 5.62858)
+visible = false
+
+[node name="BrokenEggs" parent="BrokenModel" index="0"]
+transform = Transform3D(-0.191814, 0.72931, -0.827258, -0.936424, 0.0317023, 0.228063, 0.124954, 1.35712, 0.439236, -2.28206, 0, -5.65094)
+
+[editable path="Model"]
+[editable path="BrokenModel"]
