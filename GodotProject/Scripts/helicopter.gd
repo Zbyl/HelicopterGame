@@ -58,7 +58,7 @@ var max_altitude = 15.0
 @export var PITCH_MAX = 0.2
 @export var PITCH_FADE = 0.01
 
-@export var AIM_MAX_UP = 0.7
+@export var AIM_MAX_UP = 1.5
 @export var AIM_MAX_DOWN = 0.3
 @export var AIM_AT_LANDING = -0.6
 @export var AIM_SPEED_SLOW = 0.01
