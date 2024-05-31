@@ -5,6 +5,7 @@ extends Node3D
 @onready var mob = $mob
 var helicopter
 @onready var animation_player:AnimationPlayer = $mob/Node3D/Shark/AnimationPlayer
+@onready var audio_stream_player_3d = $mob/AudioStreamPlayer3D
 
 @export var ROUNDS_PER_SEC = 0.05
 @export var SPEED = 12
@@ -89,22 +90,24 @@ func _process(delta):
 		target = path_follow_3d
 
 
-	var thowards_target = Vector3(target.global_position-mob.global_position);
-	thowards_target.y = 0;
-	if thowards_target.length()>1:
-		thowards_target = thowards_target.normalized()
+	if target:
+		var thowards_target = Vector3(target.global_position-mob.global_position);
+		thowards_target.y = 0;
+		if thowards_target.length()>1:
+			thowards_target = thowards_target.normalized()
 
-	if mob.is_on_floor() && distance_from_heli < ATTACK_DISTANCE && state!=ATTACKING:
-		mob.velocity.y = abs(mob.global_position.y-helicopter.global_position.y)*JUMP_FACTOR
-		set_state(ATTACKING)
+		if mob.is_on_floor() && distance_from_heli < ATTACK_DISTANCE && state!=ATTACKING:
+			mob.velocity.y = abs(mob.global_position.y-helicopter.global_position.y)*JUMP_FACTOR
+			audio_stream_player_3d.play()
+			set_state(ATTACKING)
 
 
-	if mob.is_on_floor() && state==IN_PURSUIT:
-		mob.velocity.x = move_toward(mob.velocity.x, thowards_target.x*PURSUIT_SPEED, SPEED_FADE)
-		mob.velocity.z = move_toward(mob.velocity.z, thowards_target.z*PURSUIT_SPEED, SPEED_FADE)
-	elif state==CALM:
-		mob.velocity.x = thowards_target.x*SPEED
-		mob.velocity.z = thowards_target.z*SPEED
+		if mob.is_on_floor() && state==IN_PURSUIT:
+			mob.velocity.x = move_toward(mob.velocity.x, thowards_target.x*PURSUIT_SPEED, SPEED_FADE)
+			mob.velocity.z = move_toward(mob.velocity.z, thowards_target.z*PURSUIT_SPEED, SPEED_FADE)
+		elif state==CALM:
+			mob.velocity.x = thowards_target.x*SPEED
+			mob.velocity.z = thowards_target.z*SPEED
 
 	mob.look_at(target.global_position)
 	mob.rotation.x = 0
