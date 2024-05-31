@@ -5,15 +5,19 @@ class_name Hud
 signal new_game_pressed()
 signal pause_game(do_pause: bool)
 
-@onready var menu = $Screen/Menu
-@onready var controls_help = $Screen/ControlsHelp
-@onready var new_game_button = $Screen/Menu/VBoxContainer/NewGameButton
-@onready var background = $Screen/Background
-@onready var health_label = $Screen/Gauges/HealthLabel
+@onready var menu: Control = $Screen/Menu
+@onready var controls_help: Control = $Screen/ControlsHelp
+@onready var new_game_button: Button = $Screen/Menu/VBoxContainer/NewGameButton
+@onready var background: Control = $Screen/Background
+@onready var gauges: Control = $Screen/Gauges
+@onready var health_label: Label = $Screen/Gauges/HealthLabel
+@onready var portals_label: Label = $Screen/Gauges/PortalsLabel
+@onready var eggs_label: Label = $Screen/Gauges/EggsLabel
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	controls_help.visible = false
+	gauges.visible = false
 	new_game_button.grab_focus.call_deferred()
 
 
@@ -22,8 +26,14 @@ func _process(delta):
 	pass
 
 
-func update_health_label(health):
-	health_label.text = "{health}".format({"health": health})
+func update_health_label(amount):
+	health_label.text = "{amount}".format({"amount": amount})
+
+func update_portals_label(amount, total):
+	portals_label.text = "{amount} / {total}".format({"amount": amount, "total": total})
+
+func update_eggs_label(amount, total):
+	eggs_label.text = "{amount} / {total}".format({"amount": amount, "total": total})
 
 
 func toggle_menu():
@@ -32,6 +42,7 @@ func toggle_menu():
 func show_menu(do_show: bool):
 	menu.visible = do_show
 	controls_help.visible = false
+	gauges.visible = !do_show
 	if do_show:
 		new_game_button.grab_focus.call_deferred()
 	pause_game.emit(do_show)

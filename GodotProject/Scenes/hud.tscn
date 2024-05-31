@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://coir15qm3jlrt"]
+[gd_scene load_steps=7 format=3 uid="uid://coir15qm3jlrt"]
 
 [ext_resource type="Script" path="res://Scripts/hud.gd" id="1_iyo5i"]
 [ext_resource type="Texture2D" uid="uid://b7us0q86x3d55" path="res://Graphics/Hud/pad.png" id="2_2ggaf"]
 [ext_resource type="Texture2D" uid="uid://do663e4dpqisj" path="res://Graphics/Screens/SplashScreen.png" id="3_l1l2y"]
 [ext_resource type="Texture2D" uid="uid://psimouhqtxko" path="res://Graphics/Hud/HealthIcon.png" id="4_bbyg8"]
+[ext_resource type="Texture2D" uid="uid://drxscvgmroukm" path="res://Graphics/Hud/PortalIcon.png" id="5_dpo7h"]
+[ext_resource type="Texture2D" uid="uid://bnwqwiryhws1" path="res://Graphics/Hud/EggIcon.png" id="6_xpdpk"]
 
 [node name="Hud" type="CanvasLayer"]
 script = ExtResource("1_iyo5i")
@@ -169,10 +171,10 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 45.0
-offset_top = -82.0
-offset_right = 301.0
-offset_bottom = 174.0
+offset_left = 31.0
+offset_top = -622.0
+offset_right = 287.0
+offset_bottom = -366.0
 grow_vertical = 0
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("4_bbyg8")
@@ -182,14 +184,73 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 105.0
-offset_top = -94.0
-offset_right = 192.0
-offset_bottom = -25.0
+offset_left = 92.0
+offset_top = -622.0
+offset_right = 179.0
+offset_bottom = -553.0
 grow_vertical = 0
+theme_override_colors/font_color = Color(0.804495, 0.526317, 5.77569e-07, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 35
+text = "100"
+
+[node name="PortalsIcon" type="TextureRect" parent="Screen/Gauges"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 965.0
+offset_top = -626.0
+offset_right = 1221.0
+offset_bottom = -370.0
+grow_vertical = 0
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("5_dpo7h")
+
+[node name="PortalsLabel" type="Label" parent="Screen/Gauges"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 1022.0
+offset_top = -629.0
+offset_right = 1109.0
+offset_bottom = -560.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.803922, 0.52549, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 35
+text = "100"
+
+[node name="EggsIcon" type="TextureRect" parent="Screen/Gauges"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 965.0
+offset_top = -556.0
+offset_right = 1221.0
+offset_bottom = -300.0
+grow_vertical = 0
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("6_xpdpk")
+
+[node name="EggsLabel" type="Label" parent="Screen/Gauges"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 1024.0
+offset_top = -554.0
+offset_right = 1111.0
+offset_bottom = -485.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.803922, 0.52549, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 35
 text = "100"
 
 [connection signal="pressed" from="Screen/Menu/VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]

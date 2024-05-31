@@ -8,6 +8,17 @@ const EXAMPLE_LEVEL = preload("res://Scenes/example_level.tscn")
 var level
 var death_camera: Camera3D = null # Camera we use after player died.
 
+var total_portals: int = 0	# Number of portals in the level on the start.
+var total_eggs: int = 0	# Number of eggs in the level on the start.
+var total_sharks: int = 0	# Number of sharks in the level on the start.
+var total_beavers: int = 0	# Number of beavers in the level on the start.
+
+# Updated on demand.
+var alive_portals: int = 0	# Number of portals still alive.
+var alive_eggs: int = 0	# Number of eggs still alive.
+var alive_sharks: int = 0	# Number of sharks still alive.
+var alive_beavers: int = 0	# Number of beavers still alive.
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	hud.new_game_pressed.connect(_on_new_game_pressed)
@@ -27,6 +38,13 @@ func _on_new_game_pressed():
 	#await _switch_level(INTRO, false)
 	#await level.intro_ended
 	await _switch_level(EXAMPLE_LEVEL, true)
+
+	#await get_tree().create_timer(0.01).timeout
+	total_portals = get_tree().get_nodes_in_group('Portals').size()
+	total_eggs = get_tree().get_nodes_in_group('Eggs').size()
+	total_sharks = get_tree().get_nodes_in_group('Sharks').size()
+	total_beavers = get_tree().get_nodes_in_group('Beavers').size()
+	update_counters()
 	
 func _switch_level(new_level_scene, show_weapons: bool):
 	if death_camera:
@@ -56,7 +74,7 @@ func pause_player_and_enemies(do_pause: bool):
 	for enemy in enemies:
 		enemy.pause(do_pause)
 
-func _on_player_died(): # Called by Helicopter when its health drops to zero.
+func _on_player_died(): # Called by Helicopter when its health drops to zero, before queue_free()!
 	GameData.game.pause_player_and_enemies(true)
 	var player = get_tree().get_first_node_in_group("Player")
 	death_camera = player.get_node('%Camera')
@@ -65,3 +83,18 @@ func _on_player_died(): # Called by Helicopter when its health drops to zero.
 	await get_tree().create_timer(2).timeout
 	hud.show_menu(true)
 	
+func _on_portal_died(): # Called by portal when its health drops to zero, before queue_free()!
+	#update_counters()
+	pass
+
+func _on_egg_died(): # Called by egg when its health drops to zero, before queue_free()!
+	#update_counters()
+	pass
+
+func update_counters():
+	alive_portals = get_tree().get_nodes_in_group('Portals').size()
+	alive_eggs = get_tree().get_nodes_in_group('Eggs').size()
+	alive_sharks = get_tree().get_nodes_in_group('Sharks').size()
+	alive_beavers = get_tree().get_nodes_in_group('Beavers').size()
+	hud.update_portals_label(total_portals - alive_portals, total_portals)
+	hud.update_eggs_label(total_eggs - alive_eggs, total_eggs)
