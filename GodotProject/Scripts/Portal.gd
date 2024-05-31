@@ -1,7 +1,7 @@
-extends StaticBody3D
+extends Node3D
 
 @export var health: float = 300
-const BIG_EXPLOSION = preload("res://Scenes/big_explosion.tscn")
+const EXPLOSION = preload("res://Scenes/huge_explosion.tscn")
 const DEBRIS = preload("res://Scenes/portal_debris.tscn")
 @export var num_debris: int = 10
 
@@ -30,11 +30,12 @@ func die():
 	for i in range(num_debris):
 		var debris = DEBRIS.instantiate()
 		get_tree().root.add_child(debris)
-		debris.global_position = global_position
+		debris.global_position = global_position + Vector3.UP * 1
 
-	var explosion = BIG_EXPLOSION.instantiate()
+	var explosion = EXPLOSION.instantiate()
 	get_tree().root.add_child(explosion)
 	explosion.global_position = self.global_position
 	explosion.global_rotation = self.global_rotation
 	
-	queue_free()
+	$"Portal-col2".queue_free()
+	$"BrokenPortal-col2".visible = true

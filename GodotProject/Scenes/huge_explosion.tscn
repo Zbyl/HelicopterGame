@@ -1,0 +1,152 @@
+[gd_scene load_steps=13 format=3 uid="uid://cslhny2y56k3q"]
+
+[ext_resource type="Material" uid="uid://c2s5soyc0u5mj" path="res://Materials/big_explosion_material.tres" id="1_jwhf4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3y3is"]
+transparency = 1
+albedo_color = Color(1, 0.843137, 0.392157, 1)
+emission_enabled = true
+emission = Color(0.95, 0.432725, 0.00949999, 1)
+emission_energy_multiplier = 3.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_uax1u"]
+radius = 1.5
+height = 3.0
+
+[sub_resource type="Curve" id="Curve_1vsfc"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0, 360), 0.0, 0.0, 0, 0, Vector2(1, 360), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_2t65c"]
+curve = SubResource("Curve_1vsfc")
+
+[sub_resource type="Gradient" id="Gradient_bmk5m"]
+offsets = PackedFloat32Array(0, 0.503876, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.752941, 0.752941, 0.752941, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hvh31"]
+gradient = SubResource("Gradient_bmk5m")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gru66"]
+emission_shape = 1
+emission_sphere_radius = 4.0
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 2.0
+initial_velocity_max = 2.0
+angular_velocity_min = -297.39
+angular_velocity_max = 219.13
+angular_velocity_curve = SubResource("CurveTexture_2t65c")
+gravity = Vector3(0, 8, 0)
+color_ramp = SubResource("GradientTexture1D_hvh31")
+
+[sub_resource type="SphereMesh" id="SphereMesh_x4sqa"]
+radius = 2.0
+height = 4.0
+
+[sub_resource type="Animation" id="Animation_4yyrd"]
+resource_name = "Explode"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../GPUParticles3D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:material_override:albedo_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 0.843137, 0.392157, 1), Color(1, 0.843137, 0.392157, 1), Color(1, 0.843137, 0.392157, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_w6x1g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../GPUParticles3D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:material_override:albedo_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0.843137, 0.392157, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pby7k"]
+_data = {
+"Explode": SubResource("Animation_4yyrd"),
+"RESET": SubResource("Animation_w6x1g")
+}
+
+[node name="HugeExplosion" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0465441, -0.195729, -2.98023e-08)
+visible = false
+material_override = SubResource("StandardMaterial3D_3y3is")
+mesh = SubResource("SphereMesh_uax1u")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+material_override = ExtResource("1_jwhf4")
+amount = 32
+one_shot = true
+explosiveness = 0.95
+process_material = SubResource("ParticleProcessMaterial_gru66")
+draw_pass_1 = SubResource("SphereMesh_x4sqa")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../MeshInstance3D")
+libraries = {
+"": SubResource("AnimationLibrary_pby7k")
+}
