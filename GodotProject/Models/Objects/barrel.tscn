@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=3 uid="uid://bs1qfxq6vthao"]
+
+[ext_resource type="PackedScene" uid="uid://vfomvgoo7vod" path="res://Models/Objects/Barrel-col.glb" id="1_yogx4"]
+
+[sub_resource type="GDScript" id="GDScript_grxts"]
+script/source = "extends StaticBody3D
+
+@export var health: float = 29
+const BIG_EXPLOSION = preload(\"res://Scenes/big_explosion.tscn\")
+const DEBRIS = preload(\"res://Scenes/crate_debris.tscn\")
+
+func hit(force: float):
+	health -= force
+	if health < 0:
+		var debris = DEBRIS.instantiate()
+		get_tree().root.add_child(debris)
+		debris.global_position = global_position
+		debris.global_position.y += 1
+
+		var explosion = BIG_EXPLOSION.instantiate()
+		get_tree().root.add_child(explosion)
+		explosion.global_position = self.global_position
+		explosion.global_rotation = self.global_rotation
+		$\"..\".queue_free()
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_a6f3x"]
+height = 0.979119
+radius = 0.63923
+
+[node name="cactus1" type="Node3D"]
+
+[node name="Barrel-col2" parent="." instance=ExtResource("1_yogx4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.640874, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." groups=["Hittable"]]
+script = SubResource("GDScript_grxts")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.347231, 0)
+shape = SubResource("CylinderShape3D_a6f3x")
