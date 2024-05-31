@@ -19,18 +19,18 @@ autostart = true
 
 [node name="MenuMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_v3ais")
-volume_db = -27.733
+volume_db = -16.0
 
 [node name="LevelMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_crtru")
-volume_db = -27.733
+volume_db = -16.0
 
 [node name="SuccessMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_3l004")
-volume_db = -27.733
+volume_db = -16.0
 
 [node name="FailedMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_k4l61")
-volume_db = -27.733
+volume_db = -16.0
 
 [connection signal="timeout" from="Timer" to="." method="update_counters"]
