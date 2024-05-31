@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bp11cmjwsnf1a"]
+[gd_scene load_steps=8 format=3 uid="uid://bp11cmjwsnf1a"]
 
 [ext_resource type="Script" path="res://Scripts/Crawling_mob.gd" id="1_jyo6m"]
 [ext_resource type="Script" path="res://Scenes/mob.gd" id="2_2uowj"]
 [ext_resource type="PackedScene" uid="uid://clmroyvalrb4w" path="res://Models/Enemies/Shark.glb" id="3_1ayi7"]
+[ext_resource type="AudioStream" uid="uid://se6ud20j8318" path="res://Sounds/shark_attack.mp3" id="4_17n01"]
+[ext_resource type="AudioStream" uid="uid://dsq1iyuilupp3" path="res://Sounds/shark_angry.mp3" id="5_nmqfe"]
 
 [sub_resource type="Curve3D" id="Curve3D_nqa06"]
 _data = {
@@ -37,3 +39,9 @@ shape = SubResource("BoxShape3D_h4kkg")
 
 [node name="Shark" parent="mob/Node3D" instance=ExtResource("3_1ayi7")]
 transform = Transform3D(-1.99988, -0.0039036, -0.0211404, -0.00293662, 1.99792, -0.0911139, 0.0212963, -0.0910775, -1.99781, 0, 0.996674, -0.0792279)
+
+[node name="Shark_attack" type="AudioStreamPlayer3D" parent="mob"]
+stream = ExtResource("4_17n01")
+
+[node name="Shark_angry" type="AudioStreamPlayer3D" parent="mob"]
+stream = ExtResource("5_nmqfe")

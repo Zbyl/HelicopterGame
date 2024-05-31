@@ -10,6 +10,7 @@ var active_rocket_left: bool = true # true fire left rocket next, false fire rig
 @onready var helicopter_sound = $Helicopter_sound
 @onready var helicopter_slowdown = $Helicopter_slowdown
 @onready var helicopter_slow = $Helicopter_slow
+@onready var intro_player = $Intro_player
 
 
 const BIG_EXPLOSION = preload("res://Scenes/big_explosion.tscn")
@@ -345,3 +346,7 @@ func land(helipad):
 
 func _on_helicopter_slowdown_finished():
 	helicopter_slow.play()
+
+
+func _on_timer_timeout():
+	intro_player.play()

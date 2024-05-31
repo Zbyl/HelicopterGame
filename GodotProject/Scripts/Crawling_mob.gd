@@ -5,7 +5,9 @@ extends Node3D
 @onready var mob = $mob
 var helicopter
 @onready var animation_player:AnimationPlayer = $mob/Node3D/Shark/AnimationPlayer
-@onready var audio_stream_player_3d = $mob/AudioStreamPlayer3D
+@onready var audio_shark_angry = $mob/Shark_angry
+@onready var audio_shark_attack = $mob/Shark_attack
+
 
 @export var ROUNDS_PER_SEC = 0.05
 @export var SPEED = 12
@@ -82,6 +84,7 @@ func _process(delta):
 		distance_from_heli = 100000
 
 	if state==CALM && distance_from_heli < PURSUIT_DISTANCE:
+		audio_shark_angry.play()
 		set_state(IN_PURSUIT)
 
 	if state==IN_PURSUIT || state==ATTACKING:
@@ -98,7 +101,7 @@ func _process(delta):
 
 		if mob.is_on_floor() && distance_from_heli < ATTACK_DISTANCE && state!=ATTACKING:
 			mob.velocity.y = abs(mob.global_position.y-helicopter.global_position.y)*JUMP_FACTOR
-			audio_stream_player_3d.play()
+			audio_shark_attack.play()
 			set_state(ATTACKING)
 
 
@@ -121,6 +124,7 @@ func _process(delta):
 		mob.velocity.y = move_toward(mob.velocity.y, 0, VERTICAL_VELOCITY_FADE)
 
 	if state==ATTACKING && Time.get_ticks_msec() - state_changed > ATTACK_COOLDOWN:
+		audio_shark_angry.play()
 		set_state(IN_PURSUIT)
 	elif state!=CALM && Time.get_ticks_msec() - state_changed > PURSUIT_COOLDOWN:
 		set_state(CALM)

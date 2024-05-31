@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://5fgwf4wqjj43"]
+[gd_scene load_steps=9 format=3 uid="uid://5fgwf4wqjj43"]
 
 [ext_resource type="Script" path="res://Scripts/BazookaBeaver.gd" id="1_veo4j"]
 [ext_resource type="Script" path="res://Scripts/BazookaBeaver_mob.gd" id="2_cror4"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ddm1cmrlmqmju" path="res://Scenes/GunHolder-col.glb" id="4_1we5a"]
 [ext_resource type="PackedScene" uid="uid://x3vbd6y8uuig" path="res://Scenes/GunLeft-col.glb" id="5_pu1j2"]
 [ext_resource type="PackedScene" uid="uid://civgg7eimqbh0" path="res://Scenes/GunRight-col.glb" id="6_lxdft"]
+[ext_resource type="AudioStream" uid="uid://dx3mq5pldyc4j" path="res://Sounds/aiming.mp3" id="7_kieoy"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_n4slt"]
 size = Vector3(3.38745, 3.23523, 5.75891)
@@ -58,6 +59,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.43686, 3.06091, -2.07946)
 
 [node name="firingMarker_right" type="Marker3D" parent="mob"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.50776, 3.06091, -2.07946)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="mob"]
+stream = ExtResource("7_kieoy")
+volume_db = 24.601
 
 [editable path="mob/model/Beaver-col"]
 [editable path="mob/model/GunHolder-col2"]

@@ -4,9 +4,11 @@ extends Node3D
 const ROCKET = preload("res://Scenes/rocket.tscn")
 @onready var firing_marker_left = $mob/firingMarker_left
 @onready var firing_marker_right = $mob/firingMarker_right
+@onready var audio_stream_player_3d = $mob/AudioStreamPlayer3D
 
 
 @export var AIMING_DISTANCE = 75
+@export var AIMING_MAX_DISTANCE = 250
 @export var AIMING_TIME = 300
 @export var FIRE_INTERVAL = 1500
 @export var BEAVER_ROCKET_SPEED = 0.6
@@ -89,7 +91,11 @@ func _process(delta):
 		distance_from_heli = 100000
 
 	if state==CALM && distance_from_heli < AIMING_DISTANCE:
+		audio_stream_player_3d.play()
 		set_state(AIMING)
+
+	if state==AIMING && distance_from_heli > AIMING_MAX_DISTANCE:
+		set_state(CALM)
 
 	var desired_rotation:float
 	if state==AIMING && helicopter:
