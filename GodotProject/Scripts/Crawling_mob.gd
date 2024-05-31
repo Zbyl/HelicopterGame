@@ -12,6 +12,7 @@ extends Node3D
 @export var JUMP = 13
 
 @export var health: float = 100
+var paused: bool = false
 const BIG_EXPLOSION = preload("res://Scenes/big_explosion.tscn")
 const DEBRIS = preload("res://Scenes/crate_debris.tscn")
 
@@ -24,6 +25,9 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 func _ready():
 	pass # Replace with function body.
 
+func pause(do_pause: bool):
+	paused = do_pause
+	
 func hit(force: float):
 	health -= force
 	if health < 0:
@@ -40,7 +44,9 @@ func hit(force: float):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	return;
+	if paused:
+		return
+
 	var now = Time.get_ticks_msec()
 	#path_follow_3d.progress = fmod((now-initiated_on)*ROUNDS_PER_SEC/1000, 1)
 	path_follow_3d.progress_ratio = fmod((now-initiated_on)*ROUNDS_PER_SEC/1000, 1)
