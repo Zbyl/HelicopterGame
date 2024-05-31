@@ -121,6 +121,9 @@ func pause_player_and_enemies(do_pause: bool):
 	var enemies = get_tree().get_nodes_in_group("Enemies")
 	for enemy in enemies:
 		enemy.pause(do_pause)
+	var rockets = get_tree().get_nodes_in_group("Rockets")
+	for rocket in rockets:
+		rocket.pause(do_pause)
 
 func _on_player_died(): # Called by Helicopter when its health drops to zero, before queue_free()!
 	GameData.game.pause_player_and_enemies(true)

@@ -11,7 +11,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_n4slt"]
 size = Vector3(3.38745, 3.23523, 5.75891)
 
-[node name="BazookaBeaver" type="Node3D"]
+[node name="BazookaBeaver" type="Node3D" groups=["Enemies"]]
 script = ExtResource("1_veo4j")
 
 [node name="mob" type="StaticBody3D" parent="." groups=["Hittable"]]

@@ -1,5 +1,7 @@
 extends Node3D
 
+var paused: bool = false
+
 @onready var mob = $mob
 const ROCKET = preload("res://Scenes/rocket.tscn")
 @onready var firing_marker_left = $mob/firingMarker_left
@@ -79,8 +81,14 @@ func try_to_fire():
 	if helicopter && now-last_fired > FIRE_INTERVAL:
 		do_fire()
 
+func pause(do_pause: bool):
+	paused = do_pause
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if paused:
+		return
+
 	helicopter = get_tree().get_first_node_in_group("Player")
 
 	var distance_from_heli;

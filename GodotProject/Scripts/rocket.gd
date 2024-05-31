@@ -24,8 +24,16 @@ func _ready():
 func set_owner_body(body):
 	owner_body = body.get_instance_id()
 
+var paused: bool = false
+
+func pause(do_pause: bool):
+	paused = do_pause
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if paused:
+		return
+
 	global_position += -transform.basis.z * speed
 	#translate_object_local(transform.basis.z * speed)
 

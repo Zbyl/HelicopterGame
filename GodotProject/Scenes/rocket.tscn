@@ -23,7 +23,7 @@ radius = 0.2
 [sub_resource type="SphereShape3D" id="SphereShape3D_ok4s0"]
 radius = 0.956271
 
-[node name="Rocket" instance=ExtResource("1_usbvj")]
+[node name="Rocket" groups=["Rockets"] instance=ExtResource("1_usbvj")]
 speed = 1.5
 
 [node name="Model" type="Node3D" parent="." index="2"]
