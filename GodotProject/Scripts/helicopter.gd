@@ -32,7 +32,11 @@ var landing_helipad: Node3D
 @onready var camera_initial_transform:Transform3D = Transform3D(%Camera.transform)
 
 #@onready var initial_altitude = global_position.y
+var min_altitude = 3.0
+var max_altitude = 15.0
 
+
+@export var ALTITUDE_CORRECTION_FADE = 0.5
 @export var UP_ACCELERATION = 1.0
 @export var UP_SPEED = 20.0
 @export var UP_FADE = 0.25
@@ -231,9 +235,6 @@ func _physics_process(delta):
 	if paused:
 		return
 
-	if Input.is_action_just_pressed("debug_button"):
-		if hit(40):
-			return
 
 	if Input.is_action_pressed("fire_rocket"):
 		fire_rocket()
@@ -246,6 +247,11 @@ func _physics_process(delta):
 		handle_input_and_movement()
 	else:
 		handle_landing_sequence()
+		
+	if $GroundRayCast.is_colliding():
+		var ground_height = $GroundRayCast.get_collision_point().y
+		var desired_height = clampf(self.global_position.y, ground_height + min_altitude, ground_height + max_altitude)
+		self.global_position.y = move_toward(self.global_position.y, desired_height, ALTITUDE_CORRECTION_FADE)
 
 	rotate_rotors()
 	fade_hit()
