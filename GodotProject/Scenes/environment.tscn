@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://glltdrtbk7mk"]
+
+[ext_resource type="Texture2D" uid="uid://dnc2t3sjrkon" path="res://Graphics/AllSkyFree_Sky_EpicBlueSunset_Equirect.png" id="1_j1l4t"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_3wnch"]
+panorama = ExtResource("1_j1l4t")
+
+[sub_resource type="Sky" id="Sky_v6hf6"]
+sky_material = SubResource("PanoramaSkyMaterial_3wnch")
+
+[sub_resource type="Environment" id="Environment_hpw2e"]
+background_mode = 2
+sky = SubResource("Sky_v6hf6")
+ambient_light_color = Color(1, 0, 1, 1)
+ambient_light_sky_contribution = 0.71
+tonemap_mode = 2
+glow_enabled = true
+fog_enabled = true
+fog_light_color = Color(0.830425, 0.534475, 0.305669, 1)
+fog_light_energy = 1.15
+fog_sky_affect = 0.39
+
+[node name="Environment" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+shadow_bias = 0.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_hpw2e")
