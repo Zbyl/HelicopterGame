@@ -38,7 +38,7 @@ func _process(delta):
 height = 0.979119
 radius = 0.63923
 
-[node name="cactus1" type="Node3D"]
+[node name="Barrel" type="Node3D"]
 
 [node name="Barrel-col2" parent="." instance=ExtResource("1_yogx4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.640874, 0)

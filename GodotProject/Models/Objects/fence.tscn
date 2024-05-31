@@ -1,12 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://bakex1o5dp86b"]
+[gd_scene load_steps=4 format=3 uid="uid://hnh306v4goi4"]
 
-[ext_resource type="PackedScene" uid="uid://bodp3ym6m7c64" path="res://Models/Objects/Palm-col.glb" id="1_7uti6"]
+[ext_resource type="PackedScene" uid="uid://cbbxrlpa6s1cl" path="res://Models/Objects/Fence-col.glb" id="1_rjh31"]
 
 [sub_resource type="GDScript" id="GDScript_grxts"]
 script/source = "extends StaticBody3D
 
-@export var health: float = 29
-const DEBRIS = preload(\"res://Models/Objects/palm_debris.tscn\")
+@export var health: float = 10
+const DEBRIS = preload(\"res://Scenes/crate_debris.tscn\")
 
 func hit(force: float):
 	health -= force
@@ -29,17 +29,17 @@ func _process(delta):
 	pass
 "
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_a6f3x"]
-height = 3.10047
-radius = 1.29896
+[sub_resource type="BoxShape3D" id="BoxShape3D_25bxg"]
+size = Vector3(0.360352, 2.04333, 5.07104)
 
-[node name="Palm" type="Node3D"]
+[node name="Fence" type="Node3D"]
 
-[node name="Palm-col2" parent="." instance=ExtResource("1_7uti6")]
+[node name="Fence-col2" parent="." instance=ExtResource("1_rjh31")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.06278, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." groups=["Hittable"]]
 script = SubResource("GDScript_grxts")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5903, 0)
-shape = SubResource("CylinderShape3D_a6f3x")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0493164, 0.984979, -0.0411377)
+shape = SubResource("BoxShape3D_25bxg")

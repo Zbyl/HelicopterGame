@@ -33,7 +33,7 @@ func _process(delta):
 height = 3.10047
 radius = 1.29896
 
-[node name="cactus1" type="Node3D"]
+[node name="cactus2" type="Node3D"]
 
 [node name="Cactus2-col2" parent="." instance=ExtResource("2_x8qhc")]
 
