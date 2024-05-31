@@ -1,14 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://de2ss5g5n71k3"]
+[gd_scene load_steps=12 format=3 uid="uid://de2ss5g5n71k3"]
 
-[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain.gd" id="1_os0q5"]
-[ext_resource type="Resource" path="res://Terrains/Terrain0/data.hterrain" id="2_fvvhu"]
-[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="3_rvsfy"]
-[ext_resource type="Texture2D" uid="uid://d17h20jdfw21e" path="res://Scenes/example_level_slot0_albedo_bump.png" id="4_75pru"]
-[ext_resource type="Texture2D" uid="uid://beu8qtuy24egg" path="res://Scenes/example_level_slot1_albedo_bump.png" id="5_db0x5"]
-[ext_resource type="Texture2D" uid="uid://wi4y3cp4pk3u" path="res://Scenes/example_level_slot2_albedo_bump.png" id="6_rq71a"]
-[ext_resource type="Texture2D" uid="uid://dfkuavlyi113s" path="res://Scenes/example_level_slot0_normal_roughness.png" id="7_5poxd"]
-[ext_resource type="Texture2D" uid="uid://dl7tensj84kv1" path="res://Scenes/example_level_slot1_normal_roughness.png" id="8_ra2f7"]
-[ext_resource type="Texture2D" uid="uid://cw7pgyhxj60w8" path="res://Scenes/example_level_slot2_normal_roughness.png" id="9_2y85y"]
+[ext_resource type="PackedScene" uid="uid://cwnf2ddcjvs8e" path="res://Models/StaticObjects/MainPlane.tscn" id="4_iy4ns"]
+[ext_resource type="PackedScene" uid="uid://mbsnudy0ijcu" path="res://Models/StaticObjects/rock3.tscn" id="5_0o5oj"]
+[ext_resource type="PackedScene" uid="uid://cu3gi8x4p7o2" path="res://Models/StaticObjects/rock.tscn" id="5_pvois"]
+[ext_resource type="PackedScene" uid="uid://dmucieunpid58" path="res://Models/StaticObjects/Rock4.tscn" id="7_6fbpj"]
 [ext_resource type="PackedScene" uid="uid://5qy16o5wggi" path="res://Scenes/helicopter.tscn" id="10_eoqmd"]
 [ext_resource type="PackedScene" uid="uid://3dtl0q5lvotw" path="res://Scenes/crate.tscn" id="11_1l5l2"]
 [ext_resource type="PackedScene" path="res://Scenes/Crawling_mob.tscn" id="11_xrqy2"]
@@ -27,41 +22,18 @@ sky = SubResource("Sky_v6hf6")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="Resource" id="Resource_6ii8t"]
-script = ExtResource("3_rvsfy")
-mode = 0
-textures = [[ExtResource("4_75pru"), ExtResource("5_db0x5"), ExtResource("6_rq71a")], [ExtResource("7_5poxd"), ExtResource("8_ra2f7"), ExtResource("9_2y85y")]]
-
 [node name="ExampleLevel" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 shadow_enabled = true
+shadow_bias = 0.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_hpw2e")
 
-[node name="HTerrain" type="Node3D" parent="."]
-script = ExtResource("1_os0q5")
-_terrain_data = ExtResource("2_fvvhu")
-chunk_size = 32
-collision_enabled = true
-collision_layer = 1
-collision_mask = 1
-shader_type = "Classic4Lite"
-custom_shader = null
-custom_globalmap_shader = null
-texture_set = SubResource("Resource_6ii8t")
-render_layers = 1
-cast_shadow = 1
-shader_params/u_ground_uv_scale = 20
-shader_params/u_depth_blending = true
-shader_params/u_triplanar = null
-shader_params/u_tile_reduction = null
-
 [node name="Helicopter" parent="." instance=ExtResource("10_eoqmd")]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 343.596, 8.63821, 309.427)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.638, 0)
 
 [node name="CrawlingMob" parent="." instance=ExtResource("11_xrqy2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 348.504, 1.56093, 242.892)
@@ -88,6 +60,31 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 341.284, 2.51874, 305.857)
 
 [node name="Crate7" parent="Crates" instance=ExtResource("11_1l5l2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 355.284, 2.51874, 290.857)
+
+[node name="Location" type="Node3D" parent="."]
+
+[node name="MainPlane" parent="Location" instance=ExtResource("4_iy4ns")]
+transform = Transform3D(1000, -0.0196946, 0.0410794, 0.0196946, 1000, -0.113362, -0.0410794, 0.113362, 1000, 0, 0, 0)
+
+[node name="StaticObjects" type="Node3D" parent="Location"]
+
+[node name="Rock3-col2" parent="Location/StaticObjects" instance=ExtResource("5_0o5oj")]
+transform = Transform3D(-0.0395314, 0, 4.99984, 0, 5, 0, -4.99984, 0, -0.0395314, -5.44602, -0.0611553, 22.6709)
+
+[node name="Rock3-col3" parent="Location/StaticObjects" instance=ExtResource("5_0o5oj")]
+transform = Transform3D(-5.47955, 0, -4.35598, 0, 7, 0, 4.35598, 0, -5.47955, 5.97691, -0.20738, 23.3099)
+
+[node name="Rock3-col4" parent="Location/StaticObjects" instance=ExtResource("5_0o5oj")]
+transform = Transform3D(3.89669, 0, -4.56244, 0, 6, 0, 4.56244, 0, 3.89669, -0.547559, -0.585346, 31.392)
+
+[node name="Rock-col2" parent="Location/StaticObjects" instance=ExtResource("5_pvois")]
+transform = Transform3D(0.800754, 0, 2.54285, 0, 3.7886, 0, -2.66045, 0, 0.765359, -0.464014, 1.08506, 14.0726)
+
+[node name="Rock4-col2" parent="Location/StaticObjects" instance=ExtResource("7_6fbpj")]
+transform = Transform3D(2.54976, 0, -1.58073, 0, 3, 0, 1.58073, 0, 2.54976, -12.4157, 0, 17.0868)
+
+[node name="Rock4-col3" parent="Location/StaticObjects" instance=ExtResource("7_6fbpj")]
+transform = Transform3D(-2.18051, 0, -1.22285, 0, 2.5, 0, 1.22285, 0, -2.18051, -7.92036, 1.40712, 29.8443)
 
 [node name="Cacti" type="Node3D" parent="."]
 

@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://mbsnudy0ijcu"]
+
+[ext_resource type="PackedScene" uid="uid://bh4vmjcy270c3" path="res://Models/StaticObjects/Rock3-col.glb" id="1_d8vn0"]
+
+[node name="Rock3-col2" instance=ExtResource("1_d8vn0")]
