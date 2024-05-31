@@ -12,10 +12,14 @@ class_name Rocket
 const ROCKET_EXPLOSION = preload("res://Scenes/explosion.tscn")
 const BULLET_EXPLOSION = preload("res://Scenes/bullet_hit.tscn")
 
+var owner_body
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
 
+func set_owner_body(body):
+	owner_body = body.get_instance_id()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -23,6 +27,9 @@ func _process(delta):
 	#translate_object_local(transform.basis.z * speed)
 
 func _on_body_entered(body):
+	if body.get_instance_id()==owner_body:
+		return
+
 	explode()
 
 	if body.is_in_group('Hittable'):
@@ -46,3 +53,7 @@ func explode():
 
 func _on_life_timer_timeout():
 	explode()
+
+
+func _on_area_entered(area):
+	_on_body_entered(area)

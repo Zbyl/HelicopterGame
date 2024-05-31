@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://5qy16o5wggi"]
+[gd_scene load_steps=9 format=3 uid="uid://5qy16o5wggi"]
 
 [ext_resource type="Script" path="res://Scripts/helicopter.gd" id="1_ghlj3"]
 [ext_resource type="Texture2D" uid="uid://b0xjpjh84d2fw" path="res://Graphics/crosshair.png" id="2_aj7h3"]
@@ -9,8 +9,25 @@
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_y4tvk"]
 points = PackedVector3Array(0.5, 0.5, 1, 0.5, -0.5, 1, 0.5, 0.5, -1, -0.5, 0.5, 1, -0.5, -0.5, 1, 0.5, -0.5, -1, -0.5, 0.5, -1, -0.5, -0.5, -1)
 
+[sub_resource type="GDScript" id="GDScript_86j6i"]
+script/source = "extends Area3D
+@onready var helicopter = $\"..\"
+
+func hit(force):
+	helicopter.hit(force)
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_8uhra"]
-size = Vector3(2, 2, 4.01538)
+size = Vector3(1.59155, 1.21527, 4.01538)
 
 [node name="Helicopter" type="CharacterBody3D" groups=["Player"]]
 collision_layer = 2
@@ -66,10 +83,11 @@ transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 [node name="HelicopterBackBlades" parent="Model" instance=ExtResource("5_nvfav")]
 transform = Transform3D(-1.31134e-08, -0.3, 0, 0.3, -1.31134e-08, 0, 0, 0, 0.3, -0.307605, 0.103363, 2.5616)
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Area3D" type="Area3D" parent="." groups=["Hittable"]]
+script = SubResource("GDScript_86j6i")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.613786)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0511475, 0.0833435, 0.613786)
 shape = SubResource("BoxShape3D_8uhra")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_body_entered"]

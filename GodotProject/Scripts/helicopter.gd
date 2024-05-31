@@ -21,6 +21,7 @@ var paused: bool = false
 @onready var crosshair = $Crosshair
 @onready var helicopter_main_blades = $Model/HelicopterMainBlades
 @onready var helicopter_back_blades = $Model/HelicopterBackBlades
+@onready var collision_area = $Area3D
 
 
 
@@ -97,6 +98,7 @@ func fire_rocket():
 	active_rocket_left = !active_rocket_left
 
 	var rocket: Rocket = ROCKET.instantiate()
+	rocket.set_owner_body(collision_area)
 	get_tree().root.add_child(rocket)
 	rocket.global_position = rocket_left_marker.global_position if active_rocket_left else rocket_right_marker.global_position
 	rocket.look_at(aim.to_global(aim.position + aim.target_position))

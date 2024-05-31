@@ -1,0 +1,46 @@
+[gd_scene load_steps=9 format=3 uid="uid://5fgwf4wqjj43"]
+
+[ext_resource type="Script" path="res://Scripts/BazookaBeaver.gd" id="1_veo4j"]
+[ext_resource type="Script" path="res://Scripts/BazookaBeaver_mob.gd" id="2_cror4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n4slt"]
+size = Vector3(1, 2.11523, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pejqq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hqg0a"]
+albedo_color = Color(0.32, 0.22576, 0.0224, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_rwlwj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fhy1c"]
+albedo_color = Color(0.32832, 0.38, 0.1976, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ubo0a"]
+top_radius = 0.1
+bottom_radius = 0.09
+
+[node name="BazookaBeaver" type="Node3D"]
+script = ExtResource("1_veo4j")
+
+[node name="mob" type="RigidBody3D" parent="." groups=["Hittable", "Pushable"]]
+script = ExtResource("2_cror4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="mob"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0634766, 0)
+shape = SubResource("BoxShape3D_n4slt")
+
+[node name="model" type="Node3D" parent="mob"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="mob/model"]
+material_override = SubResource("StandardMaterial3D_pejqq")
+material_overlay = SubResource("StandardMaterial3D_hqg0a")
+mesh = SubResource("CylinderMesh_rwlwj")
+
+[node name="bazooka" type="MeshInstance3D" parent="mob/model"]
+transform = Transform3D(1, 0, 0, 0, 0.172961, 0.984929, 0, -0.984929, 0.172961, 0, 0.915973, 0)
+material_override = SubResource("StandardMaterial3D_fhy1c")
+mesh = SubResource("CylinderMesh_ubo0a")
+
+[node name="firingMarker" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.31141, -2.07946)

@@ -3,7 +3,7 @@ extends Node3D
 @onready var initiated_on = Time.get_ticks_msec()
 @onready var path_follow_3d = $Path3D/PathFollow3D
 @onready var mob = $mob
-@onready var helicopter
+var helicopter
 @onready var animation_player:AnimationPlayer = $mob/Node3D/Shark/AnimationPlayer
 
 @export var ROUNDS_PER_SEC = 0.05
