@@ -131,5 +131,9 @@ libraries = {
 "": SubResource("AnimationLibrary_d5hfa")
 }
 
+[node name="LandingTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
 [connection signal="area_exited" from="Area3D" to="." method="_on_area_3d_area_exited"]
+[connection signal="timeout" from="LandingTimer" to="." method="start_landing"]

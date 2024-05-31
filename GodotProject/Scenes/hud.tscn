@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://coir15qm3jlrt"]
+[gd_scene load_steps=8 format=3 uid="uid://coir15qm3jlrt"]
 
 [ext_resource type="Script" path="res://Scripts/hud.gd" id="1_iyo5i"]
 [ext_resource type="Texture2D" uid="uid://b7us0q86x3d55" path="res://Graphics/Hud/pad.png" id="2_2ggaf"]
@@ -6,6 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://psimouhqtxko" path="res://Graphics/Hud/HealthIcon.png" id="4_bbyg8"]
 [ext_resource type="Texture2D" uid="uid://drxscvgmroukm" path="res://Graphics/Hud/PortalIcon.png" id="5_dpo7h"]
 [ext_resource type="Texture2D" uid="uid://bnwqwiryhws1" path="res://Graphics/Hud/EggIcon.png" id="6_xpdpk"]
+
+[sub_resource type="SystemFont" id="SystemFont_5lg41"]
+font_names = PackedStringArray("Monospace")
+font_weight = 999
 
 [node name="Hud" type="CanvasLayer"]
 script = ExtResource("1_iyo5i")
@@ -245,7 +249,53 @@ theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 35
 text = "100"
 
+[node name="MissionNotComplete" type="Control" parent="Screen"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
+[node name="MissionNotCompleteTitleLabel" type="Label" parent="Screen/MissionNotComplete"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -189.0
+offset_right = 189.0
+offset_bottom = 35.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.204951, 0.447996, 0.133112, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = SubResource("SystemFont_5lg41")
+theme_override_font_sizes/font_size = 30
+text = "Mission not complete!"
+horizontal_alignment = 1
+
+[node name="MissionNotCompleteLabel" type="Label" parent="Screen/MissionNotComplete"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -192.0
+offset_top = 33.0
+offset_right = 186.0
+offset_bottom = 68.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.204951, 0.447996, 0.133112, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = SubResource("SystemFont_5lg41")
+theme_override_font_sizes/font_size = 20
+text = "Destroy all portals and eggs."
+horizontal_alignment = 1
+
+[node name="MissionNotCompleteHideTimer" type="Timer" parent="Screen/MissionNotComplete"]
+wait_time = 4.0
+one_shot = true
+
 [connection signal="pressed" from="Screen/Menu/VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
 [connection signal="pressed" from="Screen/Menu/VBoxContainer/ControlsButton" to="." method="_on_controls_button_pressed"]
 [connection signal="pressed" from="Screen/Menu/VBoxContainer/FullScreenButton" to="." method="_on_full_screen_button_pressed"]
 [connection signal="pressed" from="Screen/Menu/VBoxContainer/ExitGameButton" to="." method="_on_exit_game_button_pressed"]
+[connection signal="timeout" from="Screen/MissionNotComplete/MissionNotCompleteHideTimer" to="." method="_on_mission_not_complete_hide_timer_timeout"]
