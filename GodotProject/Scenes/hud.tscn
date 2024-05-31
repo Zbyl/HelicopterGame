@@ -10,6 +10,7 @@
 [sub_resource type="SystemFont" id="SystemFont_5lg41"]
 font_names = PackedStringArray("Monospace")
 font_weight = 999
+subpixel_positioning = 0
 
 [node name="Hud" type="CanvasLayer"]
 script = ExtResource("1_iyo5i")
@@ -31,7 +32,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_l1l2y")
 expand_mode = 5
-stretch_mode = 5
+stretch_mode = 6
 
 [node name="Menu" type="Control" parent="Screen"]
 layout_mode = 1
