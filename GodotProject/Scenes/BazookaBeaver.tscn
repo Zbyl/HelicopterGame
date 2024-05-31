@@ -34,7 +34,13 @@ collision_layer = 64
 collision_mask = 0
 
 [node name="GunHolder-col2" parent="mob/model" instance=ExtResource("4_1we5a")]
-transform = Transform3D(0.00345571, 0, -0.999994, 0, 1, 0, 0.999994, 0, 0.00345571, 0.0129468, 0.510722, -0.428381)
+transform = Transform3D(0.00345571, 0, -0.999994, 0.403287, 0.915072, 0.00139365, 0.915067, -0.40329, 0.00316222, 0.0129468, 0.510722, -0.428381)
+
+[node name="firingMarker_left" type="Marker3D" parent="mob/model/GunHolder-col2"]
+transform = Transform3D(0.00345571, 0, 0.999994, 0, 1, 0, -0.999994, 0, 0.00345571, -1.65608, 1.1025, 1.44409)
+
+[node name="firingMarker_right" type="Marker3D" parent="mob/model/GunHolder-col2"]
+transform = Transform3D(0.00345571, 0, 0.999994, 0, 1, 0, -0.999994, 0, 0.00345571, -1.6459, 1.1025, -1.50051)
 
 [node name="StaticBody3D" parent="mob/model/GunHolder-col2/GunHolder" index="0"]
 collision_layer = 64
@@ -54,15 +60,9 @@ transform = Transform3D(0.999966, 0, -0.00827279, 0, 1, 0, 0.00827279, 0, 0.9999
 collision_layer = 64
 collision_mask = 0
 
-[node name="firingMarker_left" type="Marker3D" parent="mob"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.43686, 3.06091, -2.07946)
-
-[node name="firingMarker_right" type="Marker3D" parent="mob"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.50776, 3.06091, -2.07946)
-
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="mob"]
 stream = ExtResource("7_kieoy")
-volume_db = 24.601
+volume_db = 18.506
 
 [editable path="mob/model/Beaver-col"]
 [editable path="mob/model/GunHolder-col2"]

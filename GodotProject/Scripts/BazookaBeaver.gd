@@ -4,9 +4,10 @@ var paused: bool = false
 
 @onready var mob = $mob
 const ROCKET = preload("res://Scenes/rocket.tscn")
-@onready var firing_marker_left = $mob/firingMarker_left
-@onready var firing_marker_right = $mob/firingMarker_right
+@onready var firing_marker_left = $"mob/model/GunHolder-col2/firingMarker_left"
+@onready var firing_marker_right = $"mob/model/GunHolder-col2/firingMarker_right"
 @onready var audio_stream_player_3d = $mob/AudioStreamPlayer3D
+@onready var gun_holder = $"mob/model/GunHolder-col2"
 
 
 @export var AIMING_DISTANCE = 75
@@ -15,6 +16,7 @@ const ROCKET = preload("res://Scenes/rocket.tscn")
 @export var FIRE_INTERVAL = 1500
 @export var BEAVER_ROCKET_SPEED = 0.6
 @export var BEAVER_ROCKET_HIT_DAMAGE = 15
+@export var GUN_HOLDER_CORRECTION = 0.85
 
 @onready var initial_rotation = rotation.y
 
@@ -107,8 +109,11 @@ func _process(delta):
 
 	var desired_rotation:float
 	if state==AIMING && helicopter:
-		var dir3 = Vector3(helicopter.global_position-mob.global_position)
-		desired_rotation = Vector2(dir3.z, dir3.x).angle()-PI
+		var dir3 = Vector3(helicopter.global_position-mob.global_position).normalized()
+		var dir2 = Vector2(dir3.z, dir3.x)
+		desired_rotation = dir2.angle()-PI
+		var alt = Vector2(dir3.y, dir2.length()).angle()
+		gun_holder.rotation.z = alt-GUN_HOLDER_CORRECTION
 	else:
 		desired_rotation = initial_rotation
 
