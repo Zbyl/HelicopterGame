@@ -13,6 +13,7 @@ class_name Rocket
 
 const ROCKET_EXPLOSION = preload("res://Scenes/explosion.tscn")
 const BULLET_EXPLOSION = preload("res://Scenes/bullet_hit.tscn")
+const ROCKET_DECAL = preload("res://Scenes/rocket_decal.tscn")
 
 var owner_body
 
@@ -61,9 +62,27 @@ func _on_body_entered(body):
 func explode():
 	var explosion: Explosion = ROCKET_EXPLOSION.instantiate() if is_rocket else BULLET_EXPLOSION.instantiate()
 	get_tree().root.add_child(explosion)
+
 	var position = ray_cast.get_collision_point() if ray_cast.is_colliding() else self.global_position
+
 	explosion.global_position = position
 	explosion.global_rotation = self.global_rotation
+
+	if is_rocket:
+		var decal: Node3D = ROCKET_DECAL.instantiate() if is_rocket else ROCKET_DECAL.instantiate()
+		get_tree().root.add_child(decal)
+
+		var normal = ray_cast.get_collision_normal() if ray_cast.is_colliding() else self.transform.basis.y
+		#print('col ', ray_cast.is_colliding(), ' norm ', ray_cast.get_collision_normal())
+		var do_look_at = true
+		if normal.dot(Vector3.UP) > 0.3:
+			do_look_at = false
+		else:
+			normal = self.transform.basis.y
+		decal.global_position = position - normal * 0.5
+		if do_look_at:
+			decal.look_at(position + normal)
+
 	queue_free()
 
 func _on_life_timer_timeout():
