@@ -2,7 +2,7 @@ extends Node
 
 class_name Game
 
-@onready var hud = $Hud
+@onready var hud: Hud = %Hud
 const EXAMPLE_LEVEL = preload("res://Scenes/example_level.tscn")
 
 var level

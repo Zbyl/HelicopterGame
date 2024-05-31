@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://coir15qm3jlrt"]
+[gd_scene load_steps=5 format=3 uid="uid://coir15qm3jlrt"]
 
 [ext_resource type="Script" path="res://Scripts/hud.gd" id="1_iyo5i"]
 [ext_resource type="Texture2D" uid="uid://b7us0q86x3d55" path="res://Graphics/Hud/pad.png" id="2_2ggaf"]
 [ext_resource type="Texture2D" uid="uid://do663e4dpqisj" path="res://Graphics/Screens/SplashScreen.png" id="3_l1l2y"]
+[ext_resource type="Texture2D" uid="uid://psimouhqtxko" path="res://Graphics/Hud/HealthIcon.png" id="4_bbyg8"]
 
 [node name="Hud" type="CanvasLayer"]
 script = ExtResource("1_iyo5i")
@@ -154,6 +155,42 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 20
 text = "Gun"
+
+[node name="Gauges" type="Control" parent="Screen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HealthIcon" type="TextureRect" parent="Screen/Gauges"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 45.0
+offset_top = -82.0
+offset_right = 301.0
+offset_bottom = 174.0
+grow_vertical = 0
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_bbyg8")
+
+[node name="HealthLabel" type="Label" parent="Screen/Gauges"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 105.0
+offset_top = -94.0
+offset_right = 192.0
+offset_bottom = -25.0
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 50
+text = "100"
 
 [connection signal="pressed" from="Screen/Menu/VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
 [connection signal="pressed" from="Screen/Menu/VBoxContainer/ControlsButton" to="." method="_on_controls_button_pressed"]

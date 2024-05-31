@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+class_name Hud
+
 signal new_game_pressed()
 signal pause_game(do_pause: bool)
 
@@ -7,6 +9,7 @@ signal pause_game(do_pause: bool)
 @onready var controls_help = $Screen/ControlsHelp
 @onready var new_game_button = $Screen/Menu/VBoxContainer/NewGameButton
 @onready var background = $Screen/Background
+@onready var health_label = $Screen/Gauges/HealthLabel
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,6 +20,10 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+
+func update_health_label(health):
+	health_label.text = "{health}".format({"health": health})
 
 
 func toggle_menu():
