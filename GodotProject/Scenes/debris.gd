@@ -34,7 +34,7 @@ func _ready():
 	alpha_tween.parallel().tween_property(debris_2.get_node('MeshInstance3D'), 'transparency', 1.0, FADETIME)
 	alpha_tween.parallel().tween_property(debris_3.get_node('MeshInstance3D'), 'transparency', 1.0, FADETIME)
 	alpha_tween.parallel().tween_property(debris_4.get_node('MeshInstance3D'), 'transparency', 1.0, FADETIME)
-	alpha_tween.tween_callback(self.queue_free)		
+	alpha_tween.tween_callback(self.queue_free)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -10,6 +10,7 @@ var active_rocket_left: bool = true # true fire left rocket next, false fire rig
 
 const BIG_EXPLOSION = preload("res://Scenes/big_explosion.tscn")
 const DEBRIS = preload("res://Scenes/crate_debris.tscn")
+const HELICOPTER_HIT = preload("res://Scenes/helicopter_hit.tscn")
 @export var health: float = 100
 var paused: bool = false
 
@@ -74,9 +75,20 @@ var pitch_angle = 0
 
 var aim_angle = 0;
 
+@export var HIT_MAX_AGE = 2000
+@export var HIT_FADE = 0.1
+@export var HIT_THRUST = 50
+@export var HIT_ROTATION = 0.3
+
+var hit_thrust = Vector3(0, 0, 0)
+var hit_rotation = 0
+@onready var hit_on = Time.get_ticks_msec()-HIT_MAX_AGE
+
+var rng = RandomNumberGenerator.new()
+
 func pause(do_pause: bool):
 	paused = do_pause
-	
+
 func fire_rocket():
 	if not rocket_cooldown_timer.is_stopped():
 		return
@@ -138,7 +150,7 @@ func _physics_process(delta):
 	else:
 		rot_current = move_toward(rot_current, 0, ROT_FADE)
 
-	rotate_object_local(Vector3(0, 1, 0), rot_current)
+	rotate_object_local(Vector3(0, 1, 0), rot_current+hit_rotation)
 
 	var input_aim = Input.get_axis("aim_up", "aim_down")
 
@@ -177,6 +189,7 @@ func _physics_process(delta):
 
 	velocity = transform.basis * rel_velocity
 	velocity.y = (initial_altitude-global_position.y)*ALTITUDE_ADJUST
+	velocity += hit_thrust
 
 	camera_3d.transform = camera_initial_transform.rotated(Vector3(1, 0, 0), aim_angle)
 
@@ -201,6 +214,9 @@ func _physics_process(delta):
 	crosshair.offset.y = crosshair_2d_pos.y / crosshair.scale.y
 
 	rotate_rotors()
+	fade_hit()
+
+
 
 	#var input_dir = Input.get_vector("strafe_left", "strafe_right", "forward", "backward")
 #
@@ -216,23 +232,52 @@ func _physics_process(delta):
 
 	move_and_slide()
 
+func _on_body_entered(body):
+	if body.is_in_group('Mob'):
+		print('Hit by ', body.name)
+		spawn_hit_animation()
+		apply_hit_thrust()
+		hit(body.hit_damage)
+
+func spawn_hit_animation():
+	var hit_animation = HELICOPTER_HIT.instantiate();
+	get_tree().root.add_child(hit_animation)
+	hit_animation.global_position = model.global_position
+	hit_animation.global_rotation = model.global_rotation
+
+func rnd():
+	return rng.randf_range(-3, 3)
+
+func apply_hit_thrust():
+	hit_thrust = Vector3(rng.randf_range(-1, 1), 0.2, rng.randf_range(-1, 1)).normalized()*HIT_THRUST
+	hit_rotation = HIT_ROTATION
+	hit_on = Time.get_ticks_msec()
+
+func fade_hit():
+	var now = Time.get_ticks_msec()
+	if now - hit_on > HIT_MAX_AGE:
+		hit_thrust = Vector3(0, 0, 0)
+		hit_rotation = 0
+	else:
+		hit_thrust *= (1-HIT_FADE)
+		hit_rotation *= (1-HIT_FADE)
 
 func hit(force: float) -> bool: # Returns true if object is dead.
 	if health <= 0:
 		return true
-		
+
 	health -= force
 	GameData.hud.update_health_label(health)
 	if health > 0:
 		return false
-		
+
 	health = 0
 	die()
 	return true
 
 func die():
 	GameData.game._on_player_died()
-	
+
 	var debris = DEBRIS.instantiate()
 	get_tree().root.add_child(debris)
 	debris.global_position = global_position
