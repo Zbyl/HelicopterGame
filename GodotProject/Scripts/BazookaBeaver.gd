@@ -90,12 +90,31 @@ func _process(delta):
 	if state==CALM && distance_from_heli < AIMING_DISTANCE:
 		set_state(AIMING)
 
+	var desired_rotation:float
 	if state==AIMING && helicopter:
-		mob.look_at(helicopter.global_position)
-		mob.rotation.x = 0
-		mob.rotation.z = 0
+		var dir3 = Vector3(helicopter.global_position-mob.global_position)
+		desired_rotation = Vector2(dir3.z, dir3.x).angle()-PI
 	else:
-		mob.rotation.y = initial_rotation
+		desired_rotation = initial_rotation
+
+	while desired_rotation<0:
+		desired_rotation += 2*PI
+
+	while desired_rotation>=2*PI:
+		desired_rotation -= 2*PI
+
+	while mob.rotation.y<0:
+		mob.rotation.y += 2*PI
+
+	while mob.rotation.y>=2*PI:
+		mob.rotation.y -= 2*PI
+
+	if desired_rotation>mob.rotation.y && desired_rotation-PI>mob.rotation.y:
+		desired_rotation -= 2*PI
+	elif mob.rotation.y>desired_rotation && mob.rotation.y-PI>desired_rotation:
+		desired_rotation += 2*PI
+
+	mob.rotation.y = move_toward(mob.rotation.y, desired_rotation, 0.05)
 
 	if state==AIMING && Time.get_ticks_msec()-state_changed > AIMING_TIME:
 		try_to_fire()
