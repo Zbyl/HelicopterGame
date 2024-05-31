@@ -32,6 +32,7 @@ var alive_sharks: int = 0	# Number of sharks still alive.
 var alive_beavers: int = 0	# Number of beavers still alive.
 
 var return_to_base_played = false
+var new_game_started_on = Time.get_ticks_msec()
 
 enum MusicKind { MENU, LEVEL, SUCCESS, FAILED }
 
@@ -94,6 +95,7 @@ func _on_new_game_pressed():
 	total_beavers = get_tree().get_nodes_in_group('Beavers').size()
 	update_counters()
 	return_to_base_played = false
+	new_game_started_on = Time.get_ticks_msec()
 
 func is_in_level():
 	return level.name == 'ExampleLevel'
@@ -167,6 +169,8 @@ func _on_landing_finished():
 	_on_game_success()
 
 func play_return_to_base():
+	if Time.get_ticks_msec()-new_game_started_on < 5000:
+		return
 	if return_to_base_played:
 		return
 	get_tree().root.add_child(RETURN_TO_BASE.instantiate())

@@ -16,7 +16,7 @@ const ROCKET = preload("res://Scenes/rocket.tscn")
 @export var BEAVER_ROCKET_SPEED = 0.6
 @export var BEAVER_ROCKET_HIT_DAMAGE = 15
 
-@onready var initial_rotation = mob.rotation.y
+@onready var initial_rotation = rotation.y
 
 var helicopter
 
@@ -118,18 +118,18 @@ func _process(delta):
 	while desired_rotation>=2*PI:
 		desired_rotation -= 2*PI
 
-	while mob.rotation.y<0:
-		mob.rotation.y += 2*PI
+	while rotation.y<0:
+		rotation.y += 2*PI
 
-	while mob.rotation.y>=2*PI:
-		mob.rotation.y -= 2*PI
+	while rotation.y>=2*PI:
+		rotation.y -= 2*PI
 
-	if desired_rotation>mob.rotation.y && desired_rotation-PI>mob.rotation.y:
+	if desired_rotation>rotation.y && desired_rotation-PI>rotation.y:
 		desired_rotation -= 2*PI
-	elif mob.rotation.y>desired_rotation && mob.rotation.y-PI>desired_rotation:
+	elif rotation.y>desired_rotation && rotation.y-PI>desired_rotation:
 		desired_rotation += 2*PI
 
-	mob.rotation.y = move_toward(mob.rotation.y, desired_rotation, 0.05)
+	rotation.y = move_toward(rotation.y, desired_rotation, 0.05)
 
 	if state==AIMING && Time.get_ticks_msec()-state_changed > AIMING_TIME:
 		try_to_fire()
