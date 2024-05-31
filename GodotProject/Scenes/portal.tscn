@@ -8,10 +8,10 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_yd4sj"]
 size = Vector3(0.7, 3, 2)
 
-[node name="PortalX" type="Node3D" groups=["Portals"]]
+[node name="Portal" type="Node3D"]
 script = ExtResource("1_efcgn")
 
-[node name="Portal-col2" parent="." instance=ExtResource("2_bjqhc")]
+[node name="Portal-col2" parent="." groups=["Portals"] instance=ExtResource("2_bjqhc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.107933, 0, -0.0744913)
 
 [node name="Portal" parent="Portal-col2" index="0"]
