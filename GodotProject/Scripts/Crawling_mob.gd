@@ -22,7 +22,8 @@ var helicopter
 @export var health: float = 60
 var paused: bool = false
 const BIG_EXPLOSION = preload("res://Scenes/blood_explosion.tscn")
-const DEBRIS = preload("res://Scenes/shark_debris.tscn")
+const DEBRIS = preload("res://Scenes/guts_debris.tscn")
+@export var num_debris: int = 10
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")*GRAVITY_FACTOR
@@ -44,9 +45,10 @@ func pause(do_pause: bool):
 func hit(force: float):
 	health -= force
 	if health < 0:
-		var debris = DEBRIS.instantiate()
-		get_tree().root.add_child(debris)
-		debris.global_position = mob.global_position
+		for i in range(num_debris):
+			var debris = DEBRIS.instantiate()
+			get_tree().root.add_child(debris)
+			debris.global_position = mob.global_position + Vector3.UP * 1.0
 
 		var explosion = BIG_EXPLOSION.instantiate()
 		get_tree().root.add_child(explosion)

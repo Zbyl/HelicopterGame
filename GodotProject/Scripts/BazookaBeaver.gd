@@ -23,7 +23,8 @@ var state_changed = Time.get_ticks_msec()
 
 @export var health: float = 100
 const BIG_EXPLOSION = preload("res://Scenes/blood_explosion.tscn")
-const DEBRIS = preload("res://Scenes/crate_debris.tscn")
+const DEBRIS = preload("res://Scenes/guts_debris.tscn")
+@export var num_debris: int = 10
 
 var left_fired = true
 
@@ -39,10 +40,10 @@ func set_state(new_state):
 func hit(force):
 	health -= force
 	if health < 0:
-		var debris = DEBRIS.instantiate()
-		get_tree().root.add_child(debris)
-		debris.global_position = global_position
-		debris.global_position.y+=1
+		for i in range(num_debris):
+			var debris = DEBRIS.instantiate()
+			get_tree().root.add_child(debris)
+			debris.global_position = global_position + Vector3.UP * 1
 
 		var explosion = BIG_EXPLOSION.instantiate()
 		get_tree().root.add_child(explosion)
