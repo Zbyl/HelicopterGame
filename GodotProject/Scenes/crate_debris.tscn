@@ -1,30 +1,52 @@
-[gd_scene load_steps=4 format=3 uid="uid://iwc4sma4lqc8"]
+[gd_scene load_steps=8 format=3 uid="uid://iwc4sma4lqc8"]
 
 [ext_resource type="PackedScene" uid="uid://npe80afhhcqt" path="res://Scenes/debris.tscn" id="1_itq8l"]
+[ext_resource type="Material" uid="uid://de7j7vosy0bb5" path="res://Materials/debris_material.tres" id="2_oqg5g"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vspyg"]
+size = Vector3(0.4, 1, 0.2)
 
 [sub_resource type="BoxMesh" id="BoxMesh_kgdw3"]
 size = Vector3(0.4, 1, 0.2)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ko47n"]
-albedo_color = Color(0.627451, 0.196078, 0.109804, 1)
+[sub_resource type="BoxShape3D" id="BoxShape3D_7a38l"]
+size = Vector3(0.4, 1, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i6lk7"]
+size = Vector3(0.4, 1, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bpmxa"]
+size = Vector3(0.4, 1, 0.2)
 
 [node name="Debris" instance=ExtResource("1_itq8l")]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Debris1" index="1"]
-mesh = SubResource("BoxMesh_kgdw3")
-surface_material_override/0 = SubResource("StandardMaterial3D_ko47n")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Debris1" index="1"]
+shape = SubResource("BoxShape3D_vspyg")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Debris2" index="1"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Debris1" index="2"]
+material_override = ExtResource("2_oqg5g")
+mesh = SubResource("BoxMesh_kgdw3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Debris2" index="0"]
+shape = SubResource("BoxShape3D_7a38l")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Debris2" index="1"]
+material_override = ExtResource("2_oqg5g")
 mesh = SubResource("BoxMesh_kgdw3")
 skeleton = NodePath("../../Debris1")
-surface_material_override/0 = SubResource("StandardMaterial3D_ko47n")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Debris3" index="1"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Debris3" index="1"]
+shape = SubResource("BoxShape3D_i6lk7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Debris3" index="2"]
+material_override = ExtResource("2_oqg5g")
 mesh = SubResource("BoxMesh_kgdw3")
 skeleton = NodePath("../../Debris1")
-surface_material_override/0 = SubResource("StandardMaterial3D_ko47n")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Debris4" index="1"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Debris4" index="0"]
+shape = SubResource("BoxShape3D_bpmxa")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Debris4" index="1"]
+material_override = ExtResource("2_oqg5g")
 mesh = SubResource("BoxMesh_kgdw3")
 skeleton = NodePath("../../Debris1")
-surface_material_override/0 = SubResource("StandardMaterial3D_ko47n")

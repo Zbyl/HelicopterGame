@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://npe80afhhcqt"]
+[gd_scene load_steps=7 format=3 uid="uid://npe80afhhcqt"]
 
 [ext_resource type="Script" path="res://Scenes/debris.gd" id="1_vqsgj"]
 [ext_resource type="PackedScene" uid="uid://ydn110havasm" path="res://Scenes/smoke_trail.tscn" id="2_qp65l"]
@@ -6,13 +6,7 @@
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_pd1gk"]
 friction = 0.6
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_vspyg"]
-size = Vector3(0.4, 0.4, 0.4)
-
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_snvdw"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_35113"]
-radius = 0.217161
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5weso"]
 friction = 0.21
@@ -25,27 +19,15 @@ script = ExtResource("1_vqsgj")
 [node name="Debris1" type="RigidBody3D" parent="."]
 physics_material_override = SubResource("PhysicsMaterial_pd1gk")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Debris1"]
-shape = SubResource("BoxShape3D_vspyg")
-
 [node name="SmokeTrail" parent="Debris1" instance=ExtResource("2_qp65l")]
 
 [node name="Debris2" type="RigidBody3D" parent="."]
 physics_material_override = SubResource("PhysicsMaterial_snvdw")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Debris2"]
-shape = SubResource("SphereShape3D_35113")
-
 [node name="Debris3" type="RigidBody3D" parent="."]
 physics_material_override = SubResource("PhysicsMaterial_5weso")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Debris3"]
-shape = SubResource("SphereShape3D_35113")
 
 [node name="SmokeTrail" parent="Debris3" instance=ExtResource("2_qp65l")]
 
 [node name="Debris4" type="RigidBody3D" parent="."]
 physics_material_override = SubResource("PhysicsMaterial_mu102")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Debris4"]
-shape = SubResource("SphereShape3D_35113")

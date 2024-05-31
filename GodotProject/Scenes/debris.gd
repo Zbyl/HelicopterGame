@@ -4,7 +4,10 @@ extends Node3D
 @onready var debris_3 = $Debris3
 @onready var debris_4 = $Debris4
 
-@export var LIFETIME = 3000
+var alpha_tween: Tween
+
+@export var LIFETIME: float = 5.0 # Lifetime in seconds.
+@export var FADETIME: float = 1.0 # Fade out time in seconds (within LIFETIME).
 
 @onready var initiated_on = Time.get_ticks_msec()
 
@@ -23,8 +26,17 @@ func _ready():
 	debris_3.apply_impulse(rVector(-0.4, 12, -2), rVector(0.4, 0, 0.7))
 	debris_4.apply_impulse(rVector(1, 5, -1), rVector(0, 0, 0))
 
+	if alpha_tween:
+		alpha_tween.kill()
+	alpha_tween = get_tree().create_tween()
+	alpha_tween.tween_interval(LIFETIME - FADETIME)
+	alpha_tween.tween_property(debris_1.get_node('MeshInstance3D'), 'transparency', 1.0, FADETIME)
+	alpha_tween.parallel().tween_property(debris_2.get_node('MeshInstance3D'), 'transparency', 1.0, FADETIME)
+	alpha_tween.parallel().tween_property(debris_3.get_node('MeshInstance3D'), 'transparency', 1.0, FADETIME)
+	alpha_tween.parallel().tween_property(debris_4.get_node('MeshInstance3D'), 'transparency', 1.0, FADETIME)
+	alpha_tween.tween_callback(self.queue_free)		
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	var now = Time.get_ticks_msec()
-	if now > initiated_on + LIFETIME:
-		queue_free()
+	pass
