@@ -4,6 +4,7 @@ extends Node3D
 @onready var path_follow_3d = $Path3D/PathFollow3D
 @onready var mob = $mob
 @onready var helicopter
+@onready var animation_player:AnimationPlayer = $mob/Node3D/Shark/AnimationPlayer
 
 @export var ROUNDS_PER_SEC = 0.05
 @export var SPEED = 12
@@ -32,7 +33,7 @@ var state_changed = Time.get_ticks_msec()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	animation_player.play("Shark_swimming")
 
 func pause(do_pause: bool):
 	paused = do_pause
@@ -101,6 +102,8 @@ func _process(delta):
 		mob.velocity.z = thowards_target.z*SPEED
 
 	mob.look_at(target.global_position)
+	mob.rotation.x = 0
+	mob.rotation.z = 0
 
 	# Add the gravity.
 	if not mob.is_on_floor():
