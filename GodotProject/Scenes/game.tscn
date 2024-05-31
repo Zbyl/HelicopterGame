@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://cj0ulmn1obmdj"]
+[gd_scene load_steps=7 format=3 uid="uid://cj0ulmn1obmdj"]
 
 [ext_resource type="PackedScene" uid="uid://coir15qm3jlrt" path="res://Scenes/hud.tscn" id="1_4bnqf"]
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_6xean"]
+[ext_resource type="AudioStream" uid="uid://dd6lohejbxao" path="res://Music/Power Bots Loop.wav" id="3_crtru"]
+[ext_resource type="AudioStream" uid="uid://clvfpu2ntgwtf" path="res://Music/Puzzle Theme1.wav" id="3_v3ais"]
+[ext_resource type="AudioStream" uid="uid://dlg28wvr55o38" path="res://Music/Tribal Ritual.wav" id="4_k4l61"]
+[ext_resource type="AudioStream" uid="uid://dj6wi0nhl2nqn" path="res://Music/Lounge Game2.wav" id="5_3l004"]
 
 [node name="Game" type="Node3D" groups=["Game"]]
 script = ExtResource("1_6xean")
@@ -12,5 +16,21 @@ unique_name_in_owner = true
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.1
 autostart = true
+
+[node name="MenuMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_v3ais")
+volume_db = -27.733
+
+[node name="LevelMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_crtru")
+volume_db = -27.733
+
+[node name="SuccessMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_3l004")
+volume_db = -27.733
+
+[node name="FailedMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_k4l61")
+volume_db = -27.733
 
 [connection signal="timeout" from="Timer" to="." method="update_counters"]

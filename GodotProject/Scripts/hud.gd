@@ -42,7 +42,7 @@ func toggle_menu():
 func show_menu(do_show: bool):
 	menu.visible = do_show
 	controls_help.visible = false
-	gauges.visible = !do_show
+	gauges.visible = !do_show && GameData.game.is_in_level()
 	if do_show:
 		new_game_button.grab_focus.call_deferred()
 	pause_game.emit(do_show)
