@@ -49,8 +49,8 @@ var max_altitude = 15.0
 @export var STRAFE_FADE = 0.2
 
 @export var ROT_SPEED = 0.03
-@export var ROT_ACCELERATION = 0.1
-@export var ROT_FADE = 0.3
+@export var ROT_ACCELERATION = 0.002
+@export var ROT_FADE = 0.002
 
 @export var ROLL_MAX = 0.1
 @export var ROLL_FADE = 0.01
@@ -183,7 +183,7 @@ func handle_input_and_movement():
 	if rel_velocity.y < -UP_SPEED:
 		rel_velocity.y = -UP_SPEED
 	rel_velocity.y = move_toward(rel_velocity.y, 0, UP_FADE)
-	
+
 	velocity = transform.basis * rel_velocity
 	#velocity.y = (initial_altitude-global_position.y)*ALTITUDE_ADJUST
 	velocity += hit_thrust
@@ -247,7 +247,7 @@ func _physics_process(delta):
 		handle_input_and_movement()
 	else:
 		handle_landing_sequence()
-		
+
 	if $GroundRayCast.is_colliding():
 		var ground_height = $GroundRayCast.get_collision_point().y
 		var desired_height = clampf(self.global_position.y, ground_height + min_altitude, ground_height + max_altitude)
