@@ -16,7 +16,7 @@ var helicopter
 @export var ATTACK_COOLDOWN = 1000
 @export var PURSUIT_COOLDOWN = 4000
 
-@export var health: float = 100
+@export var health: float = 60
 var paused: bool = false
 const BIG_EXPLOSION = preload("res://Scenes/blood_explosion.tscn")
 const DEBRIS = preload("res://Scenes/shark_debris.tscn")

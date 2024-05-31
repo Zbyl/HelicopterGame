@@ -4,7 +4,8 @@ class_name Rocket
 
 @export var speed: float = 1.0
 @export var is_rocket: bool = true # true rocket, false bullet
-@export var hit_damage: float = 50.0
+@export var rocket_hit_damage: float = 30.0
+@export var gun_hit_damage: float = 10.0
 @export var hit_force: float = 50.0
 
 @onready var ray_cast: RayCast3D = $RayCast
@@ -34,7 +35,7 @@ func _on_body_entered(body):
 
 	if body.is_in_group('Hittable'):
 		print('Hitting', body.name)
-		body.hit(hit_damage)
+		body.hit(rocket_hit_damage if is_rocket else gun_hit_damage)
 
 	if body.is_in_group('Pushable'):
 		print('Pushing', body.name)
