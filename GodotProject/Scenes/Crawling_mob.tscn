@@ -26,7 +26,7 @@ script = ExtResource("1_jyo6m")
 curve = SubResource("Curve3D_nqa06")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
-transform = Transform3D(0.999949, 0.000778026, 0.00978741, -8.73112e-11, 0.996855, -0.0792425, -0.00981825, 0.0792387, 0.996807, 0.0900807, 0.0227122, -0.0524979)
+transform = Transform3D(0.999948, 0.000778026, 0.00978741, -8.73112e-11, 0.996855, -0.0792425, -0.00981825, 0.0792387, 0.996807, 0.0900807, 0.0227122, -0.0524979)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Path3D/PathFollow3D"]
 mesh = SubResource("SphereMesh_65pb4")

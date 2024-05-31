@@ -3,7 +3,7 @@ extends Node3D
 @onready var initiated_on = Time.get_ticks_msec()
 @onready var path_follow_3d = $Path3D/PathFollow3D
 @onready var mob = $mob
-@onready var helicopter = %HelicopterMain
+@onready var helicopter
 
 @export var ROUNDS_PER_SEC = 0.05
 @export var SPEED = 12
@@ -65,9 +65,11 @@ func _process(delta):
 
 	var target:Node3D
 
+	helicopter = get_tree().get_first_node_in_group("Player")
+
 	var distance_from_heli;
 
-	if helicopter!=null:
+	if helicopter:
 		distance_from_heli = Vector3(helicopter.global_position-mob.global_position).length()
 	else:
 		distance_from_heli = 100000
