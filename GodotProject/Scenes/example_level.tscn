@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cw7pgyhxj60w8" path="res://Scenes/example_level_slot2_normal_roughness.png" id="9_2y85y"]
 [ext_resource type="PackedScene" uid="uid://5qy16o5wggi" path="res://Scenes/helicopter.tscn" id="10_eoqmd"]
 [ext_resource type="PackedScene" uid="uid://3dtl0q5lvotw" path="res://Scenes/crate.tscn" id="11_1l5l2"]
-[ext_resource type="PackedScene" uid="uid://bp11cmjwsnf1a" path="res://Scenes/Crawling_mob.tscn" id="11_xrqy2"]
+[ext_resource type="PackedScene" path="res://Scenes/Crawling_mob.tscn" id="11_xrqy2"]
 [ext_resource type="PackedScene" uid="uid://by0gv5obxit0e" path="res://Models/Objects/cactus1.tscn" id="12_xedte"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7a3gm"]
