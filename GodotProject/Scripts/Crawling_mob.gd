@@ -40,6 +40,7 @@ func hit(force: float):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	return;
 	var now = Time.get_ticks_msec()
 	#path_follow_3d.progress = fmod((now-initiated_on)*ROUNDS_PER_SEC/1000, 1)
 	path_follow_3d.progress_ratio = fmod((now-initiated_on)*ROUNDS_PER_SEC/1000, 1)
