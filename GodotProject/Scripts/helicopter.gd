@@ -33,11 +33,11 @@ var paused: bool = false
 
 
 @export var SPEED_FORWARD = 40.0
-@export var SPEED_BACKWARD = 10.0
+@export var SPEED_BACKWARD = 25.0
 @export var SPEED_ACCELERATION = 0.4
 @export var SPEED_FADE = 0.2
-@export var STRAFE_SPEED = 12.0
-@export var STRAFE_ACCELERATION = 0.4
+@export var STRAFE_SPEED = 25.0
+@export var STRAFE_ACCELERATION = 0.8
 @export var STRAFE_FADE = 0.2
 
 @export var ROT_SPEED = 0.03

@@ -16,7 +16,7 @@ bottom_radius = 0.1
 height = 0.5
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_h18y2"]
-height = 3.5914
+height = 8.0
 radius = 0.2
 
 [node name="Rocket" instance=ExtResource("1_usbvj")]
@@ -48,7 +48,7 @@ mesh = SubResource("CylinderMesh_sbjp0")
 skeleton = NodePath("../MeshInstance3D2")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="." index="3"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0.468906)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 2.99096)
 shape = SubResource("CylinderShape3D_h18y2")
 
 [node name="SmokeTrail" parent="." index="4" instance=ExtResource("2_v8j2d")]
