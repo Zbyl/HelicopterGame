@@ -11,6 +11,7 @@ var active_rocket_left: bool = true # true fire left rocket next, false fire rig
 const BIG_EXPLOSION = preload("res://Scenes/big_explosion.tscn")
 const DEBRIS = preload("res://Scenes/crate_debris.tscn")
 @export var health: float = 100
+var paused: bool = false
 
 @onready var gun_marker: Marker3D = $GunMarker
 @onready var rocket_left_marker: Marker3D = $RocketLeftMarker
@@ -23,8 +24,8 @@ const DEBRIS = preload("res://Scenes/crate_debris.tscn")
 
 
 @onready var model = $Model
-@onready var camera_3d:Camera3D = $Camera3D
-@onready var camera_initial_transform:Transform3D = Transform3D($Camera3D.transform)
+@onready var camera_3d:Camera3D = %Camera
+@onready var camera_initial_transform:Transform3D = Transform3D(%Camera.transform)
 
 @onready var initial_altitude = global_position.y
 
@@ -73,6 +74,9 @@ var pitch_angle = 0
 
 var aim_angle = 0;
 
+func pause(do_pause: bool):
+	paused = do_pause
+	
 func fire_rocket():
 	if not rocket_cooldown_timer.is_stopped():
 		return
@@ -84,8 +88,6 @@ func fire_rocket():
 	get_tree().root.add_child(rocket)
 	rocket.global_position = rocket_left_marker.global_position if active_rocket_left else rocket_right_marker.global_position
 	rocket.look_at(aim.to_global(aim.position + aim.target_position))
-	
-	hit(40)
 
 func fire_gun():
 	if not gun_cooldown_timer.is_stopped():
@@ -105,6 +107,13 @@ func rotate_rotors():
 
 
 func _physics_process(delta):
+	if paused:
+		return
+
+	if Input.is_action_just_pressed("debug_button"):
+		if hit(40):
+			return
+
 	if Input.is_action_pressed("fire_rocket"):
 		fire_rocket()
 
@@ -208,20 +217,21 @@ func _physics_process(delta):
 	move_and_slide()
 
 
-func hit(force: float):
+func hit(force: float) -> bool: # Returns true if object is dead.
+	if health <= 0:
+		return true
+		
 	health -= force
 	GameData.hud.update_health_label(health)
-	if health < 0:
-		die()
+	if health > 0:
+		return false
+		
+	health = 0
+	die()
+	return true
 
 func die():
-	var pos = camera_3d.global_position
-	var rot = camera_3d.global_rotation
-	#self.remove_child(camera_3d)
-	camera_3d.reparent(get_tree().root)
-	#get_tree().root.add_child(camera_3d)
-	camera_3d.global_position = pos
-	camera_3d.global_rotation = rot
+	GameData.game._on_player_died()
 	
 	var debris = DEBRIS.instantiate()
 	get_tree().root.add_child(debris)

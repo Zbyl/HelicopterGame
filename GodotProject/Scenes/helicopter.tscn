@@ -9,7 +9,7 @@
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_y4tvk"]
 points = PackedVector3Array(0.5, 0.5, 1, 0.5, -0.5, 1, 0.5, 0.5, -1, -0.5, 0.5, 1, -0.5, -0.5, 1, 0.5, -0.5, -1, -0.5, 0.5, -1, -0.5, -0.5, -1)
 
-[node name="Helicopter" type="CharacterBody3D"]
+[node name="Helicopter" type="CharacterBody3D" groups=["Player"]]
 collision_layer = 2
 collision_mask = 13
 motion_mode = 1
@@ -18,10 +18,11 @@ script = ExtResource("1_ghlj3")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("ConvexPolygonShape3D_y4tvk")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera" type="Camera3D" parent="."]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.83143, 0.555629, 0, -0.555629, 0.83143, 0, 6.67894, 5.20448)
 
-[node name="AudioListener3D" type="AudioListener3D" parent="Camera3D"]
+[node name="AudioListener3D" type="AudioListener3D" parent="Camera"]
 
 [node name="GunMarker" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0108917, -0.0209594, -1.90442)
