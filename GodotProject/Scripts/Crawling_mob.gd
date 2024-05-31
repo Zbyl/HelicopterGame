@@ -12,9 +12,9 @@ var helicopter
 @export var SPEED_FADE = 0.7
 @export var PURSUIT_DISTANCE = 50
 @export var ATTACK_DISTANCE = 20
-@export var JUMP = 13
 @export var ATTACK_COOLDOWN = 1000
 @export var PURSUIT_COOLDOWN = 4000
+@export var JUMP_FACTOR = 2.5
 
 @export var health: float = 60
 var paused: bool = false
@@ -90,7 +90,7 @@ func _process(delta):
 		thowards_target = thowards_target.normalized()
 
 	if mob.is_on_floor() && distance_from_heli < ATTACK_DISTANCE && state!=ATTACKING:
-		mob.velocity.y = JUMP
+		mob.velocity.y = abs(mob.global_position.y-helicopter.global_position.y)*JUMP_FACTOR
 		set_state(ATTACKING)
 
 
