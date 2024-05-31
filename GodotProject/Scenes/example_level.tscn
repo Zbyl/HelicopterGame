@@ -84,7 +84,7 @@ transform = Transform3D(0.800754, 0, 2.54285, 0, 3.7886, 0, -2.66045, 0, 0.76535
 transform = Transform3D(2.54976, 0, -1.58073, 0, 3, 0, 1.58073, 0, 2.54976, -12.4157, 0, 17.0868)
 
 [node name="Rock4-col3" parent="Location/StaticObjects" instance=ExtResource("7_6fbpj")]
-transform = Transform3D(-2.18051, 0, -1.22285, 0, 2.5, 0, 1.22285, 0, -2.18051, -7.92036, 1.40712, 29.8443)
+transform = Transform3D(-2.18051, 0, -1.22285, 0, 2.5, 0, 1.22285, 0, -2.18051, -7.492, 1.53967, 30.3666)
 
 [node name="Cacti" type="Node3D" parent="."]
 
