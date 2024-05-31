@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cn62o0dcm4hef" path="res://Models/Objects/Portal-col.glb" id="2_bjqhc"]
 [ext_resource type="Script" path="res://Scripts/PortalBody.gd" id="3_1k1vh"]
 [ext_resource type="PackedScene" uid="uid://dskawxu3bigdb" path="res://Models/Objects/BrokenPortal-col.glb" id="4_mmklm"]
-[ext_resource type="PackedScene" uid="uid://d3vxr1h7nyhr6" path="res://Scenes/portal_plane.tscn" id="5_8t24t"]
+[ext_resource type="PackedScene" path="res://Scenes/portal_plane.tscn" id="5_8t24t"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yd4sj"]
 size = Vector3(0.7, 3, 2)

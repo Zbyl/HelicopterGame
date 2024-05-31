@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvbja55fk8tvf"]
+
+[ext_resource type="AudioStream" uid="uid://kcunv2vr8u4y" path="res://Sounds/well_done.mp3" id="1_aifky"]
+
+[sub_resource type="GDScript" id="GDScript_hmdef"]
+script/source = "extends Node3D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+
+
+func _on_audio_stream_player_2d_finished():
+	queue_free()
+"
+
+[node name="WellDoneSound" type="Node3D"]
+script = SubResource("GDScript_hmdef")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("1_aifky")
+volume_db = 15.312
+autoplay = true
+
+[connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]

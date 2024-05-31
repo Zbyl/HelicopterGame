@@ -15,6 +15,7 @@ class_name Game
 @onready var hud: Hud = %Hud
 const EXAMPLE_LEVEL = preload("res://Scenes/example_level.tscn")
 const SUCCESS_SCREEN = preload("res://Scenes/success_screen.tscn")
+const RETURN_TO_BASE = preload("res://Scenes/Return_to_base_sound.tscn")
 
 var level
 var death_camera: Camera3D = null # Camera we use after player died.
@@ -29,6 +30,8 @@ var alive_portals: int = 0	# Number of portals still alive.
 var alive_eggs: int = 0	# Number of eggs still alive.
 var alive_sharks: int = 0	# Number of sharks still alive.
 var alive_beavers: int = 0	# Number of beavers still alive.
+
+var return_to_base_played = false
 
 enum MusicKind { MENU, LEVEL, SUCCESS, FAILED }
 
@@ -90,7 +93,8 @@ func _on_new_game_pressed():
 	total_sharks = get_tree().get_nodes_in_group('Sharks').size()
 	total_beavers = get_tree().get_nodes_in_group('Beavers').size()
 	update_counters()
-	
+	return_to_base_played = false
+
 func is_in_level():
 	return level.name == 'ExampleLevel'
 
@@ -107,13 +111,13 @@ func _switch_level(new_level_scene, show_weapons: bool):
 	await get_tree().create_timer(0.01).timeout
 	if level:
 		return # Hack to avoid some race conditions.
-		
+
 	level = new_level_scene.instantiate()
 	add_child(level)
 	hud.show_background(false)
 	hud.show_menu(false)
 	#hud.show_weapons(show_weapons)
-	
+
 func pause_player_and_enemies(do_pause: bool):
 	var player = get_tree().get_first_node_in_group("Player")
 	if player:
@@ -130,21 +134,21 @@ func _on_player_died(): # Called by Helicopter when its health drops to zero, be
 	var player = get_tree().get_first_node_in_group("Player")
 	death_camera = player.get_node('%Camera')
 	death_camera.reparent(get_tree().root)
-	
+
 	play_music(MusicKind.FAILED)
 
 	await get_tree().create_timer(2).timeout
 	hud.show_menu(true)
-	
+
 func _on_game_success(): # Called by Helicopter when its health drops to zero, before queue_free()!
 	print('_on_game_success()')
 	GameData.game.pause_player_and_enemies(true)
-	
+
 	play_music(MusicKind.SUCCESS)
 
 	await get_tree().create_timer(1).timeout
 	await _switch_level(SUCCESS_SCREEN, true)
-	
+
 func _on_portal_died(): # Called by portal when its health drops to zero, before queue_free()!
 	#update_counters()
 	pass
@@ -162,6 +166,12 @@ func _is_landing_allowed() -> bool:
 func _on_landing_finished():
 	_on_game_success()
 
+func play_return_to_base():
+	if return_to_base_played:
+		return
+	get_tree().root.add_child(RETURN_TO_BASE.instantiate())
+	return_to_base_played = true
+
 func update_counters():
 	alive_portals = get_tree().get_nodes_in_group('Portals').size()
 	alive_eggs = get_tree().get_nodes_in_group('Eggs').size()
@@ -169,3 +179,5 @@ func update_counters():
 	alive_beavers = get_tree().get_nodes_in_group('Beavers').size()
 	hud.update_portals_label(total_portals - alive_portals, total_portals)
 	hud.update_eggs_label(total_eggs - alive_eggs, total_eggs)
+	if alive_portals<=0 && alive_eggs<=0 && (total_portals>0 || total_eggs>0):
+		play_return_to_base()
