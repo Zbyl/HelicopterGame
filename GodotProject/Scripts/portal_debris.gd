@@ -9,8 +9,8 @@ var alpha_tween: Tween
 @export var LIFETIME: float = 5.0 # Lifetime in seconds.
 @export var FADETIME: float = 1.0 # Fade out time in seconds (within LIFETIME).
 @export var poke_strength: float = 15.0
-@export var poke_dist_min: float = 0.0
-@export var poke_dist_max: float = 1.0
+@export var poke_dist_min: float = 10.0
+@export var poke_dist_max: float = 10.0
 
 @onready var initiated_on = Time.get_ticks_msec()
 
@@ -23,12 +23,16 @@ static func rand_normal() -> Vector3:
 	
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$Debris/PortalTrail/GPUParticles3D.emitting = true
+	
 	debris.apply_impulse(rand_normal() * poke_strength, rand_normal() * randf_range(poke_dist_min, poke_dist_max))
+	debris.angular_velocity = rand_normal() * 15
 
 	if alpha_tween:
 		alpha_tween.kill()
 	alpha_tween = get_tree().create_tween()
 	alpha_tween.tween_interval(LIFETIME - FADETIME)
+	alpha_tween.tween_property($Debris/PortalTrail/GPUParticles3D, 'emitting', false, 0.0)
 	alpha_tween.tween_property(debris.get_node('MeshInstance3D'), 'transparency', 1.0, FADETIME)
 	alpha_tween.tween_callback(self.queue_free)
 

@@ -1,22 +1,31 @@
-[gd_scene load_steps=4 format=3 uid="uid://b6b47r2hcps31"]
+[gd_scene load_steps=6 format=3 uid="uid://b6b47r2hcps31"]
 
 [ext_resource type="Script" path="res://Scripts/Portal.gd" id="1_efcgn"]
+[ext_resource type="PackedScene" uid="uid://cn62o0dcm4hef" path="res://Models/Objects/Portal-col.glb" id="2_bjqhc"]
+[ext_resource type="Script" path="res://Scripts/PortalBody.gd" id="3_1k1vh"]
+[ext_resource type="PackedScene" uid="uid://dskawxu3bigdb" path="res://Models/Objects/BrokenPortal-col.glb" id="4_mmklm"]
 
-[sub_resource type="TorusMesh" id="TorusMesh_22nyh"]
-inner_radius = 1.0
-outer_radius = 2.0
+[sub_resource type="BoxShape3D" id="BoxShape3D_yd4sj"]
+size = Vector3(0.7, 3, 2)
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_isd6o"]
-height = 1.0
-radius = 2.0
-
-[node name="Portal" type="StaticBody3D" groups=["Hittable", "Portals"]]
+[node name="PortalX" type="Node3D" groups=["Portals"]]
 script = ExtResource("1_efcgn")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.00493921, -0.999988, 0, 0.999988, 0.00493921, 0, 0, 0)
-mesh = SubResource("TorusMesh_22nyh")
+[node name="Portal-col2" parent="." instance=ExtResource("2_bjqhc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.107933, 0, -0.0744913)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-shape = SubResource("CylinderShape3D_isd6o")
+[node name="Portal" parent="Portal-col2" index="0"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+
+[node name="StaticBody3D" parent="Portal-col2/Portal" index="0" groups=["Hittable"]]
+script = ExtResource("3_1k1vh")
+
+[node name="CollisionShape3D" parent="Portal-col2/Portal/StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.814165, 0)
+shape = SubResource("BoxShape3D_yd4sj")
+
+[node name="BrokenPortal-col2" parent="." instance=ExtResource("4_mmklm")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+visible = false
+
+[editable path="Portal-col2"]
