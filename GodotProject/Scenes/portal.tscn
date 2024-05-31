@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://b6b47r2hcps31"]
+[gd_scene load_steps=7 format=3 uid="uid://b6b47r2hcps31"]
 
 [ext_resource type="Script" path="res://Scripts/Portal.gd" id="1_efcgn"]
 [ext_resource type="PackedScene" uid="uid://cn62o0dcm4hef" path="res://Models/Objects/Portal-col.glb" id="2_bjqhc"]
 [ext_resource type="Script" path="res://Scripts/PortalBody.gd" id="3_1k1vh"]
 [ext_resource type="PackedScene" uid="uid://dskawxu3bigdb" path="res://Models/Objects/BrokenPortal-col.glb" id="4_mmklm"]
+[ext_resource type="PackedScene" uid="uid://d3vxr1h7nyhr6" path="res://Scenes/portal_plane.tscn" id="5_8t24t"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yd4sj"]
 size = Vector3(0.7, 3, 2)
@@ -18,7 +19,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.107933, 0, -0.0744913)
 [node name="Portal" parent="Model" index="0"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 
-[node name="StaticBody3D" parent="Model/Portal" index="0" groups=["Hittable"]]
+[node name="PortalPlane" parent="Model/Portal" index="0" instance=ExtResource("5_8t24t")]
+transform = Transform3D(-2.5082e-08, 0, -0.33489, 0, 0.587305, 0, 0.573809, 0, -1.46385e-08, 0.0544857, 1.17522, 0.0206897)
+
+[node name="StaticBody3D" parent="Model/Portal" index="1" groups=["Hittable"]]
 script = ExtResource("3_1k1vh")
 
 [node name="CollisionShape3D" parent="Model/Portal/StaticBody3D" index="0"]
