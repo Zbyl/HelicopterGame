@@ -24,6 +24,8 @@ bottom_radius = 0.09
 script = ExtResource("1_veo4j")
 
 [node name="mob" type="RigidBody3D" parent="." groups=["Hittable", "Pushable"]]
+collision_layer = 4
+collision_mask = 31
 script = ExtResource("2_cror4")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="mob"]

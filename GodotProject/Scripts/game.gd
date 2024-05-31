@@ -2,6 +2,15 @@ extends Node
 
 class_name Game
 
+# Collision layers
+#            Level    Player     Enemies    Rockets    Bullets PlayerBody
+# 1. Level      -         -          Y          Y          Y        Y
+# 2. Player     -         -          Y          Y          -        -
+# 3. Enemies    Y         Y          Y          Y          -        Y
+# 4. Rockets    Y         Y          Y          Y          -        -
+# 5. Bullets    Y         -          Y          -          -        -
+# 6. PlayerBody Y         -          Y          -          -        -
+
 @onready var hud: Hud = %Hud
 const EXAMPLE_LEVEL = preload("res://Scenes/example_level.tscn")
 const SUCCESS_SCREEN = preload("res://Scenes/success_screen.tscn")

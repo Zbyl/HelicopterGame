@@ -3,6 +3,8 @@
 [ext_resource type="Script" path="res://Scripts/rocket.gd" id="1_kwgfw"]
 
 [node name="Projectile" type="Area3D"]
+collision_layer = 8
+collision_mask = 15
 script = ExtResource("1_kwgfw")
 speed = 0.5
 

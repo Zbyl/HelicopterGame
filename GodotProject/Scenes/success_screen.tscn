@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cghm48tmi08lc"]
 
 [ext_resource type="Script" path="res://Scripts/success_screen.gd" id="1_0t5rt"]
-[ext_resource type="Texture2D" uid="uid://eka234w7lnst" path="res://Graphics/Screens/SuccessScreen.png" id="2_8i2nc"]
+[ext_resource type="Texture2D" uid="uid://bj1xtnwyrhb5a" path="res://Graphics/Screens/SuccessScreen.png" id="2_8i2nc"]
 
 [node name="SuccessScreen" type="Node3D"]
 script = ExtResource("1_0t5rt")
