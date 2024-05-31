@@ -31,6 +31,10 @@ func _on_body_entered(body):
 	if body.get_instance_id()==owner_body:
 		return
 
+	var v = Vector3(basis*Vector3(0, 0, 1))
+	if body.name=='HTerrain' && v.y<0:
+		return
+
 	explode()
 
 	if body.is_in_group('Hittable'):
