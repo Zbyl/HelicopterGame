@@ -123,7 +123,6 @@ void vertex() {
 
 // VectorOp:16
 	vec2 n_out16p0 = n_out15p0 * n_out11p0;
-	float n_out16p1 = n_out16p0.r;
 
 
 // Input:5
@@ -226,7 +225,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-762.974, 140.405)
 modes/cull = 2
 nodes/vertex/0/position = Vector2(1360, 140)
 nodes/vertex/2/node = SubResource("VisualShaderNodeColorParameter_ti2dw")

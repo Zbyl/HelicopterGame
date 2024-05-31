@@ -14,8 +14,10 @@ var active_rocket_left: bool = true # true fire left rocket next, false fire rig
 
 
 const BIG_EXPLOSION = preload("res://Scenes/big_explosion.tscn")
-const DEBRIS = preload("res://Scenes/crate_debris.tscn")
+const DEBRIS = preload("res://Scenes/helicopter_debris.tscn")
 const HELICOPTER_HIT = preload("res://Scenes/helicopter_hit.tscn")
+@export var num_debris: int = 10
+
 @export var health: float = 100
 var paused: bool = false
 var landing: bool = false
@@ -317,15 +319,17 @@ func hit(force: float) -> bool: # Returns true if object is dead.
 		return false
 
 	health = 0
+	GameData.hud.update_health_label(health)
 	die()
 	return true
 
 func die():
 	GameData.game._on_player_died()
 
-	var debris = DEBRIS.instantiate()
-	get_tree().root.add_child(debris)
-	debris.global_position = global_position
+	for i in range(num_debris):
+		var debris = DEBRIS.instantiate()
+		get_tree().root.add_child(debris)
+		debris.global_position = global_position + Vector3.UP * 1.0
 
 	var explosion = BIG_EXPLOSION.instantiate()
 	get_tree().root.add_child(explosion)

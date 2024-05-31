@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://blmla1hmoqlfr"]
+
+[ext_resource type="Script" path="res://Scripts/portal_debris.gd" id="1_0boei"]
+[ext_resource type="PackedScene" uid="uid://ydn110havasm" path="res://Scenes/smoke_trail.tscn" id="3_s2eo2"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_pd1gk"]
+friction = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xw47c"]
+transparency = 1
+albedo_color = Color(0.517647, 0.262745, 0.0117647, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_cjfgb"]
+left_to_right = 0.2
+size = Vector3(0.7, 1, 0.2)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0rno3"]
+radius = 0.2
+height = 0.7
+
+[node name="GutsDebris" type="Node3D"]
+script = ExtResource("1_0boei")
+poke_strength = 8.0
+
+[node name="Debris" type="RigidBody3D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_pd1gk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Debris"]
+material_override = SubResource("StandardMaterial3D_xw47c")
+mesh = SubResource("PrismMesh_cjfgb")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Debris"]
+shape = SubResource("CapsuleShape3D_0rno3")
+
+[node name="PortalTrail" parent="Debris" instance=ExtResource("3_s2eo2")]
