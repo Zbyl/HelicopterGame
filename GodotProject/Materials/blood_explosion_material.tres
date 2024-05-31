@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b2y2xjb55tocv"]
+
+[ext_resource type="Shader" uid="uid://dqr67n55sf2r2" path="res://Scenes/big_explosion_shader.tres" id="1_pw785"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_pw785")
+shader_parameter/time_scale = Vector2(0.1, 0.2)
+shader_parameter/displacement = 0.2
+shader_parameter/base_color = Color(0.89, 0, 0, 1)
+shader_parameter/emission_color = Color(0.607843, 0.0823529, 0, 1)
+shader_parameter/emission_strength = 6.0

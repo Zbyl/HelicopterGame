@@ -1,0 +1,66 @@
+[gd_scene load_steps=11 format=3 uid="uid://bt1lhfd3sgrsb"]
+
+[ext_resource type="PackedScene" uid="uid://npe80afhhcqt" path="res://Scenes/debris.tscn" id="1_gejjb"]
+[ext_resource type="Material" uid="uid://daaj0dhs7unyp" path="res://Materials/shark_debris_material.tres" id="2_plma5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vspyg"]
+size = Vector3(0.4, 1, 0.2)
+
+[sub_resource type="PrismMesh" id="PrismMesh_d2smw"]
+left_to_right = 0.2
+size = Vector3(0.6, 0.9, 0.3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7a38l"]
+size = Vector3(0.4, 1, 0.2)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_4a0mx"]
+size = Vector2(0.7, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i6lk7"]
+size = Vector3(0.4, 1, 0.2)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_pjdkq"]
+top_radius = 0.08
+bottom_radius = 0.1
+height = 0.7
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bpmxa"]
+size = Vector3(0.4, 1, 0.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_kgdw3"]
+size = Vector3(0.7, 0.1, 0.2)
+
+[node name="Debris" instance=ExtResource("1_gejjb")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Debris1" index="1"]
+shape = SubResource("BoxShape3D_vspyg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Debris1" index="2"]
+material_override = ExtResource("2_plma5")
+mesh = SubResource("PrismMesh_d2smw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Debris2" index="0"]
+shape = SubResource("BoxShape3D_7a38l")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Debris2" index="1"]
+material_override = ExtResource("2_plma5")
+mesh = SubResource("PlaneMesh_4a0mx")
+skeleton = NodePath("../../Debris1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Debris3" index="1"]
+shape = SubResource("BoxShape3D_i6lk7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Debris3" index="2"]
+transform = Transform3D(0.563349, 0.680421, 0.468684, -0.742397, 0.665829, -0.0742847, -0.362608, -0.306101, 0.880237, 0, 0, 0)
+material_override = ExtResource("2_plma5")
+mesh = SubResource("CylinderMesh_pjdkq")
+skeleton = NodePath("../../Debris1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Debris4" index="0"]
+shape = SubResource("BoxShape3D_bpmxa")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Debris4" index="1"]
+transform = Transform3D(0.726131, 0.687557, 0, -0.687557, 0.726131, 0, 0, 0, 1, 0, 0, 0)
+material_override = ExtResource("2_plma5")
+mesh = SubResource("BoxMesh_kgdw3")
+skeleton = NodePath("../../Debris1")

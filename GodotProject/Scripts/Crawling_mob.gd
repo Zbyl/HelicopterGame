@@ -18,8 +18,8 @@ extends Node3D
 
 @export var health: float = 100
 var paused: bool = false
-const BIG_EXPLOSION = preload("res://Scenes/big_explosion.tscn")
-const DEBRIS = preload("res://Scenes/crate_debris.tscn")
+const BIG_EXPLOSION = preload("res://Scenes/blood_explosion.tscn")
+const DEBRIS = preload("res://Scenes/shark_debris.tscn")
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
