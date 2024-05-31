@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/helicopter_slow.mp3-52a1b7b35a7d0b8adf8ac43ee
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

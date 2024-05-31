@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://5qy16o5wggi"]
+[gd_scene load_steps=12 format=3 uid="uid://5qy16o5wggi"]
 
 [ext_resource type="Script" path="res://Scripts/helicopter.gd" id="1_ghlj3"]
 [ext_resource type="Texture2D" uid="uid://b0xjpjh84d2fw" path="res://Graphics/crosshair.png" id="2_aj7h3"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://c1hwmpn4cm0pd" path="res://Models/Helicopter/HelicopterMainBlades.glb" id="4_8e0nd"]
 [ext_resource type="PackedScene" uid="uid://ckq8knjfyujgd" path="res://Models/Helicopter/HelicopterBackBlades.glb" id="5_nvfav"]
 [ext_resource type="AudioStream" uid="uid://cescbk0ugw2iu" path="res://Sounds/helicopter_sound.mp3" id="6_x7h4m"]
+[ext_resource type="AudioStream" uid="uid://c0adkjt1tg28a" path="res://Sounds/helicopter_slowing.mp3" id="7_jau1o"]
+[ext_resource type="AudioStream" uid="uid://cqqvqy3bo6370" path="res://Sounds/helicopter_slow.mp3" id="8_f7x02"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_y4tvk"]
 points = PackedVector3Array(0.5, 0.5, 1, 0.5, -0.5, 1, 0.5, 0.5, -1, -0.5, 0.5, 1, -0.5, -0.5, 1, 0.5, -0.5, -1, -0.5, 0.5, -1, -0.5, -0.5, -1)
@@ -97,8 +99,15 @@ shape = SubResource("BoxShape3D_8uhra")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26547, 0)
 target_position = Vector3(0, -1000, 0)
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+[node name="Helicopter_sound" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("6_x7h4m")
 autoplay = true
 
+[node name="Helicopter_slowdown" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("7_jau1o")
+
+[node name="Helicopter_slow" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("8_f7x02")
+
 [connection signal="body_entered" from="Area3D" to="." method="_on_body_entered"]
+[connection signal="finished" from="Helicopter_slowdown" to="." method="_on_helicopter_slowdown_finished"]

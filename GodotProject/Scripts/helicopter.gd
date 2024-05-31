@@ -7,6 +7,10 @@ const ROCKET = preload("res://Scenes/rocket.tscn")
 const BULLET = preload("res://Scenes/bullet.tscn")
 @onready var gun_cooldown_timer: Timer = $GunCooldownTimer
 var active_rocket_left: bool = true # true fire left rocket next, false fire right rocket next.
+@onready var helicopter_sound = $Helicopter_sound
+@onready var helicopter_slowdown = $Helicopter_slowdown
+@onready var helicopter_slow = $Helicopter_slow
+
 
 const BIG_EXPLOSION = preload("res://Scenes/big_explosion.tscn")
 const DEBRIS = preload("res://Scenes/crate_debris.tscn")
@@ -332,5 +336,12 @@ func land(helipad):
 	print("Helicopter landing")
 	landing = true
 	landing_helipad = helipad
+	helicopter_sound.stop()
+	helicopter_slowdown.play()
+
 	landing_helipad.start_blinking()
 
+
+
+func _on_helicopter_slowdown_finished():
+	helicopter_slow.play()
