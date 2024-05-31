@@ -2,11 +2,12 @@ extends Node3D
 
 @onready var mob = $mob
 const ROCKET = preload("res://Scenes/rocket.tscn")
-@onready var firing_marker = $firingMarker
+@onready var firing_marker_left = $mob/firingMarker_left
+@onready var firing_marker_right = $mob/firingMarker_right
 
 
 @export var AIMING_DISTANCE = 30
-@export var AIMING_TIME = 3000
+@export var AIMING_TIME = 300
 @export var FIRE_INTERVAL = 1500
 @export var BEAVER_ROCKET_SPEED = 0.6
 @export var BEAVER_ROCKET_HIT_DAMAGE = 15
@@ -23,6 +24,8 @@ var state_changed = Time.get_ticks_msec()
 @export var health: float = 100
 const BIG_EXPLOSION = preload("res://Scenes/blood_explosion.tscn")
 const DEBRIS = preload("res://Scenes/crate_debris.tscn")
+
+var left_fired = true
 
 
 # Called when the node enters the scene tree for the first time.
@@ -51,6 +54,14 @@ var last_fired = Time.get_ticks_msec()-AIMING_TIME
 
 func do_fire():
 	last_fired = Time.get_ticks_msec()
+
+	var firing_marker
+	if left_fired:
+		firing_marker = firing_marker_right
+	else:
+		firing_marker = firing_marker_left
+
+	left_fired = !left_fired
 
 	var rocket: Rocket = ROCKET.instantiate()
 	rocket.speed = BEAVER_ROCKET_SPEED

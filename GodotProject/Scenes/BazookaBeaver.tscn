@@ -1,24 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://5fgwf4wqjj43"]
+[gd_scene load_steps=8 format=3 uid="uid://5fgwf4wqjj43"]
 
 [ext_resource type="Script" path="res://Scripts/BazookaBeaver.gd" id="1_veo4j"]
 [ext_resource type="Script" path="res://Scripts/BazookaBeaver_mob.gd" id="2_cror4"]
+[ext_resource type="PackedScene" uid="uid://bar81yhgt5i25" path="res://Scenes/Beaver-col.glb" id="3_vt7kq"]
+[ext_resource type="PackedScene" uid="uid://ddm1cmrlmqmju" path="res://Scenes/GunHolder-col.glb" id="4_1we5a"]
+[ext_resource type="PackedScene" uid="uid://x3vbd6y8uuig" path="res://Scenes/GunLeft-col.glb" id="5_pu1j2"]
+[ext_resource type="PackedScene" uid="uid://civgg7eimqbh0" path="res://Scenes/GunRight-col.glb" id="6_lxdft"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_n4slt"]
-size = Vector3(1, 2.11523, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pejqq"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hqg0a"]
-albedo_color = Color(0.32, 0.22576, 0.0224, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_rwlwj"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fhy1c"]
-albedo_color = Color(0.32832, 0.38, 0.1976, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_ubo0a"]
-top_radius = 0.1
-bottom_radius = 0.09
+size = Vector3(3.38745, 3.23523, 5.75891)
 
 [node name="BazookaBeaver" type="Node3D"]
 script = ExtResource("1_veo4j")
@@ -29,21 +19,47 @@ collision_mask = 31
 script = ExtResource("2_cror4")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="mob"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.03373, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0418701, 1.59372, 0.379456)
 shape = SubResource("BoxShape3D_n4slt")
 
 [node name="model" type="Node3D" parent="mob"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0008, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.44769, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="mob/model"]
-material_override = SubResource("StandardMaterial3D_pejqq")
-material_overlay = SubResource("StandardMaterial3D_hqg0a")
-mesh = SubResource("CylinderMesh_rwlwj")
+[node name="Beaver-col" parent="mob/model" instance=ExtResource("3_vt7kq")]
+transform = Transform3D(-0.0108034, 0, -0.999942, 0, 1, 0, 0.999942, 0, -0.0108034, 0, 0, 0)
 
-[node name="bazooka" type="MeshInstance3D" parent="mob/model"]
-transform = Transform3D(1, 0, 0, 0, 0.172961, 0.984929, 0, -0.984929, 0.172961, 0, 0.915973, 0)
-material_override = SubResource("StandardMaterial3D_fhy1c")
-mesh = SubResource("CylinderMesh_ubo0a")
+[node name="StaticBody3D" parent="mob/model/Beaver-col/Bever" index="0"]
+collision_layer = 64
+collision_mask = 0
 
-[node name="firingMarker" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.24662, -2.07946)
+[node name="GunHolder-col2" parent="mob/model" instance=ExtResource("4_1we5a")]
+transform = Transform3D(0.00345571, 0, -0.999994, 0, 1, 0, 0.999994, 0, 0.00345571, 0.0129468, 0.510722, -0.428381)
+
+[node name="StaticBody3D" parent="mob/model/GunHolder-col2/GunHolder" index="0"]
+collision_layer = 64
+collision_mask = 0
+
+[node name="GunLeft-col2" parent="mob/model/GunHolder-col2" instance=ExtResource("5_pu1j2")]
+transform = Transform3D(0.999966, 0, -0.00827279, 0, 1, 0, 0.00827279, 0, 0.999966, 0.305949, -0.510629, 0.00105728)
+
+[node name="StaticBody3D" parent="mob/model/GunHolder-col2/GunLeft-col2/GunLeft" index="0"]
+collision_layer = 64
+collision_mask = 0
+
+[node name="GunRight-col2" parent="mob/model/GunHolder-col2" instance=ExtResource("6_lxdft")]
+transform = Transform3D(0.999966, 0, -0.00827279, 0, 1, 0, 0.00827279, 0, 0.999966, 0.305949, -0.510629, 0.00105728)
+
+[node name="StaticBody3D" parent="mob/model/GunHolder-col2/GunRight-col2/GunRight" index="0"]
+collision_layer = 64
+collision_mask = 0
+
+[node name="firingMarker_left" type="Marker3D" parent="mob"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.43686, 3.06091, -2.07946)
+
+[node name="firingMarker_right" type="Marker3D" parent="mob"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.50776, 3.06091, -2.07946)
+
+[editable path="mob/model/Beaver-col"]
+[editable path="mob/model/GunHolder-col2"]
+[editable path="mob/model/GunHolder-col2/GunLeft-col2"]
+[editable path="mob/model/GunHolder-col2/GunRight-col2"]
