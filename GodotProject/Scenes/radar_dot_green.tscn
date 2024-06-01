@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cy1rw4cv4itsu"]
+
+[ext_resource type="Texture2D" uid="uid://bd4aw3c7br2pb" path="res://Graphics/Hud/radar_spot.png" id="1_vcs2m"]
+
+[node name="RadarDotGreen" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.315789, 0.315789)
+texture = ExtResource("1_vcs2m")

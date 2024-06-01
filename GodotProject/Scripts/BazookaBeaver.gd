@@ -11,7 +11,7 @@ const ROCKET = preload("res://Scenes/rocket.tscn")
 
 
 @export var AIMING_DISTANCE = 75
-@export var AIMING_MAX_DISTANCE = 250
+@export var AIMING_MAX_DISTANCE = 150
 @export var AIMING_TIME = 300
 @export var FIRE_INTERVAL = 1500
 @export var BEAVER_ROCKET_SPEED = 0.6

@@ -15,6 +15,8 @@ signal pause_game(do_pause: bool)
 @onready var eggs_label: Label = $Screen/Gauges/EggsLabel
 @onready var mission_not_complete: Control = $Screen/MissionNotComplete
 @onready var mission_not_complete_timer: Timer = $Screen/MissionNotComplete/MissionNotCompleteHideTimer
+@onready var radar = $Screen/Gauges/Radar
+@onready var radar_update_timer = $Screen/Gauges/RadarUpdateTimer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -78,3 +80,24 @@ func show_mission_not_complete():
 
 func _on_mission_not_complete_hide_timer_timeout():
 	mission_not_complete.visible = false
+
+var spots = []
+var max_dist = 500
+
+func clear_radar_spots():
+	spots.all(func(spot):
+		spot.queue_free()
+	)
+	spots = []
+
+func convert_to_radar(v:Vector2):
+	if v.length()>max_dist:
+		v = v.normalized()*max_dist
+
+	return Vector2(v.x/max_dist*50+43, v.y/max_dist*50+43)
+
+func add_spot(spot_scene, v):
+	var spot = spot_scene.instantiate();
+	radar.add_child(spot)
+	spots.append(spot)
+	spot.position = convert_to_radar(v)

@@ -16,6 +16,10 @@ class_name Game
 const EXAMPLE_LEVEL = preload("res://Scenes/example_level.tscn")
 const SUCCESS_SCREEN = preload("res://Scenes/success_screen.tscn")
 const RETURN_TO_BASE = preload("res://Scenes/Return_to_base_sound.tscn")
+const GREEN_SPOT = preload("res://Scenes/radar_dot_green.tscn")
+const BLUE_SPOT = preload("res://Scenes/radar_dot_blue.tscn")
+const WHITE_SPOT = preload("res://Scenes/radar_dot_white.tscn")
+
 
 var level
 var death_camera: Camera3D = null # Camera we use after player died.
@@ -176,6 +180,12 @@ func play_return_to_base():
 	get_tree().root.add_child(RETURN_TO_BASE.instantiate())
 	return_to_base_played = true
 
+func calculate_relative_position(player:Node3D, object:Node3D):
+	var vec3 = object.global_position-player.global_position
+	var vec2 = Vector2(vec3.x, vec3.z)
+	vec2 = vec2.rotated(player.rotation.y)
+	return vec2
+
 func update_counters():
 	alive_portals = get_tree().get_nodes_in_group('Portals').size()
 	alive_eggs = get_tree().get_nodes_in_group('Eggs').size()
@@ -183,5 +193,19 @@ func update_counters():
 	alive_beavers = get_tree().get_nodes_in_group('Beavers').size()
 	hud.update_portals_label(total_portals - alive_portals, total_portals)
 	hud.update_eggs_label(total_eggs - alive_eggs, total_eggs)
+
+	hud.clear_radar_spots()
+	var player = get_tree().get_first_node_in_group("Player")
+	if player:
+		get_tree().get_nodes_in_group('Portals').all(func(portal):
+			hud.add_spot(BLUE_SPOT, calculate_relative_position(player, portal))
+		)
+		get_tree().get_nodes_in_group('Eggs').all(func(egg):
+			hud.add_spot(WHITE_SPOT, calculate_relative_position(player, egg))
+		)
+		get_tree().get_nodes_in_group('Helipads').all(func(helipad):
+			hud.add_spot(GREEN_SPOT, calculate_relative_position(player, helipad))
+		)
+
 	if alive_portals<=0 && alive_eggs<=0 && (total_portals>0 || total_eggs>0):
 		play_return_to_base()

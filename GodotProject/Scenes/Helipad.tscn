@@ -65,7 +65,7 @@ _data = {
 "landing_sequence": SubResource("Animation_w14jr")
 }
 
-[node name="Helipad" type="Node3D"]
+[node name="Helipad" type="Node3D" groups=["Helipads"]]
 script = ExtResource("1_x7fs5")
 
 [node name="Area3D" type="Area3D" parent="."]

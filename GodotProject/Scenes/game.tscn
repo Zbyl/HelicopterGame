@@ -14,7 +14,7 @@ script = ExtResource("1_6xean")
 unique_name_in_owner = true
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.2
 autostart = true
 
 [node name="MenuMusic" type="AudioStreamPlayer" parent="."]

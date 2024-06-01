@@ -8,6 +8,7 @@
 [ext_resource type="StyleBox" uid="uid://bqirfubr3fc5s" path="res://Materials/button_hover.tres" id="4_umje4"]
 [ext_resource type="Texture2D" uid="uid://drxscvgmroukm" path="res://Graphics/Hud/PortalIcon.png" id="5_dpo7h"]
 [ext_resource type="Texture2D" uid="uid://bnwqwiryhws1" path="res://Graphics/Hud/EggIcon.png" id="6_xpdpk"]
+[ext_resource type="Texture2D" uid="uid://bse5yfc2lyqmn" path="res://Graphics/Hud/radar.svg" id="7_v67nh"]
 
 [sub_resource type="SystemFont" id="SystemFont_5lg41"]
 font_names = PackedStringArray("Consolas")
@@ -311,6 +312,15 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 35
 text = "100"
+
+[node name="Radar" type="TextureRect" parent="Screen/Gauges"]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 76.0
+offset_right = 131.0
+offset_bottom = 176.0
+scale = Vector2(2, 2)
+texture = ExtResource("7_v67nh")
 
 [node name="MissionNotComplete" type="Control" parent="Screen"]
 layout_mode = 1
