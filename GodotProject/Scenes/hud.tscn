@@ -163,10 +163,10 @@ texture = ExtResource("2_2ggaf")
 
 [node name="Move" type="Label" parent="Screen/ControlsHelp"]
 layout_mode = 0
-offset_left = 213.0
-offset_top = -43.0
-offset_right = 304.0
-offset_bottom = -1.0
+offset_left = 240.0
+offset_top = 21.0
+offset_right = 331.0
+offset_bottom = 63.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 20
@@ -174,10 +174,10 @@ text = "Move"
 
 [node name="Rotate" type="Label" parent="Screen/ControlsHelp"]
 layout_mode = 0
-offset_left = 451.0
-offset_top = 78.0
-offset_right = 542.0
-offset_bottom = 120.0
+offset_left = 449.0
+offset_top = 100.0
+offset_right = 540.0
+offset_bottom = 142.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 20
@@ -185,10 +185,10 @@ text = "Rotate"
 
 [node name="Rockets" type="Label" parent="Screen/ControlsHelp"]
 layout_mode = 0
-offset_left = 500.0
-offset_top = -129.0
-offset_right = 613.0
-offset_bottom = -87.0
+offset_left = 553.0
+offset_top = -121.0
+offset_right = 666.0
+offset_bottom = -79.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 20
@@ -196,10 +196,10 @@ text = "Rockets"
 
 [node name="Menu" type="Label" parent="Screen/ControlsHelp"]
 layout_mode = 0
-offset_left = 434.0
-offset_top = -65.0
-offset_right = 547.0
-offset_bottom = -23.0
+offset_left = 417.0
+offset_top = -27.0
+offset_right = 530.0
+offset_bottom = 15.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 20
@@ -207,10 +207,10 @@ text = "Menu"
 
 [node name="Gun" type="Label" parent="Screen/ControlsHelp"]
 layout_mode = 0
-offset_left = 288.0
-offset_top = -128.0
-offset_right = 401.0
-offset_bottom = -86.0
+offset_left = 248.0
+offset_top = -120.0
+offset_right = 361.0
+offset_bottom = -78.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 20
@@ -218,10 +218,10 @@ text = "Gun"
 
 [node name="Down" type="Label" parent="Screen/ControlsHelp"]
 layout_mode = 0
-offset_left = 339.0
-offset_top = -106.0
-offset_right = 452.0
-offset_bottom = -64.0
+offset_left = 346.0
+offset_top = -120.0
+offset_right = 459.0
+offset_bottom = -78.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 20
@@ -229,10 +229,10 @@ text = "Down"
 
 [node name="Down2" type="Label" parent="Screen/ControlsHelp"]
 layout_mode = 0
-offset_left = 335.0
-offset_top = 90.0
-offset_right = 448.0
-offset_bottom = 132.0
+offset_left = 337.0
+offset_top = 101.0
+offset_right = 450.0
+offset_bottom = 143.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 20
@@ -240,10 +240,10 @@ text = "Down"
 
 [node name="Up" type="Label" parent="Screen/ControlsHelp"]
 layout_mode = 0
-offset_left = 453.0
-offset_top = -105.0
-offset_right = 566.0
-offset_bottom = -63.0
+offset_left = 461.0
+offset_top = -120.0
+offset_right = 574.0
+offset_bottom = -78.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 20
@@ -251,10 +251,10 @@ text = "Up"
 
 [node name="Up2" type="Label" parent="Screen/ControlsHelp"]
 layout_mode = 0
-offset_left = 347.0
-offset_top = -15.0
-offset_right = 460.0
-offset_bottom = 27.0
+offset_left = 350.0
+offset_top = -1.0
+offset_right = 463.0
+offset_bottom = 41.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 20
