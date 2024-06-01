@@ -27,7 +27,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	$Screen/Gauges/FPSCounter.text = "{amount} FPS".format({"amount": Engine.get_frames_per_second()})
 
 
 func update_health_label(amount):
