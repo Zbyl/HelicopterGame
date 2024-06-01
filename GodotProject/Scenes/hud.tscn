@@ -283,9 +283,7 @@ offset_left = 88.0
 offset_top = 26.0
 offset_right = 175.0
 offset_bottom = 95.0
-theme_override_colors/font_color = Color(0.804495, 0.526317, 5.77569e-07, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 35
 text = "100"
 
@@ -312,9 +310,7 @@ offset_top = 14.0
 offset_right = -44.0
 offset_bottom = 83.0
 grow_horizontal = 0
-theme_override_colors/font_color = Color(0.803922, 0.52549, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 35
 text = "100"
 
@@ -341,9 +337,7 @@ offset_top = 78.0
 offset_right = -40.0
 offset_bottom = 147.0
 grow_horizontal = 0
-theme_override_colors/font_color = Color(0.803922, 0.52549, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 35
 text = "100"
 
