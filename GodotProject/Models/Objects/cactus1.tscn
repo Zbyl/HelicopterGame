@@ -74,6 +74,7 @@ radius = 2.0
 [node name="cactus1" type="Node3D"]
 
 [node name="Cactus1" type="MeshInstance3D" parent="."]
+layers = 16
 mesh = SubResource("ArrayMesh_8btxp")
 skeleton = NodePath("")
 
