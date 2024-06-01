@@ -1,14 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://coir15qm3jlrt"]
+[gd_scene load_steps=13 format=3 uid="uid://coir15qm3jlrt"]
 
 [ext_resource type="Script" path="res://Scripts/hud.gd" id="1_iyo5i"]
 [ext_resource type="Texture2D" uid="uid://b7us0q86x3d55" path="res://Graphics/Hud/pad.png" id="2_2ggaf"]
 [ext_resource type="Texture2D" uid="uid://do663e4dpqisj" path="res://Graphics/Screens/SplashScreen.png" id="3_l1l2y"]
-[ext_resource type="StyleBox" uid="uid://dpxw3upyuavhh" path="res://Materials/button_normal.tres" id="3_pl4i8"]
+[ext_resource type="StyleBox" uid="uid://cn2n1upmss8y1" path="res://Materials/button_normal.tres" id="3_pl4i8"]
+[ext_resource type="Texture2D" uid="uid://rhwcfyeu4qsa" path="res://Graphics/Hud/Fog.png" id="3_qsu3j"]
 [ext_resource type="Texture2D" uid="uid://psimouhqtxko" path="res://Graphics/Hud/HealthIcon.png" id="4_bbyg8"]
-[ext_resource type="StyleBox" uid="uid://bqirfubr3fc5s" path="res://Materials/button_hover.tres" id="4_umje4"]
+[ext_resource type="StyleBox" uid="uid://blwq8cend1yyj" path="res://Materials/button_hover.tres" id="4_umje4"]
 [ext_resource type="Texture2D" uid="uid://drxscvgmroukm" path="res://Graphics/Hud/PortalIcon.png" id="5_dpo7h"]
 [ext_resource type="Texture2D" uid="uid://bnwqwiryhws1" path="res://Graphics/Hud/EggIcon.png" id="6_xpdpk"]
 [ext_resource type="Texture2D" uid="uid://bse5yfc2lyqmn" path="res://Graphics/Hud/radar.svg" id="7_v67nh"]
+[ext_resource type="Texture2D" uid="uid://cmy755qfo20y2" path="res://Graphics/Hud/Logotype-01.png" id="10_nbl5q"]
 
 [sub_resource type="SystemFont" id="SystemFont_5lg41"]
 font_names = PackedStringArray("Consolas")
@@ -37,6 +39,17 @@ texture = ExtResource("3_l1l2y")
 expand_mode = 5
 stretch_mode = 6
 
+[node name="Fog" type="TextureRect" parent="Screen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_qsu3j")
+expand_mode = 5
+stretch_mode = 6
+
 [node name="Menu" type="Control" parent="Screen"]
 layout_mode = 1
 anchors_preset = 15
@@ -45,22 +58,43 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Screen/Menu"]
+[node name="VBox" type="Control" parent="Screen/Menu"]
+layout_mode = 1
+anchor_left = 0.077
+anchor_top = 0.5
+anchor_right = 0.077
+anchor_bottom = 0.5
+offset_left = -88.704
+offset_top = -20.0
+offset_right = -48.704
+offset_bottom = 20.0
+grow_vertical = 2
+
+[node name="Logotype" type="TextureRect" parent="Screen/Menu/VBox"]
+layout_mode = 0
+offset_left = 47.0
+offset_top = -149.0
+offset_right = 981.0
+offset_bottom = 186.0
+scale = Vector2(0.303918, 0.303918)
+texture = ExtResource("10_nbl5q")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Screen/Menu/VBox"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -370.0
-offset_top = -136.0
-offset_right = -84.0
-offset_bottom = 142.0
+offset_left = 26.0
+offset_top = -31.0001
+offset_right = 312.0
+offset_bottom = 247.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 9
 
-[node name="NewGameButton" type="Button" parent="Screen/Menu/VBoxContainer"]
+[node name="NewGameButton" type="Button" parent="Screen/Menu/VBox/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -69,7 +103,7 @@ theme_override_styles/hover = ExtResource("4_umje4")
 theme_override_styles/focus = ExtResource("4_umje4")
 text = "New Game"
 
-[node name="ControlsButton" type="Button" parent="Screen/Menu/VBoxContainer"]
+[node name="ControlsButton" type="Button" parent="Screen/Menu/VBox/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -79,7 +113,7 @@ theme_override_styles/focus = ExtResource("4_umje4")
 text = "Controls
 "
 
-[node name="FullScreenButton" type="Button" parent="Screen/Menu/VBoxContainer"]
+[node name="FullScreenButton" type="Button" parent="Screen/Menu/VBox/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -88,7 +122,7 @@ theme_override_styles/hover = ExtResource("4_umje4")
 theme_override_styles/focus = ExtResource("4_umje4")
 text = "Full Screen"
 
-[node name="ExitGameButton" type="Button" parent="Screen/Menu/VBoxContainer"]
+[node name="ExitGameButton" type="Button" parent="Screen/Menu/VBox/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -388,8 +422,8 @@ horizontal_alignment = 1
 wait_time = 4.0
 one_shot = true
 
-[connection signal="pressed" from="Screen/Menu/VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
-[connection signal="pressed" from="Screen/Menu/VBoxContainer/ControlsButton" to="." method="_on_controls_button_pressed"]
-[connection signal="pressed" from="Screen/Menu/VBoxContainer/FullScreenButton" to="." method="_on_full_screen_button_pressed"]
-[connection signal="pressed" from="Screen/Menu/VBoxContainer/ExitGameButton" to="." method="_on_exit_game_button_pressed"]
+[connection signal="pressed" from="Screen/Menu/VBox/VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="Screen/Menu/VBox/VBoxContainer/ControlsButton" to="." method="_on_controls_button_pressed"]
+[connection signal="pressed" from="Screen/Menu/VBox/VBoxContainer/FullScreenButton" to="." method="_on_full_screen_button_pressed"]
+[connection signal="pressed" from="Screen/Menu/VBox/VBoxContainer/ExitGameButton" to="." method="_on_exit_game_button_pressed"]
 [connection signal="timeout" from="Screen/MissionNotComplete/MissionNotCompleteHideTimer" to="." method="_on_mission_not_complete_hide_timer_timeout"]

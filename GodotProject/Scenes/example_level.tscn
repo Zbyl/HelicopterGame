@@ -9,12 +9,12 @@
 [ext_resource type="PackedScene" uid="uid://b0n0fx6wosttu" path="res://Scenes/Helipad.tscn" id="10_rb0eo"]
 [ext_resource type="PackedScene" uid="uid://b6b47r2hcps31" path="res://Scenes/portal.tscn" id="11_7nsdl"]
 [ext_resource type="PackedScene" uid="uid://bp11cmjwsnf1a" path="res://Scenes/Crawling_mob.tscn" id="11_xrqy2"]
-[ext_resource type="PackedScene" path="res://Models/Objects/barrel.tscn" id="12_qhyf6"]
+[ext_resource type="PackedScene" uid="uid://bs1qfxq6vthao" path="res://Models/Objects/barrel.tscn" id="12_qhyf6"]
 [ext_resource type="PackedScene" uid="uid://by0gv5obxit0e" path="res://Models/Objects/cactus1.tscn" id="12_xedte"]
-[ext_resource type="PackedScene" path="res://Models/Objects/broken_log.tscn" id="13_ntqbl"]
-[ext_resource type="PackedScene" path="res://Models/Objects/cactus2.tscn" id="14_7b1pe"]
-[ext_resource type="PackedScene" path="res://Models/Objects/fence.tscn" id="15_6e5tq"]
-[ext_resource type="PackedScene" path="res://Models/Objects/palm.tscn" id="16_xs8oc"]
+[ext_resource type="PackedScene" uid="uid://csh3wgl1aly24" path="res://Models/Objects/broken_log.tscn" id="13_ntqbl"]
+[ext_resource type="PackedScene" uid="uid://dul2wl1aarwil" path="res://Models/Objects/cactus2.tscn" id="14_7b1pe"]
+[ext_resource type="PackedScene" uid="uid://hnh306v4goi4" path="res://Models/Objects/fence.tscn" id="15_6e5tq"]
+[ext_resource type="PackedScene" uid="uid://bakex1o5dp86b" path="res://Models/Objects/palm.tscn" id="16_xs8oc"]
 [ext_resource type="PackedScene" path="res://Scenes/eggs.tscn" id="17_n5x8n"]
 [ext_resource type="PackedScene" uid="uid://c3c87ynrf7d4e" path="res://Models/StaticObjects/Base-col.glb" id="18_m2rth"]
 
@@ -1334,7 +1334,7 @@ transform = Transform3D(-0.130508, 0, -0.991447, 0, 1, 0, 0.991447, 0, -0.130508
 transform = Transform3D(0.396908, 0, 0.917859, 0, 1, 0, -0.917859, 0, 0.396908, -684.406, 17.0037, -698.961)
 
 [node name="Helipad" parent="." instance=ExtResource("10_rb0eo")]
-transform = Transform3D(1.40083, 0, 1.67562, 0, 1, 0, -1.89664, 0, 1.23759, -0.0672607, 0.10038, 523.21)
+transform = Transform3D(1.40083, 0, 1.67562, 0, 1, 0, -1.89664, 0, 1.23759, -73.2241, 0.10038, 47.9488)
 
 [node name="Portal" parent="." instance=ExtResource("11_7nsdl")]
 transform = Transform3D(-0.900065, 0.00264349, 0.435748, 0.00216754, 0.999996, -0.00158936, -0.435751, -0.000486029, -0.900068, -815.117, 0, -754.292)
@@ -7103,10 +7103,10 @@ transform = Transform3D(1.47289, 0, 0.480726, 0, 1, 0, -0.497172, 0, 1.42417, -1
 transform = Transform3D(1.47289, 0, 0.480726, 0, 1, 0, -0.497172, 0, 1.42417, 195.676, -0.111042, -425.78)
 
 [node name="Eggs5" parent="." instance=ExtResource("17_n5x8n")]
-transform = Transform3D(1.47289, 0, 0.480726, 0, 1, 0, -0.497172, 0, 1.42417, 84.4619, -0.111035, 490.425)
+transform = Transform3D(1.47289, 0, 0.480726, 0, 1, 0, -0.497172, 0, 1.42417, 84.4619, -0.111035, 73.3458)
 
 [node name="Eggs6" parent="." instance=ExtResource("17_n5x8n")]
-transform = Transform3D(1.47289, 0, 0.480726, 0, 1, 0, -0.497172, 0, 1.42417, -308.224, -0.111035, 486.374)
+transform = Transform3D(1.47289, 0, 0.480726, 0, 1, 0, -0.497172, 0, 1.42417, -330.034, -0.111035, 246.198)
 
 [node name="Base-col2" parent="." instance=ExtResource("18_m2rth")]
 transform = Transform3D(5.48874, 0, -7.29821, 0, 9.08668, 0, 4.91025, 0, 8.15802, -936.602, 7.4886, -873.108)

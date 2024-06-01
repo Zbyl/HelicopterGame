@@ -5,9 +5,10 @@ class_name Hud
 signal new_game_pressed()
 signal pause_game(do_pause: bool)
 
+@onready var fog = $Screen/Fog
 @onready var menu: Control = $Screen/Menu
 @onready var controls_help: Control = $Screen/ControlsHelp
-@onready var new_game_button: Button = $Screen/Menu/VBoxContainer/NewGameButton
+@onready var new_game_button: Button = $Screen/Menu/VBox/VBoxContainer/NewGameButton
 @onready var background: Control = $Screen/Background
 @onready var gauges: Control = $Screen/Gauges
 @onready var health_label: Label = $Screen/Gauges/HealthLabel
@@ -45,6 +46,7 @@ func toggle_menu():
 
 func show_menu(do_show: bool):
 	menu.visible = do_show
+	fog.visible = do_show
 	controls_help.visible = false
 	gauges.visible = !do_show && GameData.game.is_in_level()
 	if do_show:
