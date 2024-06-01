@@ -112,7 +112,7 @@ func _process(delta):
 			mob.velocity.x = thowards_target.x*SPEED
 			mob.velocity.z = thowards_target.z*SPEED
 
-	mob.look_at(target.global_position)
+		mob.look_at(target.global_position)
 	mob.rotation.x = 0
 	mob.rotation.z = 0
 

@@ -104,6 +104,8 @@ var hit_thrust = Vector3(0, 0, 0)
 var hit_rotation = 0
 @onready var hit_on = Time.get_ticks_msec()-HIT_MAX_AGE
 
+var crosshair_3d_pos: Vector3 = Vector3.ZERO
+
 var rng = RandomNumberGenerator.new()
 
 func pause(do_pause: bool):
@@ -120,7 +122,7 @@ func fire_rocket():
 	rocket.set_owner_body(collision_area)
 	get_tree().root.add_child(rocket)
 	rocket.global_position = rocket_left_marker.global_position if active_rocket_left else rocket_right_marker.global_position
-	rocket.look_at(aim.to_global(aim.position + aim.target_position))
+	rocket.look_at(crosshair_3d_pos)
 
 func fire_gun():
 	if not gun_cooldown_timer.is_stopped():
@@ -130,7 +132,7 @@ func fire_gun():
 	var bullet: Rocket = BULLET.instantiate()
 	get_tree().root.add_child(bullet)
 	bullet.global_position = gun_marker.global_position
-	bullet.look_at(aim.to_global(aim.position + aim.target_position))
+	bullet.look_at(crosshair_3d_pos)
 
 func rotate_rotors():
 	var now = Time.get_ticks_msec()
@@ -207,7 +209,7 @@ func handle_input_and_movement():
 	var point_of_aim = camera_3d.project_position(visible_rect.position+(visible_rect.size/2), 100);
 	aim.target_position = aim.to_local(point_of_aim)
 
-	var crosshair_3d_pos = Vector3(0, 0, 0)
+	crosshair_3d_pos = Vector3(0, 0, 0)
 	if aim.is_colliding():
 		crosshair_3d_pos = aim.get_collision_point()
 	else:
