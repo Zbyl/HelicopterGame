@@ -1,14 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://coir15qm3jlrt"]
+[gd_scene load_steps=10 format=3 uid="uid://coir15qm3jlrt"]
 
 [ext_resource type="Script" path="res://Scripts/hud.gd" id="1_iyo5i"]
 [ext_resource type="Texture2D" uid="uid://b7us0q86x3d55" path="res://Graphics/Hud/pad.png" id="2_2ggaf"]
 [ext_resource type="Texture2D" uid="uid://do663e4dpqisj" path="res://Graphics/Screens/SplashScreen.png" id="3_l1l2y"]
+[ext_resource type="StyleBox" uid="uid://dpxw3upyuavhh" path="res://Materials/button_normal.tres" id="3_pl4i8"]
 [ext_resource type="Texture2D" uid="uid://psimouhqtxko" path="res://Graphics/Hud/HealthIcon.png" id="4_bbyg8"]
+[ext_resource type="StyleBox" uid="uid://bqirfubr3fc5s" path="res://Materials/button_hover.tres" id="4_umje4"]
 [ext_resource type="Texture2D" uid="uid://drxscvgmroukm" path="res://Graphics/Hud/PortalIcon.png" id="5_dpo7h"]
 [ext_resource type="Texture2D" uid="uid://bnwqwiryhws1" path="res://Graphics/Hud/EggIcon.png" id="6_xpdpk"]
 
 [sub_resource type="SystemFont" id="SystemFont_5lg41"]
-font_names = PackedStringArray("Monospace")
+font_names = PackedStringArray("Consolas")
 font_weight = 999
 subpixel_positioning = 0
 
@@ -49,10 +51,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -408.0
-offset_top = -237.0
-offset_right = -122.0
-offset_bottom = 41.0
+offset_left = -370.0
+offset_top = -136.0
+offset_right = -84.0
+offset_bottom = 142.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 9
@@ -60,22 +62,38 @@ theme_override_constants/separation = 9
 [node name="NewGameButton" type="Button" parent="Screen/Menu/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = ExtResource("3_pl4i8")
+theme_override_styles/hover = ExtResource("4_umje4")
+theme_override_styles/focus = ExtResource("4_umje4")
 text = "New Game"
 
 [node name="ControlsButton" type="Button" parent="Screen/Menu/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = ExtResource("3_pl4i8")
+theme_override_styles/hover = ExtResource("4_umje4")
+theme_override_styles/focus = ExtResource("4_umje4")
 text = "Controls
 "
 
 [node name="FullScreenButton" type="Button" parent="Screen/Menu/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = ExtResource("3_pl4i8")
+theme_override_styles/hover = ExtResource("4_umje4")
+theme_override_styles/focus = ExtResource("4_umje4")
 text = "Full Screen"
 
 [node name="ExitGameButton" type="Button" parent="Screen/Menu/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = ExtResource("3_pl4i8")
+theme_override_styles/hover = ExtResource("4_umje4")
+theme_override_styles/focus = ExtResource("4_umje4")
 text = "Exit Game"
 
 [node name="ControlsHelp" type="Control" parent="Screen"]
@@ -85,10 +103,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -229.0
-offset_top = -167.0
-offset_right = 229.0
-offset_bottom = 167.0
+offset_left = -225.0
+offset_top = -66.0
+offset_right = 233.0
+offset_bottom = 268.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -162,6 +180,50 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 20
 text = "Gun"
+
+[node name="Down" type="Label" parent="Screen/ControlsHelp"]
+layout_mode = 0
+offset_left = 339.0
+offset_top = -106.0
+offset_right = 452.0
+offset_bottom = -64.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 20
+text = "Down"
+
+[node name="Down2" type="Label" parent="Screen/ControlsHelp"]
+layout_mode = 0
+offset_left = 335.0
+offset_top = 90.0
+offset_right = 448.0
+offset_bottom = 132.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 20
+text = "Down"
+
+[node name="Up" type="Label" parent="Screen/ControlsHelp"]
+layout_mode = 0
+offset_left = 453.0
+offset_top = -105.0
+offset_right = 566.0
+offset_bottom = -63.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 20
+text = "Up"
+
+[node name="Up2" type="Label" parent="Screen/ControlsHelp"]
+layout_mode = 0
+offset_left = 347.0
+offset_top = -15.0
+offset_right = 460.0
+offset_bottom = 27.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 20
+text = "Up"
 
 [node name="Gauges" type="Control" parent="Screen"]
 layout_mode = 1
@@ -261,11 +323,12 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -189.0
-offset_right = 189.0
-offset_bottom = 35.0
+offset_left = -186.0
+offset_top = 11.0
+offset_right = 192.0
+offset_bottom = 46.0
 grow_horizontal = 2
-theme_override_colors/font_color = Color(0.204951, 0.447996, 0.133112, 1)
+theme_override_colors/font_color = Color(0.376223, 0.823235, 0.237717, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 2
 theme_override_fonts/font = SubResource("SystemFont_5lg41")
@@ -278,12 +341,12 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -192.0
-offset_top = 33.0
-offset_right = 186.0
-offset_bottom = 68.0
+offset_left = -189.0
+offset_top = 44.0
+offset_right = 189.0
+offset_bottom = 79.0
 grow_horizontal = 2
-theme_override_colors/font_color = Color(0.204951, 0.447996, 0.133112, 1)
+theme_override_colors/font_color = Color(0.376223, 0.823235, 0.237717, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 2
 theme_override_fonts/font = SubResource("SystemFont_5lg41")
