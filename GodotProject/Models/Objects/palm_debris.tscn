@@ -47,7 +47,7 @@ transform = Transform3D(1, 0, 0, 0, 0.830693, -0.556731, 0, 0.556731, 0.830693, 
 material_override = SubResource("StandardMaterial3D_k7qs4")
 mesh = SubResource("PrismMesh_110bt")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Debris2" index="0"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Debris2" index="0"]
 material_override = SubResource("StandardMaterial3D_ddmai")
 mesh = SubResource("CylinderMesh_x4cix")
 skeleton = NodePath("../../Debris1")
@@ -58,7 +58,7 @@ shape = SubResource("CylinderShape3D_x581p")
 [node name="SmokeTrail" parent="Debris3" index="0"]
 visible = false
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Debris3" index="1"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Debris3" index="1"]
 transform = Transform3D(0.761165, 0.648558, 0, -0.648558, 0.761165, 0, 0, 0, 1, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_k7qs4")
 mesh = SubResource("BoxMesh_kgdw3")
@@ -67,7 +67,7 @@ skeleton = NodePath("../../Debris1")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Debris3" index="2"]
 shape = SubResource("BoxShape3D_i6lk7")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Debris4" index="0"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Debris4" index="0"]
 transform = Transform3D(0.762352, -0.442939, 0.471831, 0.647162, 0.521779, -0.555813, 0, 0.729076, 0.684433, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_k7qs4")
 mesh = SubResource("PlaneMesh_pkxji")
