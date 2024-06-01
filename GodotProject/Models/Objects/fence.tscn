@@ -78,6 +78,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0493164, 0.984979, -0.04113
 shape = SubResource("BoxShape3D_25bxg")
 
 [node name="Fence" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05564, 0)
 layers = 16
 mesh = SubResource("ArrayMesh_2i2bq")
 skeleton = NodePath("")

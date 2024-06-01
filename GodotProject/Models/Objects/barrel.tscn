@@ -140,6 +140,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.347231, 0)
 shape = SubResource("CylinderShape3D_a6f3x")
 
 [node name="Barrel" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.532052, 0)
 layers = 16
 mesh = SubResource("ArrayMesh_2887x")
 skeleton = NodePath("")
