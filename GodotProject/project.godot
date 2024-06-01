@@ -23,6 +23,10 @@ GameData="*res://Scenes/game_data.tscn"
 
 project/assembly_name="HelicopterAnomaly"
 
+[editor]
+
+movie_writer/movie_file="C:/Users/Syellia/Documents/GitHub/Hellacopter_gameplay.avi"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/zylann.hterrain/plugin.cfg")
