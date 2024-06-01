@@ -20,6 +20,8 @@ const GREEN_SPOT = preload("res://Scenes/radar_dot_green.tscn")
 const BLUE_SPOT = preload("res://Scenes/radar_dot_blue.tscn")
 const WHITE_SPOT = preload("res://Scenes/radar_dot_white.tscn")
 
+@export var MOB_DISABLE_DISTANCE = 250
+
 
 var level
 var death_camera: Camera3D = null # Camera we use after player died.
@@ -79,7 +81,7 @@ func _process(delta):
 	if Input.is_action_just_pressed("debug_button"):
 		#_on_game_success()
 		pass
-		
+
 	update_radar()
 
 func _on_pause_game(do_pause: bool):
@@ -211,3 +213,12 @@ func update_radar():
 
 	if alive_portals<=0 && alive_eggs<=0 && (total_portals>0 || total_eggs>0):
 		play_return_to_base()
+
+
+func _on_disable_mob_timer_timeout():
+	var player = get_tree().get_first_node_in_group("Player")
+	if player:
+		var enemies = get_tree().get_nodes_in_group("Enemies")
+		for enemy in enemies:
+			var vec3 = enemy.global_position-player.global_position
+			enemy.set_process(vec3.length()<MOB_DISABLE_DISTANCE)

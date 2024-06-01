@@ -33,4 +33,8 @@ volume_db = -16.0
 stream = ExtResource("4_k4l61")
 volume_db = -16.0
 
+[node name="DisableMobTimer" type="Timer" parent="."]
+autostart = true
+
 [connection signal="timeout" from="Timer" to="." method="update_counters"]
+[connection signal="timeout" from="DisableMobTimer" to="." method="_on_disable_mob_timer_timeout"]
