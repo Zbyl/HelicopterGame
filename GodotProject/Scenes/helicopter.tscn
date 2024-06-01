@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://5qy16o5wggi"]
+[gd_scene load_steps=14 format=3 uid="uid://5qy16o5wggi"]
 
 [ext_resource type="Script" path="res://Scripts/helicopter.gd" id="1_ghlj3"]
 [ext_resource type="Texture2D" uid="uid://b0xjpjh84d2fw" path="res://Graphics/crosshair.png" id="2_aj7h3"]
 [ext_resource type="PackedScene" uid="uid://rmwxa7ffk43" path="res://Models/Helicopter/HelicopterMain.glb" id="3_p8ct2"]
+[ext_resource type="PackedScene" uid="uid://b3xxfkuk6krvh" path="res://Scenes/helicopter_smoke.tscn" id="3_ukxer"]
 [ext_resource type="PackedScene" uid="uid://c1hwmpn4cm0pd" path="res://Models/Helicopter/HelicopterMainBlades.glb" id="4_8e0nd"]
 [ext_resource type="PackedScene" uid="uid://ckq8knjfyujgd" path="res://Models/Helicopter/HelicopterBackBlades.glb" id="5_nvfav"]
 [ext_resource type="AudioStream" uid="uid://cescbk0ugw2iu" path="res://Sounds/helicopter_sound.mp3" id="6_x7h4m"]
@@ -76,6 +77,10 @@ scale = Vector2(0.0921569, 0.0921569)
 texture = ExtResource("2_aj7h3")
 
 [node name="Model" type="Node3D" parent="."]
+
+[node name="HelicopterSmoke" parent="Model" instance=ExtResource("3_ukxer")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.288264, 0.673087)
+visible = false
 
 [node name="HelicopterMain" parent="Model" instance=ExtResource("3_p8ct2")]
 unique_name_in_owner = true

@@ -32,6 +32,8 @@ var landing_helipad: Node3D
 @onready var helicopter_main_blades = $Model/HelicopterMainBlades
 @onready var helicopter_back_blades = $Model/HelicopterBackBlades
 @onready var collision_area = $Area3D
+@onready var helicopter_smoke = $Model/HelicopterSmoke
+
 
 
 
@@ -317,6 +319,7 @@ func hit(force: float) -> bool: # Returns true if object is dead.
 		return true
 
 	health -= force
+	helicopter_smoke.visible = health<=30
 	GameData.hud.update_health_label(health)
 	if health > 0:
 		return false
