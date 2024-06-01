@@ -102,6 +102,7 @@ func _on_new_game_pressed():
 	total_sharks = get_tree().get_nodes_in_group('Sharks').size()
 	total_beavers = get_tree().get_nodes_in_group('Beavers').size()
 	update_counters()
+	hud.update_health_label(100)
 	return_to_base_played = false
 	new_game_started_on = Time.get_ticks_msec()
 
