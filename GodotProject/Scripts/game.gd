@@ -79,6 +79,8 @@ func _process(delta):
 	if Input.is_action_just_pressed("debug_button"):
 		#_on_game_success()
 		pass
+		
+	update_radar()
 
 func _on_pause_game(do_pause: bool):
 	print('Pausing.' if do_pause else 'Unpausing.')
@@ -194,18 +196,18 @@ func update_counters():
 	hud.update_portals_label(total_portals - alive_portals, total_portals)
 	hud.update_eggs_label(total_eggs - alive_eggs, total_eggs)
 
+func update_radar():
 	hud.clear_radar_spots()
 	var player = get_tree().get_first_node_in_group("Player")
 	if player:
-		get_tree().get_nodes_in_group('Portals').all(func(portal):
+		for portal in get_tree().get_nodes_in_group('Portals'):
 			hud.add_spot(BLUE_SPOT, calculate_relative_position(player, portal))
-		)
-		get_tree().get_nodes_in_group('Eggs').all(func(egg):
+
+		for egg in get_tree().get_nodes_in_group('Eggs'):
 			hud.add_spot(WHITE_SPOT, calculate_relative_position(player, egg))
-		)
-		get_tree().get_nodes_in_group('Helipads').all(func(helipad):
+
+		for helipad in get_tree().get_nodes_in_group('Helipads'):
 			hud.add_spot(GREEN_SPOT, calculate_relative_position(player, helipad))
-		)
 
 	if alive_portals<=0 && alive_eggs<=0 && (total_portals>0 || total_eggs>0):
 		play_return_to_base()

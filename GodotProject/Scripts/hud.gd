@@ -16,7 +16,6 @@ signal pause_game(do_pause: bool)
 @onready var mission_not_complete: Control = $Screen/MissionNotComplete
 @onready var mission_not_complete_timer: Timer = $Screen/MissionNotComplete/MissionNotCompleteHideTimer
 @onready var radar = $Screen/Gauges/Radar
-@onready var radar_update_timer = $Screen/Gauges/RadarUpdateTimer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -85,9 +84,8 @@ var spots = []
 var max_dist = 500
 
 func clear_radar_spots():
-	spots.all(func(spot):
+	for spot in spots:
 		spot.queue_free()
-	)
 	spots = []
 
 func convert_to_radar(v:Vector2):

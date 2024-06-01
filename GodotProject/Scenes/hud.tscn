@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://coir15qm3jlrt"]
+[gd_scene load_steps=11 format=3 uid="uid://coir15qm3jlrt"]
 
 [ext_resource type="Script" path="res://Scripts/hud.gd" id="1_iyo5i"]
 [ext_resource type="Texture2D" uid="uid://b7us0q86x3d55" path="res://Graphics/Hud/pad.png" id="2_2ggaf"]
@@ -316,9 +316,9 @@ text = "100"
 [node name="Radar" type="TextureRect" parent="Screen/Gauges"]
 layout_mode = 0
 offset_left = 31.0
-offset_top = 76.0
+offset_top = 91.0
 offset_right = 131.0
-offset_bottom = 176.0
+offset_bottom = 191.0
 scale = Vector2(2, 2)
 texture = ExtResource("7_v67nh")
 
