@@ -20,7 +20,8 @@ var owner_body
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	audio_stream_player_3d.play()
-	pass # Replace with function body.
+	if not is_rocket:
+		$RayCast.queue_free()
 
 func set_owner_body(body):
 	owner_body = body.get_instance_id()
@@ -63,12 +64,17 @@ func explode():
 	var explosion: Explosion = ROCKET_EXPLOSION.instantiate() if is_rocket else BULLET_EXPLOSION.instantiate()
 	get_tree().root.add_child(explosion)
 
-	var position = ray_cast.get_collision_point() if ray_cast.is_colliding() else self.global_position
+	if not is_rocket:
+		var position = self.global_position
 
-	explosion.global_position = position
-	explosion.global_rotation = self.global_rotation
+		explosion.global_position = position
+		explosion.global_rotation = self.global_rotation
+	else:
+		var position = ray_cast.get_collision_point() if ray_cast.is_colliding() else self.global_position
 
-	if is_rocket:
+		explosion.global_position = position
+		explosion.global_rotation = self.global_rotation
+
 		var decal: Node3D = ROCKET_DECAL.instantiate() if is_rocket else ROCKET_DECAL.instantiate()
 		get_tree().root.add_child(decal)
 
