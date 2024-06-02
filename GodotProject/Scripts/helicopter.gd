@@ -59,7 +59,7 @@ var max_altitude = 15.0
 @export var STRAFE_FADE = 0.2
 
 @export var ROT_SPEED = 0.03
-@export var ROT_ACCELERATION = 0.002
+@export var ROT_ACCELERATION = 0.001
 @export var ROT_FADE = 0.002
 
 @export var ROLL_MAX = 0.1
@@ -71,8 +71,8 @@ var max_altitude = 15.0
 @export var AIM_MAX_UP = 1.5
 @export var AIM_MAX_DOWN = 0.3
 @export var AIM_AT_LANDING = -0.6
-@export var AIM_SPEED_SLOW = 0.01
-@export var AIM_SPEED_FAST = 0.03
+@export var AIM_SPEED_MAX = 0.03
+@export var AIM_SPEED_ACCELERATION = 0.001
 
 @export var MODEL_CAMERA_LAG = 10
 
@@ -95,6 +95,7 @@ var roll_angle = 0
 var pitch_angle = 0
 
 var aim_angle = 0;
+var aim_speed = 0;
 var rotor_speed = ROTOR_SPEED
 
 @export var HIT_MAX_AGE = 2000
@@ -154,14 +155,21 @@ func handle_input_and_movement():
 
 	var input_aim = Input.get_axis("aim_up", "aim_down")
 
-	if input_aim < -0.5:
-		aim_angle = move_toward(aim_angle, AIM_MAX_UP, AIM_SPEED_FAST)
-	elif input_aim < 0:
-		aim_angle = move_toward(aim_angle, AIM_MAX_UP, AIM_SPEED_SLOW)
-	elif input_aim > 0.5:
-		aim_angle = move_toward(aim_angle, -AIM_MAX_DOWN, AIM_SPEED_FAST)
+	if input_aim < 0:
+		aim_speed = move_toward(aim_speed, AIM_SPEED_MAX, AIM_SPEED_ACCELERATION)
+		#aim_angle = move_toward(aim_angle, AIM_MAX_UP, AIM_SPEED_FAST)
+	elif input_aim == 0:
+		aim_speed = 0
+		#aim_angle = move_toward(aim_angle, AIM_MAX_UP, AIM_SPEED_SLOW)
 	elif input_aim > 0:
-		aim_angle = move_toward(aim_angle, -AIM_MAX_DOWN, AIM_SPEED_SLOW)
+		aim_speed = move_toward(aim_speed, -AIM_SPEED_MAX, AIM_SPEED_ACCELERATION)
+		#aim_angle = move_toward(aim_angle, -AIM_MAX_DOWN, AIM_SPEED_FAST)
+	aim_angle += aim_speed
+
+	if aim_angle > AIM_MAX_UP:
+		aim_angle = AIM_MAX_UP
+	elif aim_angle < -AIM_MAX_DOWN:
+		aim_angle = -AIM_MAX_DOWN
 
 
 	# Get the input direction and handle the movement/deceleration.
@@ -238,7 +246,7 @@ func handle_landing_sequence():
 	model.global_position.x = move_toward(model.global_position.x, landing_helipad.landing_marker.global_position.x, 0.05)
 	model.global_position.y = move_toward(model.global_position.y, landing_helipad.landing_marker.global_position.y, 0.05)
 	model.global_position.z = move_toward(model.global_position.z, landing_helipad.landing_marker.global_position.z, 0.05)
-	aim_angle = move_toward(aim_angle, AIM_AT_LANDING, AIM_SPEED_SLOW)
+	aim_angle = move_toward(aim_angle, AIM_AT_LANDING, AIM_SPEED_MAX/2)
 	camera_3d.transform = camera_initial_transform.rotated(Vector3(1, 0, 0), aim_angle)
 	rotor_speed = move_toward(rotor_speed, ROTOR_SPEED_LANDED, 0.01)
 
